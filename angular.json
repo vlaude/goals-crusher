@@ -50,8 +50,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles/main.sass"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -114,8 +119,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles/main.sass"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "scripts": []
           }
         },
@@ -143,8 +153,13 @@
               "devServerTarget": "goals-crusher-webapp:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "goals-crusher-webapp"
 }

@@ -1,0 +1,18 @@
+<div class="layout">
+  <div style="text-align: center;">
+    <h1>Hello there 🚀</h1>
+    <span>Sign In to continue !</span>
+  </div>
+  <form>
+    <label for="loginEmail">Email</label>
+    <input id="loginEmail" type="text" placeholder="email" disabled required />
+    <label for="loginPassword">Password </label>
+    <input id="loginPassword" type="password" placeholder="password" disabled required />
+    <a class="forget-password">Forget password ?</a>
+    <button type="submit" disabled>Login</button>
+    Or
+    <button (click)="authService.loginWithGoogle()">Login with Google</button>
+  </form>
+
+  <span>Don't have an account ? <a>Create one !</a></span>
+</div>
