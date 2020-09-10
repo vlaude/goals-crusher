@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "sass",
+          "style": "scss",
           "skipTests": true
         },
         "@schematics/angular:class": {
@@ -50,13 +50,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/main.sass"
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "src/styles.scss"
             ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/styles"
-              ]
-            },
             "scripts": []
           },
           "configurations": {
@@ -119,13 +115,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/main.sass"
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "src/styles.scss"
             ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/styles"
-              ]
-            },
             "scripts": []
           }
         },

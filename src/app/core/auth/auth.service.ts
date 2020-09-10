@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
 import { Router } from '@angular/router';
+import { UserModel } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  user: any;
+  user: UserModel;
 
   constructor(public afAuth: AngularFireAuth, private router: Router) {
     this.afAuth.authState.subscribe((user) => {
@@ -16,7 +17,7 @@ export class AuthService {
         this.router.navigate(['']);
         console.log('User', user);
       } else {
-        this.router.navigate(['login']);
+        this.router.navigate(['']);
         console.log('No user ☹️');
       }
     });

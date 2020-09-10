@@ -4,11 +4,11 @@ import { LoginComponent } from './core/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './core/home/home.component';
 import { DailyGoalsComponent } from './daily-goals/daily-goals.component';
-import { WeeklyGoalsComponent } from './weekly-goals/weekly-goals.component';
+import { WeeklyGoalsContainerComponent } from './weekly-goals/weekly-goals-container.component';
 import { LifelongGoalsComponent } from './lifelong-goals/lifelong-goals.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: 'weekly', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent,
@@ -29,10 +29,16 @@ const routes: Routes = [
       {
         path: 'daily',
         component: DailyGoalsComponent,
+        data: {
+          title: 'Daily Goals',
+        },
       },
       {
         path: 'weekly',
-        component: WeeklyGoalsComponent,
+        component: WeeklyGoalsContainerComponent,
+        data: {
+          title: 'Weekly Goals',
+        },
       },
       {
         path: 'lifelong',
