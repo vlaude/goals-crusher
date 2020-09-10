@@ -1,0 +1,40 @@
+mat-list-item {
+  margin: 1em 0;
+}
+
+mat-card {
+  width: 100%;
+  overflow: auto;
+  font-size: 0.9rem;
+}
+
+mat-card.achieved {
+  border: 1px solid #8bc34a;
+
+  animation: pulse;
+  animation-duration: 0.5s;
+  animation-fill-mode: backwards;
+
+  span {
+    color: #8bc34a;
+  }
+}
+
+.goal-count {
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+.mat-list-item.mat-list-item-word-wrap {
+  height: initial !important;
+  .mat-line {
+    word-wrap: break-word !important;
+    white-space: pre-wrap !important;
+  }
+}
+
+.mat-list-item-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}

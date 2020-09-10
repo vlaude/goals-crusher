@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>{{ goal.title }}</h2>
+<span class="goal-type">{{ goal.type }}</span>
+
+<mat-dialog-content> {{ goal.description || 'No description yet.' }}</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="accent" mat-dialog-close>Back</button>
+  <button mat-raised-button [mat-dialog-close]="'edit'" disabled>Edit</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="'remove'">Remove</button>
+</mat-dialog-actions>

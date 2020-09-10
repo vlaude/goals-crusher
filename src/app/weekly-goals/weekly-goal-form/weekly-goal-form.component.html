@@ -1,0 +1,24 @@
+<h3 mat-dialog-title>Add a new Goal</h3>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Ex. Read a book" formControlName="title" required />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Describe your goal." formControlName="description"></textarea>
+    </mat-form-field>
+    <mat-radio-group aria-label="Select an goal type" formControlName="type" required>
+      <mat-radio-button value="daily">Daily</mat-radio-button>
+      <mat-radio-button value="weekly">Weekly</mat-radio-button>
+      <mat-radio-button value="lifelong">Lifelong</mat-radio-button>
+    </mat-radio-group>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="accent" mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="form" [disabled]="!form.valid">
+    Add
+  </button>
+</mat-dialog-actions>

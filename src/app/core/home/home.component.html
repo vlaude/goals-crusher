@@ -1,4 +1,32 @@
-<vl-navbar></vl-navbar>
-<main>
-  <router-outlet></router-outlet>
-</main>
+<div class="container" [class.is-mobile]="mobileQuery.matches">
+  <mat-sidenav-container>
+    <mat-sidenav
+      [opened]="sidenavService.toggled$ | async"
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      role="navigation"
+    >
+      <mat-nav-list>
+        <mat-list-item disabled>
+          <a matLine routerLink="dashboard">Dashboard</a>
+          <button mat-icon-button><mat-icon>dashboard</mat-icon></button> </mat-list-item
+        ><mat-list-item disabled>
+          <a matLine routerLink="daily">Daily Goals</a>
+          <button mat-icon-button><mat-icon>today</mat-icon></button> </mat-list-item
+        ><mat-list-item>
+          <a matLine routerLink="weekly">Weekly Goals</a>
+          <button mat-icon-button><mat-icon>date_range</mat-icon></button> </mat-list-item
+        ><mat-list-item disabled>
+          <a matLine routerLink="lifelong">Lifelong Goals</a
+          ><button mat-icon-button><mat-icon>whatshot</mat-icon></button> </mat-list-item
+        ><mat-list-item disabled>
+          <a matLine routerLink="">Profile</a><button mat-icon-button><mat-icon>person</mat-icon></button>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content role="main">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
