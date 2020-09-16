@@ -1,18 +1,39 @@
-<div class="layout">
-  <div style="text-align: center;">
-    <h1>Hello there 🚀</h1>
-    <span>Sign In to continue !</span>
-  </div>
-  <form>
-    <label for="loginEmail">Email</label>
-    <input id="loginEmail" type="text" placeholder="email" disabled required />
-    <label for="loginPassword">Password </label>
-    <input id="loginPassword" type="password" placeholder="password" disabled required />
-    <a class="forget-password">Forget password ?</a>
-    <button type="submit" disabled>Login</button>
-    Or
-    <button (click)="authService.loginWithGoogle()">Login with Google</button>
-  </form>
-
-  <span>Don't have an account ? <a>Create one !</a></span>
+<div class="container">
+  <mat-card>
+    <mat-tab-group>
+      <!-- Sign In -->
+      <mat-tab label="Sign In">
+        <mat-card-title>Signing in</mat-card-title>
+        <mat-card-content>
+          <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+            <div class="form-layout">
+              <!-- Email -->
+              <mat-form-field class="full-width">
+                <mat-label>E-mail</mat-label>
+                <input matInput formControlName="email" required />
+                <mat-icon matSuffix color="primary">email</mat-icon>
+              </mat-form-field>
+              <!-- Password -->
+              <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password" required />
+                <mat-icon matSuffix color="primary">lock</mat-icon>
+              </mat-form-field>
+            </div>
+            <!-- Submit -->
+            <button mat-raised-button style="margin-top: 20px;" class="full-width" type="submit" color="primary">
+              Log In
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-tab>
+      <!-- Register -->
+      <mat-tab label="Register">
+        <mat-card-title>Register</mat-card-title>
+        <mat-card-content>
+          <form></form>
+        </mat-card-content>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
 </div>

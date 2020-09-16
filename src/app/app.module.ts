@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
@@ -13,7 +14,6 @@ import { DailyGoalsComponent } from './daily-goals/daily-goals.component';
 import { LifelongGoalsComponent } from './lifelong-goals/lifelong-goals.component';
 import { WeeklyGoalListComponent } from './weekly-goals/weekly-goal-list/weekly-goal-list.component';
 import { WeeklyGoalCardComponent } from './weekly-goals/weekly-goal-card/weekly-goal-card.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
@@ -28,6 +28,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { WeeklyGoalDetailComponent } from './weekly-goals/weekly-goal-detail/weekly-goal-detail.component';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { WeeklyGoalDetailComponent } from './weekly-goals/weekly-goal-detail/wee
     BrowserModule,
     CommonModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
     AppRoutingModule,
     CoreModule,
     FormsModule,

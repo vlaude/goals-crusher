@@ -6,6 +6,9 @@ import { HomeComponent } from './core/home/home.component';
 import { DailyGoalsComponent } from './daily-goals/daily-goals.component';
 import { WeeklyGoalsContainerComponent } from './weekly-goals/weekly-goals-container.component';
 import { LifelongGoalsComponent } from './lifelong-goals/lifelong-goals.component';
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   { path: '', redirectTo: 'weekly', pathMatch: 'full' },
@@ -16,6 +19,8 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
     children: [
       {
         path: '',
