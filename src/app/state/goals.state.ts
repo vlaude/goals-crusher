@@ -17,7 +17,7 @@ export class GoalsState {
   constructor(private afs: AngularFirestore) {
     this.weeklyGoalsCollection = this.afs.collection<GoalModel<'weekly'>>('weekly-goals');
     this.weeklyGoals$ = this.weeklyGoalsCollection.valueChanges({ idField: 'id' }).pipe(startWith([]));
-    this.goalAchievementsCollection = this.afs.collection<GoalAchievementModel<any>>('goal-achievement');
+    this.goalAchievementsCollection = this.afs.collection<GoalAchievementModel<any>>('goal-achievements');
     this.goalAchievements$ = this.goalAchievementsCollection.valueChanges({ idField: 'id' }).pipe(startWith([]));
   }
 
@@ -35,7 +35,7 @@ export class GoalsState {
   }
 
   removeGoalAchievement(goalAchievement: GoalAchievementModel<any>): Promise<void> {
-    const goalAchievementDoc = this.afs.doc<GoalAchievementModel<any>>(`goal-achievement/${goalAchievement.id}`);
+    const goalAchievementDoc = this.afs.doc<GoalAchievementModel<any>>(`goal-achievements/${goalAchievement.id}`);
     return goalAchievementDoc.delete();
   }
 }
