@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { GoalsState } from '../state/goals.state';
 import { combineLatest, Observable } from 'rxjs';
 import { GoalModel } from '../core/models/goal.model';
-import { map } from 'rxjs/operators';
 import { WeeklyGoalService } from '../core/services/weekly-goal.service';
 import { GoalAchievementModel } from '../core/models/goal-achievement.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
