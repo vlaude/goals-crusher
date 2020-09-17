@@ -4,8 +4,8 @@ import { combineLatest, Observable } from 'rxjs';
 import { GoalModel } from '../core/models/goal.model';
 import { WeeklyGoalService } from '../core/services/weekly-goal.service';
 import { GoalAchievementModel } from '../core/models/goal-achievement.model';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { map } from 'rxjs/operators';
+import { SnackbarService } from '../core/services/snackbar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class GoalsFacade {
   constructor(
     private readonly state: GoalsState,
     private readonly weeklyGoalService: WeeklyGoalService,
-    private readonly snackBar: MatSnackBar
+    private readonly snackbarService: SnackbarService
   ) {}
 
   getWeeklyGoalsWithCurrentAchievements$(): Observable<GoalModel<'weekly'>[]> {
@@ -40,14 +40,11 @@ export class GoalsFacade {
     this.state
       .addWeeklyGoal(weeklyGoal)
       .then((_) => {
-        this.snackBar.open(`New goal added ! 👊`, null, {
-          duration: 5000,
-          horizontalPosition: 'center',
-        });
+        this.snackbarService.show(`New goal added ! 👊`);
       })
       .catch((err) => {
         console.error(err);
-        this.snackBar.open(`❌ Error, unable to create the goal, please try again later.`);
+        this.snackbarService.show(`❌ Error, unable to create the goal, please try again later.`);
       });
   }
 
@@ -55,13 +52,11 @@ export class GoalsFacade {
     this.state
       .removeWeeklyGoal(weeklyGoal)
       .then((_) => {
-        this.snackBar.open(`Goal ${weeklyGoal.title} removed. ✌️`, null, {
-          duration: 5000,
-        });
+        this.snackbarService.show(`Goal ${weeklyGoal.title} removed. ✌️`);
       })
       .catch((err) => {
         console.error(err);
-        this.snackBar.open(`❌ Error, unable to remove the goal, please try again later.`);
+        this.snackbarService.show(`❌ Error, unable to remove the goal, please try again later.`);
       });
   }
 
@@ -75,7 +70,7 @@ export class GoalsFacade {
       .then()
       .catch((err) => {
         console.error(err);
-        this.snackBar.open(`❌ Error, unable to achieved the goal, please try again later.`);
+        this.snackbarService.show(`❌ Error, unable to achieved the goal, please try again later.`);
       });
   }
 
@@ -86,7 +81,7 @@ export class GoalsFacade {
       .then()
       .catch((err) => {
         console.error(err);
-        this.snackBar.open(`❌ Error, unable to unachieved the goal, please try again later.`);
+        this.snackbarService.show(`❌ Error, unable to unachieved the goal, please try again later.`);
       });
   }
 }
