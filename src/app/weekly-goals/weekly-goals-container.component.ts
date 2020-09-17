@@ -16,17 +16,17 @@ export class WeeklyGoalsContainerComponent implements OnInit {
   weeklyGoals: GoalModel<'weekly'>[];
 
   constructor(
-    private readonly goalsFacade: GoalsFacade,
+    private goalsFacade: GoalsFacade,
     public readonly sidenavService: SidenavService,
-    public dialog: MatDialog,
-    private readonly fb: FormBuilder
-  ) {
+    private readonly fb: FormBuilder,
+    public dialog: MatDialog
+  ) {}
+
+  ngOnInit(): void {
     this.goalsFacade.getWeeklyGoalsWithCurrentAchievements$().subscribe((weeklyGoals) => {
       this.weeklyGoals = weeklyGoals;
     });
   }
-
-  ngOnInit(): void {}
 
   handleGoalClicked(goal: GoalModel<any>) {
     if (!goal.achieved) {
