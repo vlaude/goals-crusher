@@ -30,6 +30,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { WeeklyGoalDetailComponent } from './weekly-goals/weekly-goal-detail/weekly-goal-detail.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { ProfileContainerComponent } from './profile/profile-container/profile-container.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     WeeklyGoalCardComponent,
     WeeklyGoalFormComponent,
     WeeklyGoalDetailComponent,
+    ProfileContainerComponent,
   ],
   imports: [
     BrowserModule,
