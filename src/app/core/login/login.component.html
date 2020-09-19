@@ -12,12 +12,14 @@
                 <mat-label>E-mail</mat-label>
                 <input matInput formControlName="email" required />
                 <mat-icon matSuffix color="primary">email</mat-icon>
+                <mat-error *ngIf="signInEmailFormControl.hasError('required')">Email required.</mat-error>
               </mat-form-field>
               <!-- Password -->
               <mat-form-field class="full-width">
                 <mat-label>Password</mat-label>
                 <input matInput formControlName="password" type="password" required />
                 <mat-icon matSuffix color="primary">lock</mat-icon>
+                <mat-error *ngIf="signInPasswordFormControl.hasError('required')">Password required.</mat-error>
               </mat-form-field>
             </div>
             <!-- Submit -->
@@ -25,6 +27,8 @@
               Log In
             </button>
           </form>
+          <mat-progress-bar mode="indeterminate" style="margin-bottom: 1em;" *ngIf="isLoading"></mat-progress-bar>
+
           Or
           <!-- Google Sign In -->
           <button
@@ -42,7 +46,31 @@
       <mat-tab label="Register">
         <mat-card-title>Register</mat-card-title>
         <mat-card-content>
-          <form></form>
+          <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <div class="form-layout">
+              <!-- Email -->
+              <mat-form-field class="full-width">
+                <mat-label>E-mail</mat-label>
+                <input matInput formControlName="email" required />
+                <mat-icon matSuffix color="primary">email</mat-icon>
+                <mat-error *ngIf="registerEmailFormControl.hasError('required')">Enter your email address.</mat-error>
+                <mat-error *ngIf="registerEmailFormControl.hasError('email')">Email invalid.</mat-error>
+              </mat-form-field>
+              <!-- Password -->
+              <mat-form-field class="full-width">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password" required />
+                <mat-icon matSuffix color="primary">lock</mat-icon>
+                <mat-error *ngIf="registerPasswordFormControl.hasError('required')">Choose a password.</mat-error>
+                <mat-error *ngIf="registerPasswordFormControl.hasError('minlength')">8 characters minimum.</mat-error>
+              </mat-form-field>
+            </div>
+            <!-- Submit -->
+            <button mat-raised-button style="margin: 20px 0;" class="full-width" type="submit" color="primary">
+              Register
+            </button>
+          </form>
+          <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
         </mat-card-content>
       </mat-tab>
     </mat-tab-group>

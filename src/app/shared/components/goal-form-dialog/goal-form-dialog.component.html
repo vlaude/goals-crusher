@@ -1,14 +1,21 @@
 <h3 mat-dialog-title>Add a new Goal</h3>
 <mat-dialog-content>
   <form [formGroup]="form">
+    <!-- Title -->
     <mat-form-field>
       <mat-label>Title</mat-label>
-      <input matInput placeholder="Ex. Read a book" formControlName="title" required />
+      <input matInput placeholder="Ex. Read a book" formControlName="title" minlength="2" maxlength="100" required />
+      <mat-error *ngIf="titleFormControl.hasError('required')">Title required.</mat-error>
+      <mat-error *ngIf="titleFormControl.hasError('minlength')">2 characters minimum.</mat-error>
+      <mat-error *ngIf="titleFormControl.hasError('maxlength')">100 characters maximum.</mat-error>
     </mat-form-field>
+    <!-- Description -->
     <mat-form-field class="example-full-width">
       <mat-label>Description</mat-label>
-      <textarea matInput placeholder="Describe your goal." formControlName="description"></textarea>
+      <textarea matInput placeholder="Describe your goal." formControlName="description" maxlength="250"></textarea>
+      <mat-error *ngIf="descriptionFormControl.hasError('maxlength')">250 characters maximum.</mat-error>
     </mat-form-field>
+    <!-- Title -->
     <mat-radio-group aria-label="Select a goal type" formControlName="type" required>
       <mat-radio-button value="daily">Daily</mat-radio-button>
       <mat-radio-button value="weekly">Weekly</mat-radio-button>
@@ -16,6 +23,7 @@
     </mat-radio-group>
   </form>
 </mat-dialog-content>
+<!-- Actions -->
 <mat-dialog-actions align="end">
   <button mat-raised-button color="accent" mat-dialog-close>Cancel</button>
   <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="form" [disabled]="!form.valid">
