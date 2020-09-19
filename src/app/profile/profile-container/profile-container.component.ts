@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../core/auth/auth.service';
 import { SidenavService } from '../../core/services/sidenav.service';
+import { UserModel } from '../../core/models/user.model';
+import { AuthService } from '../../core/auth/auth.service';
+import { UserFacade } from '../../facades/user.facade';
 
 @Component({
   selector: 'vl-profile-container',
@@ -8,9 +10,17 @@ import { SidenavService } from '../../core/services/sidenav.service';
   styleUrls: ['./profile-container.component.scss'],
 })
 export class ProfileContainerComponent implements OnInit {
-  constructor(private readonly authService: AuthService, public sidenavService: SidenavService) {}
+  user: UserModel;
 
-  ngOnInit(): void {}
+  constructor(
+    private readonly userFacade: UserFacade,
+    private readonly authService: AuthService,
+    public sidenavService: SidenavService
+  ) {}
+
+  ngOnInit(): void {
+    this.user = this.userFacade.getCurrentUser();
+  }
 
   logout() {
     this.authService.logout().then((_) => {

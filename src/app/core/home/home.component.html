@@ -1,5 +1,5 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
-  <mat-sidenav-container>
+  <mat-sidenav-container (backdropClick)="sidenavService.toggle()">
     <mat-sidenav
       [opened]="sidenavService.toggled$ | async"
       [mode]="mobileQuery.matches ? 'over' : 'side'"
@@ -7,20 +7,21 @@
       role="navigation"
     >
       <mat-nav-list>
-        <mat-list-item disabled>
-          <a matLine routerLink="dashboard">Dashboard</a>
+        <mat-list-item routerLink="dashboard" routerLinkActive="active" disabled>
+          <a matLine>Dashboard</a>
           <button mat-icon-button><mat-icon>dashboard</mat-icon></button> </mat-list-item
-        ><mat-list-item>
-          <a matLine routerLink="daily">Daily Goals</a>
+        ><mat-list-item routerLink="daily" routerLinkActive="active">
+          <a matLine>Daily Goals</a>
           <button mat-icon-button><mat-icon>today</mat-icon></button> </mat-list-item
-        ><mat-list-item>
-          <a matLine routerLink="weekly">Weekly Goals</a>
+        ><mat-list-item routerLink="weekly" routerLinkActive="active">
+          <a matLine>Weekly Goals</a>
           <button mat-icon-button><mat-icon>date_range</mat-icon></button> </mat-list-item
-        ><mat-list-item>
-          <a matLine routerLink="lifelong">Lifelong Goals</a
-          ><button mat-icon-button><mat-icon>whatshot</mat-icon></button> </mat-list-item
-        ><mat-list-item>
-          <a matLine routerLink="profile">Profile</a><button mat-icon-button><mat-icon>person</mat-icon></button>
+        ><mat-list-item routerLink="lifelong" routerLinkActive="active">
+          <a matLine>Lifelong Goals</a>
+          <button mat-icon-button><mat-icon>whatshot</mat-icon></button> </mat-list-item
+        ><mat-list-item routerLink="profile" routerLinkActive="active">
+          <a matLine>Profile</a>
+          <button mat-icon-button><mat-icon>person</mat-icon></button>
         </mat-list-item>
       </mat-nav-list>
     </mat-sidenav>

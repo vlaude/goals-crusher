@@ -1,3 +1,5 @@
+@import '~@angular/material/theming';
+
 .container {
   display: flex;
   flex-direction: column;
@@ -26,4 +28,9 @@ mat-sidenav {
 
 mat-sidenav-content {
   overflow-x: hidden;
+}
+
+/* TODO get the primary color from the current theme. */
+.active {
+  color: mat-color(mat-palette($mat-pink));
 }
