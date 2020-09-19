@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { SidenavService } from '../services/sidenav.service';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'vl-home',
@@ -12,6 +13,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private readonly _mobileQueryListener: () => void;
 
   constructor(
+    private readonly router: Router,
     public readonly sidenavService: SidenavService,
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher
@@ -20,6 +22,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
     this.sidenavService.setToggled(!this.mobileQuery.matches);
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd && this.mobileQuery.matches) {
+        this.sidenavService.hide();
+      }
+    });
   }
 
   ngOnInit(): void {}

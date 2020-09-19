@@ -3,6 +3,27 @@
   <h1 class="app-name">Profile</h1>
   <span class="spacer"></span>
 </mat-toolbar>
-<div class="profile-layout">
-  <button mat-raised-button color="warn" (click)="logout()">Log Out</button>
+<div class="profile-container">
+  <div class="profile-layout">
+    <!-- Avatar -->
+    <img [src]="user?.photoURL || 'assets/blank-avatar.png'" alt="" />
+    <div>
+      <!-- User info -->
+      <h1 class="user-display-name">{{ user?.displayName || 'Hello Stranger !' }}</h1>
+      <mat-divider></mat-divider>
+      <mat-list>
+        <mat-list-item>
+          <mat-icon matListIcon>email</mat-icon>
+          <span matLine>{{ user?.email }}</span>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon matListIcon>phone</mat-icon>
+          <span matLine>{{ user?.phoneNumber || 'None' }}</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+
+  <!-- Logout button -->
+  <button mat-stroked-button (click)="logout()" class="logout-btn">Log Out</button>
 </div>

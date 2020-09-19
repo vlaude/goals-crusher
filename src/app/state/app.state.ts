@@ -5,28 +5,28 @@ import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from 
 import { GoalAchievementModel } from '../core/models/goal-achievement.model';
 import { startWith } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { UserModel } from '../core/models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GoalsState {
-  private userId: string;
-
+export class AppState {
   private goalsCollection: AngularFirestoreCollection<GoalModel<any>>;
   private achievementsCollection: AngularFirestoreCollection<GoalAchievementModel<any>>;
   public goals$: Observable<GoalModel<any>[]>;
   public achievements$: Observable<GoalAchievementModel<any>[]>;
+  public user: UserModel;
 
   public initialized = new Subject<void>();
 
   constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe((user) => {
-      this.userId = user?.uid;
-      this.goalsCollection = this.afs.collection(`goals`).doc(this.userId).collection('data');
+      this.user = user;
+      this.goalsCollection = this.afs.collection(`goals`).doc(this.user.uid).collection('data');
       this.goals$ = this.goalsCollection.valueChanges({ idField: 'id' }).pipe(startWith([]));
       this.achievementsCollection = this.afs
         .collection<GoalAchievementModel<any>>('goal-achievements')
-        .doc(this.userId)
+        .doc(this.user.uid)
         .collection('data');
       this.achievements$ = this.achievementsCollection.valueChanges({ idField: 'id' }).pipe(startWith([]));
 

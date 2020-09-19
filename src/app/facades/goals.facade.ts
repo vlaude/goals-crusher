@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GoalsState } from '../state/goals.state';
+import { AppState } from '../state/app.state';
 import { combineLatest, Observable } from 'rxjs';
 import { GoalModel } from '../core/models/goal.model';
 import { GoalService } from '../core/services/goal.service';
@@ -16,7 +16,7 @@ export class GoalsFacade {
   private achievements: GoalAchievementModel<any>[];
 
   constructor(
-    private readonly state: GoalsState,
+    private readonly state: AppState,
     private readonly goalService: GoalService,
     private readonly snackbarService: SnackbarService
   ) {}

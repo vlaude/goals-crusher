@@ -29,21 +29,16 @@ export class LoginComponent implements OnInit {
       return;
     }
     const { email, password } = this.signInForm.value;
-    this.authService
-      .loginWithEmailAndPassword(email, password)
-      .then((_) => {
-        this.router.navigate(['']);
-      })
-      .catch((error) => {
-        switch (error.code) {
-          case this.authService.WRONG_PASSWORD_CODE:
-            this.snackbarService.show('🤔 Password incorrect !');
-            break;
-          case this.authService.USER_NOT_FOUND_CODE:
-            this.snackbarService.show('Account not found, create one ! 💪');
-            break;
-        }
-      });
+    this.authService.loginWithEmailAndPassword(email, password).catch((error) => {
+      switch (error.code) {
+        case this.authService.WRONG_PASSWORD_CODE:
+          this.snackbarService.show('🤔 Password incorrect !');
+          break;
+        case this.authService.USER_NOT_FOUND_CODE:
+          this.snackbarService.show('Account not found, create one ! 💪');
+          break;
+      }
+    });
   }
 
   private initSignInForm() {

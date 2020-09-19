@@ -1,3 +1,47 @@
+.profile-container {
+  padding: 3em;
+  display: flex;
+  flex-direction: column;
+}
+
 .profile-layout {
-  padding: 1em;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+}
+
+img {
+  width: 250px;
+  height: auto;
+  align-self: center;
+}
+
+button.logout-btn {
+  align-self: flex-end;
+  margin-top: 3rem;
+}
+
+@media screen and (max-width: 640px) {
+  .profile-container {
+    padding: 1em;
+  }
+
+  .profile-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-display-name {
+    text-align: center;
+  }
+
+  img {
+    width: 150px;
+    border-radius: 75px;
+    margin-bottom: 1em;
+  }
+
+  .mat-line {
+    // TODO Customize typography => https://material.angular.io/guide/typography
+    font-size: 0.9rem !important;
+  }
 }

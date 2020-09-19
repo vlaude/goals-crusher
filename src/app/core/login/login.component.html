@@ -21,10 +21,21 @@
               </mat-form-field>
             </div>
             <!-- Submit -->
-            <button mat-raised-button style="margin-top: 20px;" class="full-width" type="submit" color="primary">
+            <button mat-raised-button style="margin: 20px 0;" class="full-width" type="submit" color="primary">
               Log In
             </button>
           </form>
+          Or
+          <!-- Google Sign In -->
+          <button
+            mat-raised-button
+            style="margin: 20px 0;"
+            class="full-width"
+            color="accent"
+            (click)="authService.loginWithGoogle()"
+          >
+            Google
+          </button>
         </mat-card-content>
       </mat-tab>
       <!-- Register -->

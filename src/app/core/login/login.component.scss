@@ -4,12 +4,12 @@ div.container {
   padding-top: 3em;
 }
 
-mat-card {
+.mat-card {
   max-width: 500px;
   flex-grow: 1;
   padding: 2em;
 
-  mat-card-title {
+  .mat-card-title {
     margin-top: 1em;
   }
 }
