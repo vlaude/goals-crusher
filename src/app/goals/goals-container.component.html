@@ -1,11 +1,11 @@
 <mat-toolbar color="primary">
   <button mat-icon-button (click)="sidenavService.toggle()"><mat-icon>menu</mat-icon></button>
-  <h1 class="app-name">Weekly Goals</h1>
+  <h1 class="app-name">{{ title }}</h1>
   <span class="spacer"></span>
   <button mat-icon-button (click)="openForm()"><mat-icon>add</mat-icon></button>
 </mat-toolbar>
-<vl-weekly-goal-list
-  [weeklyGoals]="weeklyGoals"
+<vl-goal-list
+  [goals]="goals"
   (goalClicked)="handleGoalClicked($event)"
   (goalDetailClicked)="handleGoalDetailClicked($event)"
-></vl-weekly-goal-list>
+></vl-goal-list>

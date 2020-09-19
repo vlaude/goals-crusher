@@ -25,6 +25,7 @@
     "@angular/router": "~10.0.6",
     "animate.css": "^4.1.0",
     "firebase": "^7.13.1",
+    "moment": "^2.28.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

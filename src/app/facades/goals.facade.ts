@@ -2,43 +2,45 @@ import { Injectable } from '@angular/core';
 import { GoalsState } from '../state/goals.state';
 import { combineLatest, Observable } from 'rxjs';
 import { GoalModel } from '../core/models/goal.model';
-import { WeeklyGoalService } from '../core/services/weekly-goal.service';
+import { GoalService } from '../core/services/goal.service';
 import { GoalAchievementModel } from '../core/models/goal-achievement.model';
 import { map } from 'rxjs/operators';
 import { SnackbarService } from '../core/services/snackbar.service';
+import { GoalType } from '../core/models/goal.type';
+import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GoalsFacade {
-  private goalAchievements: GoalAchievementModel<any>[];
+  private achievements: GoalAchievementModel<any>[];
 
   constructor(
     private readonly state: GoalsState,
-    private readonly weeklyGoalService: WeeklyGoalService,
+    private readonly goalService: GoalService,
     private readonly snackbarService: SnackbarService
   ) {}
 
-  getWeeklyGoalsWithCurrentAchievements$(): Observable<GoalModel<'weekly'>[]> {
-    return combineLatest([this.state.weeklyGoals$, this.state.goalAchievements$]).pipe(
-      map(([weeklyGoals, goalAchievements]) => {
-        this.goalAchievements = goalAchievements;
-        // Only weekly goal achievements.
-        goalAchievements = goalAchievements.filter((ga) => weeklyGoals.find((wg) => wg.id === ga.goalId));
-        return weeklyGoals.map((wg) => {
+  getGoalsByTypeWithCurrentAchievements$(type: GoalType): Observable<GoalModel<'weekly'>[]> {
+    return combineLatest([
+      this.state.goals$.pipe(map((goals) => goals.filter((goal) => goal.type === type))),
+      this.state.achievements$,
+    ]).pipe(
+      map(([goals, achievements]) => {
+        this.achievements = achievements.map((a) => this.convertDate(a));
+        return goals.map((g) => {
           return {
-            achieved: this.weeklyGoalService.isAchieved(wg, goalAchievements),
-            achievedCount: goalAchievements.find((ga) => ga.goalId === wg.id)?.count,
-            ...wg,
+            achieved: this.goalService.isAchieved(g, this.achievements),
+            ...g,
           };
         });
       })
     );
   }
 
-  addWeeklyGoal(weeklyGoal: GoalModel<'weekly'>) {
+  addGoal(goal: GoalModel<'weekly'>) {
     this.state
-      .addWeeklyGoal(weeklyGoal)
+      .addGoal(goal)
       .then((_) => {
         this.snackbarService.show(`New goal added ! 👊`);
       })
@@ -48,11 +50,11 @@ export class GoalsFacade {
       });
   }
 
-  removeWeeklyGoal(weeklyGoal: GoalModel<'weekly'>) {
+  removeGoal(goal: GoalModel<any>) {
     this.state
-      .removeWeeklyGoal(weeklyGoal)
+      .removeGoal(goal)
       .then((_) => {
-        this.snackbarService.show(`Goal ${weeklyGoal.title} removed. ✌️`);
+        this.snackbarService.show(`Goal ${goal.title} removed. ✌️`);
       })
       .catch((err) => {
         console.error(err);
@@ -61,12 +63,12 @@ export class GoalsFacade {
   }
 
   achievedGoal(goal: GoalModel<any>) {
-    const newGoalAchievement: GoalAchievementModel<any> = {
+    const newAchievement: GoalAchievementModel<any> = {
       goalId: goal.id,
       achievedAt: new Date(),
     };
     this.state
-      .addGoalAchievement(newGoalAchievement)
+      .addGoalAchievement(newAchievement)
       .then()
       .catch((err) => {
         console.error(err);
@@ -75,13 +77,31 @@ export class GoalsFacade {
   }
 
   unAchievedGoal(goal: GoalModel<any>) {
-    const goalAchievement = this.goalAchievements.find((ga) => ga.goalId === goal.id);
+    const achievement = this.achievements.find((ga) => ga.goalId === goal.id);
     this.state
-      .removeGoalAchievement(goalAchievement)
+      .removeGoalAchievement(achievement)
       .then()
       .catch((err) => {
         console.error(err);
         this.snackbarService.show(`❌ Error, unable to unachieved the goal, please try again later.`);
       });
+  }
+
+  private convertDate(firebaseObject: any) {
+    if (!firebaseObject) return null;
+
+    for (const [key, value] of Object.entries(firebaseObject)) {
+      // covert items inside array
+      if (value && Array.isArray(value)) firebaseObject[key] = value.map((item) => this.convertDate(item));
+
+      // convert inner objects
+      if (value && typeof value === 'object') {
+        firebaseObject[key] = this.convertDate(value);
+      }
+
+      // convert simple properties
+      if (value && value.hasOwnProperty('seconds')) firebaseObject[key] = (value as firestore.Timestamp).toDate();
+    }
+    return firebaseObject;
   }
 }

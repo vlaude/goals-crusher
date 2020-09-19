@@ -3,15 +3,15 @@ import { FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'vl-weekly-goal-form',
-  templateUrl: './weekly-goal-form.component.html',
-  styleUrls: ['./weekly-goal-form.component.scss'],
+  selector: 'vl-goal-form-dialog',
+  templateUrl: './goal-form-dialog.component.html',
+  styleUrls: ['./goal-form-dialog.component.scss'],
 })
-export class WeeklyGoalFormComponent implements OnInit {
+export class GoalFormDialogComponent implements OnInit {
   form: FormGroup;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    this.form = data.form;
+    this.form = data.form || data;
   }
 
   ngOnInit(): void {}

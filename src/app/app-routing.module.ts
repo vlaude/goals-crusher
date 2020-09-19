@@ -3,12 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './core/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './core/home/home.component';
-import { DailyGoalsComponent } from './daily-goals/daily-goals.component';
-import { WeeklyGoalsContainerComponent } from './weekly-goals/weekly-goals-container.component';
-import { LifelongGoalsComponent } from './lifelong-goals/lifelong-goals.component';
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { StateInitializedResolver } from './core/resolvers/state-initialized.resolver';
 import { ProfileContainerComponent } from './profile/profile-container/profile-container.component';
+import { GoalsContainerComponent } from './goals/goals-container.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -38,15 +36,18 @@ const routes: Routes = [
       },
       {
         path: 'daily',
-        component: DailyGoalsComponent,
+        component: GoalsContainerComponent,
+        data: { type: 'daily', title: 'Daily Goals' },
       },
       {
         path: 'weekly',
-        component: WeeklyGoalsContainerComponent,
+        component: GoalsContainerComponent,
+        data: { type: 'weekly', title: 'Weekly Goals' },
       },
       {
         path: 'lifelong',
-        component: LifelongGoalsComponent,
+        component: GoalsContainerComponent,
+        data: { type: 'lifelong', title: 'Lifelong Goals' },
       },
       {
         path: 'profile',
