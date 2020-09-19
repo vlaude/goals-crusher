@@ -63,6 +63,8 @@ export class GoalsFacade {
   }
 
   achievedGoal(goal: GoalModel<any>) {
+    const isAlreadyAchieved = this.goalService.isAchieved(goal, this.achievements);
+    if (isAlreadyAchieved) return;
     const newAchievement: GoalAchievementModel<any> = {
       goalId: goal.id,
       achievedAt: new Date(),
@@ -77,7 +79,9 @@ export class GoalsFacade {
   }
 
   unAchievedGoal(goal: GoalModel<any>) {
-    const achievement = this.achievements.find((ga) => ga.goalId === goal.id);
+    const isNotAchieved = !this.goalService.isAchieved(goal, this.achievements);
+    if (isNotAchieved) return;
+    const achievement = this.goalService.getCurrentAchievement(goal, this.achievements);
     this.state
       .removeGoalAchievement(achievement)
       .then()
@@ -87,6 +91,11 @@ export class GoalsFacade {
       });
   }
 
+  /**
+   * Convert Firebase timestamp to javascript date format.
+   * See https://medium.com/@peterkracik/firebase-timestamp-to-javascript-date-format-876a42978c10.
+   * @param firebaseObject
+   */
   private convertDate(firebaseObject: any) {
     if (!firebaseObject) return null;
 
