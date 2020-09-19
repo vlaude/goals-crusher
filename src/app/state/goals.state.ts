@@ -12,44 +12,44 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class GoalsState {
   private userId: string;
 
-  private weeklyGoalsCollection: AngularFirestoreCollection<GoalModel<any>>;
-  private goalAchievementsCollection: AngularFirestoreCollection<GoalAchievementModel<any>>;
-  public weeklyGoals$: Observable<GoalModel<'weekly'>[]>;
-  public goalAchievements$: Observable<GoalAchievementModel<any>[]>;
+  private goalsCollection: AngularFirestoreCollection<GoalModel<any>>;
+  private achievementsCollection: AngularFirestoreCollection<GoalAchievementModel<any>>;
+  public goals$: Observable<GoalModel<any>[]>;
+  public achievements$: Observable<GoalAchievementModel<any>[]>;
 
   public initialized = new Subject<void>();
 
   constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe((user) => {
       this.userId = user?.uid;
-      this.weeklyGoalsCollection = this.afs.collection(`weekly-goals`).doc(this.userId).collection('data');
-      this.weeklyGoals$ = this.weeklyGoalsCollection.valueChanges({ idField: 'id' }).pipe(startWith([]));
-      this.goalAchievementsCollection = this.afs
+      this.goalsCollection = this.afs.collection(`goals`).doc(this.userId).collection('data');
+      this.goals$ = this.goalsCollection.valueChanges({ idField: 'id' }).pipe(startWith([]));
+      this.achievementsCollection = this.afs
         .collection<GoalAchievementModel<any>>('goal-achievements')
         .doc(this.userId)
         .collection('data');
-      this.goalAchievements$ = this.goalAchievementsCollection.valueChanges({ idField: 'id' }).pipe(startWith([]));
+      this.achievements$ = this.achievementsCollection.valueChanges({ idField: 'id' }).pipe(startWith([]));
 
       this.initialized.next();
       this.initialized.complete();
     });
   }
 
-  addWeeklyGoal(weeklyGoal: GoalModel<'weekly'>): Promise<DocumentReference> {
-    return this.weeklyGoalsCollection.add(weeklyGoal);
+  addGoal(goal: GoalModel<any>): Promise<DocumentReference> {
+    return this.goalsCollection.add(goal);
   }
 
-  removeWeeklyGoal(weeklyGoal: GoalModel<'weekly'>): Promise<void> {
-    const weeklyGoalDoc = this.weeklyGoalsCollection.doc(weeklyGoal.id);
-    return weeklyGoalDoc.delete();
+  removeGoal(goal: GoalModel<any>): Promise<void> {
+    const goalDoc = this.goalsCollection.doc(goal.id);
+    return goalDoc.delete();
   }
 
-  addGoalAchievement(goalAchievement: GoalAchievementModel<any>): Promise<DocumentReference> {
-    return this.goalAchievementsCollection.add(goalAchievement);
+  addGoalAchievement(achievement: GoalAchievementModel<any>): Promise<DocumentReference> {
+    return this.achievementsCollection.add(achievement);
   }
 
-  removeGoalAchievement(goalAchievement: GoalAchievementModel<any>): Promise<void> {
-    const goalAchievementDoc = this.goalAchievementsCollection.doc(goalAchievement.id);
-    return goalAchievementDoc.delete();
+  removeGoalAchievement(achievement: GoalAchievementModel<any>): Promise<void> {
+    const achievementDoc = this.achievementsCollection.doc(achievement.id);
+    return achievementDoc.delete();
   }
 }
