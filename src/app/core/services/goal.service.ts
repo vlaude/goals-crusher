@@ -10,27 +10,34 @@ export class GoalService {
   constructor(private readonly momentService: MomentService) {}
 
   public isAchieved(goal: GoalModel<any>, achievements: GoalAchievementModel<any>[]): boolean {
+    return !!this.getCurrentAchievement(goal, achievements);
+  }
+
+  public getCurrentAchievement(
+    goal: GoalModel<any>,
+    achievements: GoalAchievementModel<any>[]
+  ): GoalAchievementModel<any> {
     switch (goal.type) {
       case 'daily':
-        return this.isAchievedToday(goal, achievements);
+        return this.getTodayAchievement(goal, achievements);
       case 'weekly':
-        return this.isAchievedThisWeek(goal, achievements);
+        return this.getThisWeekAchievement(goal, achievements);
       case 'lifelong':
-        return achievements.filter((a) => a.goalId === goal.id)?.length > 0;
+        return achievements.find((a) => a.goalId === goal.id);
     }
   }
 
-  private isAchievedToday(goal: GoalModel<any>, achievements: GoalAchievementModel<any>[]): boolean {
-    return (
-      achievements.filter((a) => a.goalId === goal.id).filter((a) => this.momentService.isThisDay(a.achievedAt))
-        .length > 0
-    );
+  private getTodayAchievement(
+    goal: GoalModel<any>,
+    achievements: GoalAchievementModel<any>[]
+  ): GoalAchievementModel<any> {
+    return achievements.find((a) => a.goalId === goal.id && this.momentService.isThisDay(a.achievedAt));
   }
 
-  private isAchievedThisWeek(goal: GoalModel<any>, achievements: GoalAchievementModel<any>[]): boolean {
-    return (
-      achievements.filter((a) => a.goalId === goal.id).filter((a) => this.momentService.isThisWeek(a.achievedAt))
-        .length > 0
-    );
+  private getThisWeekAchievement(
+    goal: GoalModel<any>,
+    achievements: GoalAchievementModel<any>[]
+  ): GoalAchievementModel<any> {
+    return achievements.find((a) => a.goalId === goal.id && this.momentService.isThisWeek(a.achievedAt));
   }
 }
