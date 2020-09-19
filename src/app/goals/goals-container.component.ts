@@ -10,7 +10,7 @@ import {
 } from '../shared/components/goal-detail-dialog/goal-detail-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { GoalFormDialogComponent } from '../shared/components/goal-form-dialog/goal-form-dialog.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'vl-goals-container',
@@ -25,7 +25,6 @@ export class GoalsContainerComponent implements OnInit {
   constructor(
     private readonly goalsFacade: GoalsFacade,
     private readonly route: ActivatedRoute,
-    private readonly fb: FormBuilder,
     private readonly dialog: MatDialog,
     public readonly sidenavService: SidenavService
   ) {}
@@ -66,11 +65,7 @@ export class GoalsContainerComponent implements OnInit {
     const dialogRef = this.dialog.open(GoalFormDialogComponent, {
       width: '400px',
       data: {
-        form: this.fb.group({
-          title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-          description: ['', Validators.maxLength(250)],
-          type: [this.goalType, Validators.required],
-        }),
+        defaultGoalType: this.goalType,
       },
     });
 
