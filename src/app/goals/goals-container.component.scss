@@ -6,7 +6,13 @@ span.spacer {
   flex: 1 1 auto;
 }
 
+.mat-chip-list {
+  padding: 1em 1em 0 1em;
+}
+
 .goals-container-layout {
+  display: flex;
+  flex-direction: column;
   padding: 0 200px;
 }
 

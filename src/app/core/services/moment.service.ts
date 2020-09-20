@@ -14,4 +14,12 @@ export class MomentService {
   isThisWeek(date: Date): boolean {
     return moment(date).isSame(moment(), 'week');
   }
+
+  endOfTheDayHoursLeft() {
+    return moment().endOf('day').diff(moment(), 'hours');
+  }
+
+  endOfTheWeekHoursLeft() {
+    return moment().endOf('week').diff(moment(), 'hours');
+  }
 }

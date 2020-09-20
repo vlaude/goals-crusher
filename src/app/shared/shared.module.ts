@@ -5,10 +5,11 @@ import { GoalDetailDialogComponent } from './components/goal-detail-dialog/goal-
 import { GoalFormDialogComponent } from './components/goal-form-dialog/goal-form-dialog.component';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TimeLeftPipe } from './pipes/time-left.pipe';
 
 @NgModule({
-  declarations: [GoalListComponent, GoalDetailDialogComponent, GoalFormDialogComponent],
+  declarations: [GoalListComponent, GoalDetailDialogComponent, GoalFormDialogComponent, TimeLeftPipe],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
-  exports: [GoalListComponent],
+  exports: [GoalListComponent, TimeLeftPipe],
 })
 export class SharedModule {}
