@@ -39,6 +39,7 @@ export class GoalsFacade {
   }
 
   addGoal(goal: GoalModel<'weekly'>) {
+    goal.createdAt = new Date();
     this.state
       .addGoal(goal)
       .then((_) => {
