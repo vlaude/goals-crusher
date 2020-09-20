@@ -5,6 +5,14 @@
   <button mat-icon-button (click)="openForm()"><mat-icon>add</mat-icon></button>
 </mat-toolbar>
 <div class="goals-container-layout">
+  <!-- Chips -->
+  <mat-chip-list *ngIf="goals?.length > 0">
+    <!-- Goals achieved count -->
+    <mat-chip>✅ {{ achievedGoalsCount }} / {{ goals.length }}</mat-chip>
+    <!-- Time left -->
+    <mat-chip *ngIf="hoursLeft">⏳ {{ hoursLeft | timeLeft }} left</mat-chip>
+  </mat-chip-list>
+  <!-- Goals -->
   <vl-goal-list
     [goals]="goals"
     (goalClicked)="handleGoalClicked($event)"

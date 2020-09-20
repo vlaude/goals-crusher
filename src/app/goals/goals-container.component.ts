@@ -11,6 +11,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { GoalFormDialogComponent } from '../shared/components/goal-form-dialog/goal-form-dialog.component';
 import { FormGroup } from '@angular/forms';
+import { GoalService } from '../core/services/goal.service';
 
 @Component({
   selector: 'vl-goals-container',
@@ -21,9 +22,15 @@ export class GoalsContainerComponent implements OnInit {
   public goals: GoalModel<any>[];
   public title = '';
   public goalType: GoalType;
+  public hoursLeft: number;
+
+  get achievedGoalsCount(): number {
+    return this.goals.filter((goal) => goal.achieved).length;
+  }
 
   constructor(
     private readonly goalsFacade: GoalsFacade,
+    private readonly goalService: GoalService,
     private readonly route: ActivatedRoute,
     private readonly dialog: MatDialog,
     public readonly sidenavService: SidenavService
@@ -35,6 +42,7 @@ export class GoalsContainerComponent implements OnInit {
     this.goalsFacade.getGoalsByTypeWithCurrentAchievements$(this.goalType).subscribe((goals) => {
       this.goals = goals;
     });
+    this.hoursLeft = this.goalService.getHoursLeftToAchieve(this.goalType);
   }
 
   handleGoalClicked(goal: GoalModel<any>) {
