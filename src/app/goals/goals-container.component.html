@@ -4,8 +4,10 @@
   <span class="spacer"></span>
   <button mat-icon-button (click)="openForm()"><mat-icon>add</mat-icon></button>
 </mat-toolbar>
-<vl-goal-list
-  [goals]="goals"
-  (goalClicked)="handleGoalClicked($event)"
-  (goalDetailClicked)="handleGoalDetailClicked($event)"
-></vl-goal-list>
+<div class="goals-container-layout">
+  <vl-goal-list
+    [goals]="goals"
+    (goalClicked)="handleGoalClicked($event)"
+    (goalDetailClicked)="handleGoalDetailClicked($event)"
+  ></vl-goal-list>
+</div>

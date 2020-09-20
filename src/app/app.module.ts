@@ -21,6 +21,7 @@ import { GoalsContainerComponent } from './goals/goals-container.component';
   declarations: [AppComponent, DashboardComponent, ProfileContainerComponent, GoalsContainerComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -29,7 +30,6 @@ import { GoalsContainerComponent } from './goals/goals-container.component';
     AppRoutingModule,
     CoreModule,
     MaterialModule,
-    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
   ],

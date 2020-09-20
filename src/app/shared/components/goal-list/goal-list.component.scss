@@ -1,27 +1,21 @@
-mat-list-item {
+@import '~@angular/material/theming';
+
+.mat-list-item {
   margin: 1em 0;
 }
 
-mat-card {
+.mat-card {
   width: 100%;
   overflow: auto;
   font-size: 0.9rem;
+  cursor: pointer;
 }
 
-mat-card.achieved {
-  border: 1px solid #8bc34a;
-
-  animation: pulse;
-  animation-duration: 0.5s;
-  animation-fill-mode: backwards;
-
-  span {
-    color: #8bc34a;
-  }
-}
-
-.goal-count {
-  margin-left: 8px;
+.mat-card.achieved {
+  animation: achieved;
+  animation-duration: 1s;
+  background-color: mat-color(mat-palette($mat-pink));
+  opacity: 0.7;
   font-weight: bold;
 }
 
@@ -37,4 +31,17 @@ mat-card.achieved {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
+}
+
+@keyframes achieved {
+  from {
+    background-color: #424242;
+    opacity: 1;
+    font-weight: normal;
+  }
+  to {
+    background-color: mat-color(mat-palette($mat-pink));
+    opacity: 0.7;
+    font-weight: bold;
+  }
 }

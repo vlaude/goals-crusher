@@ -5,3 +5,19 @@ h1.app-name {
 span.spacer {
   flex: 1 1 auto;
 }
+
+.goals-container-layout {
+  padding: 0 200px;
+}
+
+@media screen and (max-width: 800px) {
+  .goals-container-layout {
+    padding: 0 50px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .goals-container-layout {
+    padding: 0;
+  }
+}
