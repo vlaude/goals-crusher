@@ -1,6 +1,13 @@
 <mat-list>
   <mat-list-item *ngFor="let goal of goals" class="mat-list-item-word-wrap">
-    <mat-card [class.achieved]="goal.achieved" (click)="goalClicked.emit(goal)">
+    <mat-card
+      [class.achieved]="goal.achieved"
+      (mousedown)="mousedown(goal)"
+      (mouseup)="mouseup()"
+      (touchstart)="mousedown(goal)"
+      (touchend)="mouseup()"
+      (touchmove)="mouseup()"
+    >
       <div matLine class="mat-list-item-header">
         <span>{{ goal.title }} </span>
         <button mat-icon-button color="accent" (click)="$event.stopPropagation(); goalDetailClicked.emit(goal)">

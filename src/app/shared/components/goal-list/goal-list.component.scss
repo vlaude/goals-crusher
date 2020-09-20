@@ -5,18 +5,38 @@
 }
 
 .mat-card {
+  position: relative;
   width: 100%;
   overflow: auto;
   font-size: 0.9rem;
   cursor: pointer;
+  z-index: 0;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 7px;
+    height: 100%;
+    background-color: mat-color(mat-palette($mat-pink));
+    transition: width 0s;
+    z-index: -1;
+  }
+  &:active:before {
+    transition: width 1s ease-in-out;
+    width: 100%;
+  }
 }
 
 .mat-card.achieved {
-  animation: achieved;
-  animation-duration: 1s;
-  background-color: mat-color(mat-palette($mat-pink));
   opacity: 0.7;
   font-weight: bold;
+  &:before {
+    width: 100%;
+  }
+  &:active:before {
+    width: 0;
+  }
 }
 
 .mat-list-item.mat-list-item-word-wrap {
@@ -31,17 +51,4 @@
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-}
-
-@keyframes achieved {
-  from {
-    background-color: #424242;
-    opacity: 1;
-    font-weight: normal;
-  }
-  to {
-    background-color: mat-color(mat-palette($mat-pink));
-    opacity: 0.7;
-    font-weight: bold;
-  }
 }

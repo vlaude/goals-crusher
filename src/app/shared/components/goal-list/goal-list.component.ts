@@ -11,7 +11,23 @@ export class GoalListComponent implements OnInit {
   @Output() goalClicked = new EventEmitter<GoalModel<any>>();
   @Output() goalDetailClicked = new EventEmitter<GoalModel<any>>();
 
+  timeoutHandler = null;
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  mousedown(goal: GoalModel<any>) {
+    this.timeoutHandler = setTimeout(() => {
+      this.timeoutHandler = null;
+      this.goalClicked.emit(goal);
+    }, 1000);
+  }
+
+  mouseup() {
+    if (this.timeoutHandler) {
+      clearTimeout(this.timeoutHandler);
+      this.timeoutHandler = null;
+    }
+  }
 }
