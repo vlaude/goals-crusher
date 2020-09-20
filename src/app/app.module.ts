@@ -16,6 +16,7 @@ import { ProfileContainerComponent } from './profile/profile-container/profile-c
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './material.module';
 import { GoalsContainerComponent } from './goals/goals-container.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent, DashboardComponent, ProfileContainerComponent, GoalsContainerComponent],
@@ -32,6 +33,7 @@ import { GoalsContainerComponent } from './goals/goals-container.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent],
