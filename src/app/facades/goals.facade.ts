@@ -13,6 +13,9 @@ import { firestore } from 'firebase';
   providedIn: 'root',
 })
 export class GoalsFacade {
+  private readonly GOAL_ACHIEVED_MESSAGE = 'Nice job 👍 !';
+  private readonly GOAL_UNACHIEVED_MESSAGE = 'Oh, what happened ? 😕';
+
   private achievements: GoalAchievementModel<any>[];
 
   constructor(
@@ -72,7 +75,9 @@ export class GoalsFacade {
     };
     this.state
       .addGoalAchievement(newAchievement)
-      .then()
+      .then((_) => {
+        this.snackbarService.show(this.GOAL_ACHIEVED_MESSAGE);
+      })
       .catch((err) => {
         console.error(err);
         this.snackbarService.show(`❌ Error, unable to achieved the goal, please try again later.`);
@@ -85,7 +90,9 @@ export class GoalsFacade {
     const achievement = this.goalService.getCurrentAchievement(goal, this.achievements);
     this.state
       .removeGoalAchievement(achievement)
-      .then()
+      .then((_) => {
+        this.snackbarService.show(this.GOAL_UNACHIEVED_MESSAGE);
+      })
       .catch((err) => {
         console.error(err);
         this.snackbarService.show(`❌ Error, unable to unachieved the goal, please try again later.`);
