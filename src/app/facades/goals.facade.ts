@@ -32,13 +32,19 @@ export class GoalsFacade {
       map(([goals, achievements]) => {
         this.achievements = achievements.map((a) => this.convertDate(a));
         return goals.map((g) => {
-          return {
+          let goal = {
             achieved: this.goalService.isAchieved(g, this.achievements),
             ...g,
           };
+          goal = this.convertDate(goal);
+          return goal;
         });
       })
     );
+  }
+
+  getAchievements$(): Observable<GoalAchievementModel<any>[]> {
+    return this.state.achievements$.pipe(map((achievements) => achievements.map((a) => this.convertDate(a))));
   }
 
   addGoal(goal: GoalModel<'weekly'>) {

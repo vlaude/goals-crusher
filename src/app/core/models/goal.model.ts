@@ -5,8 +5,7 @@ export interface GoalModel<T extends GoalType> {
   title: string;
   description?: string;
   type: T;
-  countToBeAchieved?: number;
-  achievedCount?: number;
   achieved?: boolean;
+  achievedAt?: Date;
   createdAt?: Date;
 }
