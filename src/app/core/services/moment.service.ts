@@ -22,4 +22,8 @@ export class MomentService {
   endOfTheWeekHoursLeft() {
     return moment().endOf('week').diff(moment(), 'hours');
   }
+
+  isToday(date: Date): boolean {
+    return moment(date).isSame(new Date(), 'day');
+  }
 }

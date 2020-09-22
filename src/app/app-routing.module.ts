@@ -11,7 +11,7 @@ import { GoalsContainerComponent } from './goals/goals-container.component';
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
-  { path: '', redirectTo: 'daily', pathMatch: 'full' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent,
