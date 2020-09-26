@@ -14,6 +14,12 @@ export class GoalService {
     return !!this.getCurrentAchievement(goal, achievements);
   }
 
+  public isAchievedByDate(goal: GoalModel<any>, achievements: GoalAchievementModel<any>[], date: Date) {
+    return achievements
+      .filter((a) => a.goalId === goal.id)
+      .find((a) => this.momentService.isSameDays(a.achievedAt, date));
+  }
+
   public getCurrentAchievement(
     goal: GoalModel<any>,
     achievements: GoalAchievementModel<any>[]

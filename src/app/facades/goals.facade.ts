@@ -24,7 +24,7 @@ export class GoalsFacade {
     private readonly snackbarService: SnackbarService
   ) {}
 
-  getGoalsByTypeWithCurrentAchievements$(type: GoalType): Observable<GoalModel<'weekly'>[]> {
+  getGoalsByTypeWithCurrentAchievements$(type: GoalType): Observable<GoalModel<any>[]> {
     return combineLatest([
       this.state.goals$.pipe(map((goals) => goals.filter((goal) => goal.type === type))),
       this.state.achievements$,

@@ -2,16 +2,16 @@
   <button mat-icon-button (click)="sidenavService.toggle()"><mat-icon>menu</mat-icon></button>
   <h1 class="app-name">Dashboard</h1>
 </mat-toolbar>
-<div class="dashboard-layout">
+<div class="dashboard-layout container-layout">
   <!-- Summary -->
   <mat-card>
     <mat-card-header>
       <mat-card-title>Summary</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <mat-list>
+      <mat-list class="summary-list">
         <!-- Daily -->
-        <mat-list-item [class.completed]="isGoalsCompletedByType('daily')">
+        <mat-list-item [class.completed]="isGoalsCompletedByType('daily')" routerLink="/daily">
           <mat-icon matListIcon>today</mat-icon>
           <p matLine class="flex-space-between">
             <span>Daily</span>
@@ -19,7 +19,7 @@
           </p>
         </mat-list-item>
         <!-- Weekly -->
-        <mat-list-item [class.completed]="isGoalsCompletedByType('weekly')">
+        <mat-list-item [class.completed]="isGoalsCompletedByType('weekly')" routerLink="/weekly">
           <mat-icon matListIcon>date_range</mat-icon>
           <p matLine class="flex-space-between">
             <span>Weekly</span>
@@ -27,7 +27,7 @@
           </p>
         </mat-list-item>
         <!-- Lifelong -->
-        <mat-list-item [class.completed]="isGoalsCompletedByType('lifelong')">
+        <mat-list-item [class.completed]="isGoalsCompletedByType('lifelong')" routerLink="/lifelong">
           <mat-icon matListIcon>whatshot</mat-icon>
           <p matLine class="flex-space-between">
             <span>Lifelong</span>

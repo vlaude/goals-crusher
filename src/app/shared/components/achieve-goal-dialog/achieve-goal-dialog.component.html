@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Achieve {{ goal.title }} ?</h2>
+<mat-dialog-content
+  >Do you want to mark <b>{{ goal.title }}</b> as achieve on <b>{{ date | date }}</b> ?
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close color="accent">Cancel</button>
+  <button mat-raised-button mat-dialog-close="true" color="primary">Achieve 👊</button>
+</mat-dialog-actions>
