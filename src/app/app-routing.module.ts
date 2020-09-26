@@ -7,6 +7,7 @@ import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth
 import { StateInitializedResolver } from './core/resolvers/state-initialized.resolver';
 import { ProfileContainerComponent } from './profile/profile-container/profile-container.component';
 import { GoalsContainerComponent } from './goals/goals-container.component';
+import { CalendarsContainerComponent } from './calendars/calendars-container.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -48,6 +49,10 @@ const routes: Routes = [
         path: 'lifelong',
         component: GoalsContainerComponent,
         data: { type: 'lifelong', title: 'Lifelong Goals' },
+      },
+      {
+        path: 'calendars',
+        component: CalendarsContainerComponent,
       },
       {
         path: 'profile',

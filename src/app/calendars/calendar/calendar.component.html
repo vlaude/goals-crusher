@@ -1,0 +1,43 @@
+<div class="calendar-layout">
+  <!-- Calendar Header -->
+  <div class="calendar-header">
+    <!-- Previous Button -->
+    <button mat-icon-button (click)="switchMonth$.next('Previous')">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <!-- Current Month and Year -->
+    <span class="calendar-header-title">
+      <span class="calendar-header-title-month">{{ currentMonth }}</span>
+      <br />
+      <span class="calendar-header-title-year">{{ currentYear }}</span>
+    </span>
+    <!-- Next Button -->
+    <button mat-icon-button (click)="switchMonth$.next('Next')">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+  <!-- calendar-header -->
+
+  <!-- Calendar -->
+  <div class="calendar-grid">
+    <!-- Day titles -->
+    <div *ngFor="let day of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']" class="calendar-day calendar-day-header">
+      {{ day }}
+    </div>
+    <!-- Days -->
+    <div
+      *ngFor="let calendarDay of calendarDays"
+      class="calendar-day"
+      (click)="onCalendarDayClicked(calendarDay)"
+      [style.backgroundColor]="calendarDay.color"
+      [class.calendar-day-today]="isToday(calendarDay)"
+      [class.calendar-day-out]="calendarDay.isOutOfMonth"
+      [class.disabled]="isAfterToday(calendarDay)"
+    >
+      <span class="calendar-day-number" [matBadge]="calendarDay.badge" matBadgeOverlap="false" matBadgeSize="small">{{
+        calendarDay.dayNumber
+      }}</span>
+    </div>
+  </div>
+  <!-- calendar-grid -->
+</div>

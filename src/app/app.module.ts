@@ -17,9 +17,18 @@ import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './material.module';
 import { GoalsContainerComponent } from './goals/goals-container.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { CalendarsContainerComponent } from './calendars/calendars-container.component';
+import { CalendarComponent } from './calendars/calendar/calendar.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, ProfileContainerComponent, GoalsContainerComponent],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    ProfileContainerComponent,
+    GoalsContainerComponent,
+    CalendarsContainerComponent,
+    CalendarComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -30,9 +39,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFireAuthModule,
     AppRoutingModule,
     CoreModule,
-    MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    MaterialModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],

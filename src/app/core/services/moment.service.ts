@@ -7,12 +7,25 @@ import * as moment from 'moment';
 export class MomentService {
   constructor() {}
 
+  // TODO remove duplicate functions.
+  isToday(date: Date): boolean {
+    return moment(date).isSame(new Date(), 'day');
+  }
+
   isThisDay(date: Date): boolean {
     return moment(date).isSame(moment(), 'day');
   }
 
+  isSameDays(date1: Date, date2: Date): boolean {
+    return moment(date1).isSame(date2, 'date');
+  }
+
   isThisWeek(date: Date): boolean {
     return moment(date).isSame(moment(), 'week');
+  }
+
+  isAfterToday(date: Date): boolean {
+    return moment(date).isAfter(moment());
   }
 
   endOfTheDayHoursLeft() {
@@ -23,7 +36,12 @@ export class MomentService {
     return moment().endOf('week').diff(moment(), 'hours');
   }
 
-  isToday(date: Date): boolean {
-    return moment(date).isSame(new Date(), 'day');
+  getAllWeekDays(date: Date): Date[] {
+    const startOfWeek = moment(date).startOf('week').add(1, 'day');
+    const result: Date[] = [startOfWeek.toDate()];
+    for (let i = 1; i < 7; i++) {
+      result.push(new Date(startOfWeek.add(1, 'day').toDate()));
+    }
+    return result;
   }
 }

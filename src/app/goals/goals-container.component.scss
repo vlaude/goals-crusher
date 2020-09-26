@@ -13,17 +13,4 @@ span.spacer {
 .goals-container-layout {
   display: flex;
   flex-direction: column;
-  padding: 0 200px;
-}
-
-@media screen and (max-width: 800px) {
-  .goals-container-layout {
-    padding: 0 50px;
-  }
-}
-
-@media screen and (max-width: 640px) {
-  .goals-container-layout {
-    padding: 0;
-  }
 }

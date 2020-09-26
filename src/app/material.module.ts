@@ -15,6 +15,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [],
@@ -35,6 +38,9 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSnackBarModule,
     MatProgressBarModule,
     MatChipsModule,
+    MatAutocompleteModule,
+    MatButtonToggleModule,
+    MatBadgeModule,
   ],
   exports: [
     MatSidenavModule,
@@ -52,6 +58,9 @@ import { MatChipsModule } from '@angular/material/chips';
     MatSnackBarModule,
     MatProgressBarModule,
     MatChipsModule,
+    MatAutocompleteModule,
+    MatButtonToggleModule,
+    MatBadgeModule,
   ],
 })
 export class MaterialModule {}

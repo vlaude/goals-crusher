@@ -1,0 +1,27 @@
+h1.app-name {
+  margin-left: 8px;
+}
+
+.calendars-container-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendars-container-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .mat-form-field:first-child {
+    width: 30%;
+  }
+  .mat-form-field:nth-child(2) {
+    width: 65%;
+  }
+}
+
+.mat-card {
+  width: 100%;
+  margin-top: 1em;
+}
