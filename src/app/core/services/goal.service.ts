@@ -10,14 +10,32 @@ import { GoalType } from '../models/goal.type';
 export class GoalService {
   constructor(private readonly momentService: MomentService) {}
 
+  private getTodayAchievement(
+    goal: GoalModel<any>,
+    achievements: GoalAchievementModel<any>[]
+  ): GoalAchievementModel<any> {
+    return achievements.find((a) => a.goalId === goal.id && this.momentService.isThisDay(a.achievedAt));
+  }
+
+  private getThisWeekAchievement(
+    goal: GoalModel<any>,
+    achievements: GoalAchievementModel<any>[]
+  ): GoalAchievementModel<any> {
+    return achievements.find((a) => a.goalId === goal.id && this.momentService.isThisWeek(a.achievedAt));
+  }
+
   public isAchieved(goal: GoalModel<any>, achievements: GoalAchievementModel<any>[]): boolean {
     return !!this.getCurrentAchievement(goal, achievements);
   }
 
   public isAchievedByDate(goal: GoalModel<any>, achievements: GoalAchievementModel<any>[], date: Date) {
-    return achievements
-      .filter((a) => a.goalId === goal.id)
-      .find((a) => this.momentService.isSameDays(a.achievedAt, date));
+    const goalAchievements = achievements.filter((a) => a.goalId === goal.id);
+    switch (goal.type) {
+      case 'daily':
+        return goalAchievements.find((a) => this.momentService.isSameDay(a.achievedAt, date));
+      case 'weekly':
+        return goalAchievements.find((a) => this.momentService.isSameWeek(a.achievedAt, date));
+    }
   }
 
   public getCurrentAchievement(
@@ -41,19 +59,5 @@ export class GoalService {
       case 'weekly':
         return this.momentService.endOfTheWeekHoursLeft();
     }
-  }
-
-  private getTodayAchievement(
-    goal: GoalModel<any>,
-    achievements: GoalAchievementModel<any>[]
-  ): GoalAchievementModel<any> {
-    return achievements.find((a) => a.goalId === goal.id && this.momentService.isThisDay(a.achievedAt));
-  }
-
-  private getThisWeekAchievement(
-    goal: GoalModel<any>,
-    achievements: GoalAchievementModel<any>[]
-  ): GoalAchievementModel<any> {
-    return achievements.find((a) => a.goalId === goal.id && this.momentService.isThisWeek(a.achievedAt));
   }
 }

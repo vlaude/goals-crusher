@@ -66,6 +66,8 @@ export class CalendarComponent implements OnInit, OnChanges {
         ? this.currentMoment.subtract(1, 'month')
         : change === 'Next'
         ? this.currentMoment.add(1, 'month')
+        : this.currentMoment
+        ? this.currentMoment
         : moment().startOf('month');
   }
 

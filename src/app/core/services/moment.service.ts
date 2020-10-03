@@ -16,8 +16,12 @@ export class MomentService {
     return moment(date).isSame(moment(), 'day');
   }
 
-  isSameDays(date1: Date, date2: Date): boolean {
+  isSameDay(date1: Date, date2: Date): boolean {
     return moment(date1).isSame(date2, 'date');
+  }
+
+  isSameWeek(date1: Date, date2: Date): boolean {
+    return moment(date1).isSame(date2, 'isoWeek');
   }
 
   isThisWeek(date: Date): boolean {

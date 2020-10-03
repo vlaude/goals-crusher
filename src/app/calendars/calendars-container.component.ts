@@ -47,15 +47,13 @@ export class CalendarsContainerComponent implements OnInit {
       map(([goals, goalType]) => goals?.filter((goal) => goal.type === goalType))
     );
 
-    this.goalsFacade.getAchievements$().subscribe((achievements) => (this.achievements = achievements));
-  }
-
-  handleGoalSelected() {
-    this.highlightDates = this.achievements
-      .filter((achievement) => achievement.goalId === this.goalSelected.id)
-      .map((achievement) => this.generateHighlightDates(this.goalSelected, achievement))
-      .concat([{ date: this.goalSelected.createdAt, color: null, badge: '★' }])
-      .reduce((acc, val) => acc.concat(val), []);
+    this.goalsFacade.getAchievements$().subscribe((achievements) => {
+      this.achievements = achievements;
+      if (this.goalSelected) {
+        // TODO improve this.
+        this.handleGoalSelected();
+      }
+    });
   }
 
   /**
@@ -77,7 +75,7 @@ export class CalendarsContainerComponent implements OnInit {
     return {
       date: achievement.achievedAt,
       color: '#c2185b',
-      badge: this.momentService.isSameDays(achievement.achievedAt, goal.createdAt) ? '★' : '',
+      badge: this.momentService.isSameDay(achievement.achievedAt, goal.createdAt) ? '★' : '',
     };
   }
 
@@ -92,7 +90,7 @@ export class CalendarsContainerComponent implements OnInit {
       return {
         date: day,
         color: '#c2185b',
-        badge: this.momentService.isSameDays(day, goal.createdAt) ? '★' : '',
+        badge: this.momentService.isSameDay(day, goal.createdAt) ? '★' : '',
       };
     });
   }
@@ -107,7 +105,7 @@ export class CalendarsContainerComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((achieve) => {
       if (achieve) {
-        // TODO Achieve the goal at the date.
+        this.goalsFacade.achievedGoal(goal, date);
       }
     });
   }
@@ -129,6 +127,14 @@ export class CalendarsContainerComponent implements OnInit {
 
   public displayGoal(goal: GoalModel<any>): string {
     return goal?.title;
+  }
+
+  public handleGoalSelected() {
+    this.highlightDates = this.achievements
+      .filter((achievement) => achievement.goalId === this.goalSelected.id)
+      .map((achievement) => this.generateHighlightDates(this.goalSelected, achievement))
+      .concat([{ date: this.goalSelected.createdAt, color: null, badge: '★' }])
+      .reduce((acc, val) => acc.concat(val), []);
   }
 
   public handleDateClicked(event: Date): void {
