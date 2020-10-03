@@ -72,16 +72,19 @@ export class GoalsFacade {
       });
   }
 
-  achievedGoal(goal: GoalModel<any>) {
-    const isAlreadyAchieved = this.goalService.isAchieved(goal, this.achievements);
+  achievedGoal(goal: GoalModel<any>, date?: Date) {
+    // TODO refactor isAchieved and isAchievedByDate into one single function.
+    const isAlreadyAchieved = date
+      ? this.goalService.isAchievedByDate(goal, this.achievements, date)
+      : this.goalService.isAchieved(goal, this.achievements);
     if (isAlreadyAchieved) return;
     const newAchievement: GoalAchievementModel<any> = {
       goalId: goal.id,
-      achievedAt: new Date(),
+      achievedAt: date || new Date(),
     };
     this.state
       .addGoalAchievement(newAchievement)
-      .then((_) => {
+      .then((x) => {
         this.snackbarService.show(this.GOAL_ACHIEVED_MESSAGE);
       })
       .catch((err) => {
@@ -90,7 +93,7 @@ export class GoalsFacade {
       });
   }
 
-  unAchievedGoal(goal: GoalModel<any>) {
+  unAchievedGoal(goal: GoalModel<any>, date?: Date) {
     const isNotAchieved = !this.goalService.isAchieved(goal, this.achievements);
     if (isNotAchieved) return;
     const achievement = this.goalService.getCurrentAchievement(goal, this.achievements);
