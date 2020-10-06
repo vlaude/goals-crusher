@@ -37,7 +37,7 @@ export class MomentService {
   }
 
   endOfTheWeekHoursLeft() {
-    return moment().endOf('week').diff(moment(), 'hours');
+    return moment().endOf('isoWeek').diff(moment(), 'hours');
   }
 
   getAllWeekDays(date: Date): Date[] {
