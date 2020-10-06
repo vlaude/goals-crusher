@@ -25,7 +25,7 @@ export class MomentService {
   }
 
   isThisWeek(date: Date): boolean {
-    return moment(date).isSame(moment(), 'week');
+    return moment(date).isSame(moment(), 'isoWeek');
   }
 
   isAfterToday(date: Date): boolean {

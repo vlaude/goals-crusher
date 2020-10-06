@@ -120,7 +120,7 @@ export class CalendarsContainerComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((unachieve) => {
       if (unachieve) {
-        // TODO Unachieve the goal at the date.
+        this.goalsFacade.unAchievedGoal(goal, date);
       }
     });
   }
@@ -139,7 +139,7 @@ export class CalendarsContainerComponent implements OnInit {
 
   public handleDateClicked(event: Date): void {
     if (this.momentService.isAfterToday(event)) return;
-    const isGoalSelectedAchievedAtClickedDate = this.goalService.isAchievedByDate(
+    const isGoalSelectedAchievedAtClickedDate = this.goalService.isAchieved(
       this.goalSelected,
       this.achievements,
       event

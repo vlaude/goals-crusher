@@ -73,10 +73,7 @@ export class GoalsFacade {
   }
 
   achievedGoal(goal: GoalModel<any>, date?: Date) {
-    // TODO refactor isAchieved and isAchievedByDate into one single function.
-    const isAlreadyAchieved = date
-      ? this.goalService.isAchievedByDate(goal, this.achievements, date)
-      : this.goalService.isAchieved(goal, this.achievements);
+    const isAlreadyAchieved = this.goalService.isAchieved(goal, this.achievements, date);
     if (isAlreadyAchieved) return;
     const newAchievement: GoalAchievementModel<any> = {
       goalId: goal.id,
@@ -94,9 +91,11 @@ export class GoalsFacade {
   }
 
   unAchievedGoal(goal: GoalModel<any>, date?: Date) {
-    const isNotAchieved = !this.goalService.isAchieved(goal, this.achievements);
-    if (isNotAchieved) return;
-    const achievement = this.goalService.getCurrentAchievement(goal, this.achievements);
+    const isAchieved = this.goalService.isAchieved(goal, this.achievements, date);
+    if (!isAchieved) return;
+    const achievement = date
+      ? this.goalService.getAchievementByDate(goal, this.achievements, date)
+      : this.goalService.getCurrentAchievement(goal, this.achievements);
     this.state
       .removeGoalAchievement(achievement)
       .then((_) => {
