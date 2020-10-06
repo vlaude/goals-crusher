@@ -24,11 +24,17 @@ export class GoalService {
     return achievements.find((a) => a.goalId === goal.id && this.momentService.isThisWeek(a.achievedAt));
   }
 
-  public isAchieved(goal: GoalModel<any>, achievements: GoalAchievementModel<any>[]): boolean {
-    return !!this.getCurrentAchievement(goal, achievements);
+  public isAchieved(goal: GoalModel<any>, achievements: GoalAchievementModel<any>[], date?: Date): boolean {
+    return date
+      ? !!this.getAchievementByDate(goal, achievements, date)
+      : !!this.getCurrentAchievement(goal, achievements);
   }
 
-  public isAchievedByDate(goal: GoalModel<any>, achievements: GoalAchievementModel<any>[], date: Date) {
+  public getAchievementByDate(
+    goal: GoalModel<any>,
+    achievements: GoalAchievementModel<any>[],
+    date: Date
+  ): GoalAchievementModel<any> {
     const goalAchievements = achievements.filter((a) => a.goalId === goal.id);
     switch (goal.type) {
       case 'daily':
