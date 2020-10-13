@@ -19,6 +19,8 @@ import { GoalsContainerComponent } from './goals/goals-container.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { CalendarsContainerComponent } from './calendars/calendars-container.component';
 import { CalendarComponent } from './calendars/calendar/calendar.component';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { GoalsTabsComponent } from './goals/goals-tabs/goals-tabs.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { CalendarComponent } from './calendars/calendar/calendar.component';
     GoalsContainerComponent,
     CalendarsContainerComponent,
     CalendarComponent,
+    GoalsTabsComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { CalendarComponent } from './calendars/calendar/calendar.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireMessagingModule,
     AppRoutingModule,
     CoreModule,
     FormsModule,

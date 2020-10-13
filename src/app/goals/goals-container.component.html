@@ -1,18 +1,13 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="sidenavService.toggle()"><mat-icon>menu</mat-icon></button>
-  <h1 class="app-name">{{ title }}</h1>
-  <span class="spacer"></span>
-  <button mat-icon-button (click)="openForm()"><mat-icon>add</mat-icon></button>
-</mat-toolbar>
 <div class="goals-container-layout container-layout">
-  <!-- Chips -->
-  <mat-chip-list *ngIf="goals?.length > 0">
-    <!-- Goals achieved count -->
-    <mat-chip>✅ {{ achievedGoalsCount }} / {{ goals.length }}</mat-chip>
-    <!-- Time left -->
-    <mat-chip *ngIf="hoursLeft">⏳ {{ hoursLeft | timeLeft }} left</mat-chip>
-  </mat-chip-list>
-  <!-- Goals -->
+  <div class="goals-summary">
+    <div class="goals-summary-count">
+      <i class="material-icons">check_circle_outline</i> <span>{{ achievedGoalsCount }} / {{ goals.length }}</span>
+    </div>
+    <div class="goals-summary-timeleft">
+      <span>{{ hoursLeft | timeLeft }} left</span>
+      <i class="material-icons">hourglass_empty</i>
+    </div>
+  </div>
   <vl-goal-list
     [goals]="goals"
     (goalClicked)="handleGoalClicked($event)"

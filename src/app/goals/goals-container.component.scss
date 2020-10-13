@@ -1,16 +1,17 @@
-h1.app-name {
-  margin-left: 8px;
-}
-
-span.spacer {
-  flex: 1 1 auto;
-}
-
-.mat-chip-list {
-  padding: 1em 1em 0 1em;
-}
-
-.goals-container-layout {
+.goals-summary {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-secondary);
+}
+.goals-summary-count,
+.goals-summary-timeleft {
+  display: flex;
+  align-items: center;
+}
+.goals-summary-count .material-icons {
+  margin-right: 0.5rem;
+}
+.goals-summary-timeleft .material-icons {
+  margin-left: 0.5rem;
 }

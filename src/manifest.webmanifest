@@ -6,6 +6,7 @@
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
+  "gcm_sender_id": "807076644137",
   "icons": [
     {
       "src": "assets/maskable_icon.png",
