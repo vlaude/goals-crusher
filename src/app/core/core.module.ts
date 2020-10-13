@@ -6,9 +6,10 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
-  declarations: [LoginComponent, HomeComponent],
+  declarations: [LoginComponent, HomeComponent, NavbarComponent],
   exports: [],
   imports: [CommonModule, BrowserAnimationsModule, RouterModule, MaterialModule, ReactiveFormsModule, FormsModule],
 })

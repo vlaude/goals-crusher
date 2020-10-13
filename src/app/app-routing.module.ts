@@ -8,6 +8,7 @@ import { StateInitializedResolver } from './core/resolvers/state-initialized.res
 import { ProfileContainerComponent } from './profile/profile-container/profile-container.component';
 import { GoalsContainerComponent } from './goals/goals-container.component';
 import { CalendarsContainerComponent } from './calendars/calendars-container.component';
+import { GoalsTabsComponent } from './goals/goals-tabs/goals-tabs.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -36,22 +37,33 @@ const routes: Routes = [
         component: DashboardComponent,
       },
       {
-        path: 'daily',
-        component: GoalsContainerComponent,
-        data: { type: 'daily', title: 'Daily Goals' },
+        path: 'goals',
+        component: GoalsTabsComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'daily',
+            pathMatch: 'full',
+          },
+          {
+            path: 'daily',
+            component: GoalsContainerComponent,
+            data: { type: 'daily', title: 'Daily Goals' },
+          },
+          {
+            path: 'weekly',
+            component: GoalsContainerComponent,
+            data: { type: 'weekly', title: 'Weekly Goals' },
+          },
+          {
+            path: 'lifelong',
+            component: GoalsContainerComponent,
+            data: { type: 'lifelong', title: 'Lifelong Goals' },
+          },
+        ],
       },
       {
-        path: 'weekly',
-        component: GoalsContainerComponent,
-        data: { type: 'weekly', title: 'Weekly Goals' },
-      },
-      {
-        path: 'lifelong',
-        component: GoalsContainerComponent,
-        data: { type: 'lifelong', title: 'Lifelong Goals' },
-      },
-      {
-        path: 'calendars',
+        path: 'calendar',
         component: CalendarsContainerComponent,
       },
       {

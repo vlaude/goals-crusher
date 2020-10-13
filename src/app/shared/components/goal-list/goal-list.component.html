@@ -1,20 +1,18 @@
-<mat-list>
-  <mat-list-item *ngFor="let goal of goals" class="mat-list-item-word-wrap">
-    <mat-card
-      [class.achieved]="goal.achieved"
-      (mousedown)="mousedown(goal)"
-      (mouseup)="mouseup()"
-      (touchstart)="mousedown(goal)"
-      (touchend)="mouseup()"
-      (touchmove)="mouseup()"
-    >
-      <div matLine class="mat-list-item-header">
-        <span>{{ goal.title }} </span>
-        <button mat-icon-button color="accent" (click)="$event.stopPropagation(); goalDetailClicked.emit(goal)">
-          <mat-icon>info</mat-icon>
-        </button>
-      </div>
-    </mat-card>
-  </mat-list-item>
-  <mat-list-item *ngIf="goals?.length === 0">No goals yet, create one and crush it ! 💪</mat-list-item>
-</mat-list>
+<div
+  *ngFor="let goal of goals"
+  class="goal-card"
+  [class.achieved]="goal.achieved"
+  (click)="goalDetailClicked.emit(goal)"
+>
+  <i
+    class="material-icons"
+    (click)="$event.stopPropagation(); goalClicked.emit(goal)"
+    [innerHTML]="goal.achieved ? 'check_circle_outline' : 'radio_button_unchecked'"
+  >
+  </i>
+  <span class="vertical-divider"></span>
+  <span class="goal-title">{{ goal.title }}</span>
+</div>
+<span *ngIf="goals?.length === 0">
+  No goals yet, create one and crsh it ! 💪
+</span>

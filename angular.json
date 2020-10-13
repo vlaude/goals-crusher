@@ -48,10 +48,10 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/firebase-messaging-sw.js",
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -116,10 +116,10 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/firebase-messaging-sw.js",
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.scss"
             ],
             "scripts": []

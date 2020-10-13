@@ -1,54 +1,27 @@
-@import '~@angular/material/theming';
-
-.mat-list-item {
-  margin: 1em 0;
-}
-
-.mat-card {
-  position: relative;
-  width: 100%;
-  overflow: auto;
-  font-size: 0.9rem;
-  cursor: pointer;
-  z-index: 0;
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 7px;
-    height: 100%;
-    background-color: mat-color(mat-palette($mat-pink));
-    transition: width 0s;
-    z-index: -1;
-  }
-  &:active:before {
-    transition: width 1s ease-in-out;
-    width: 100%;
+.goal-card {
+  display: grid;
+  grid-template-columns: 20% 5% 75%;
+  align-items: center;
+  height: 3rem;
+  padding: 1rem 0.5rem;
+  margin: 1rem 0;
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  border-radius: 5px;
+  &.achieved {
+    .material-icons {
+      color: var(--primary-color);
+    }
   }
 }
-
-.mat-card.achieved {
-  opacity: 0.7;
-  font-weight: bold;
-  &:before {
-    width: 100%;
-  }
-  &:active:before {
-    width: 0;
-  }
+.material-icons {
+  font-size: 2rem;
+  justify-self: center;
 }
-
-.mat-list-item.mat-list-item-word-wrap {
-  height: initial !important;
-  .mat-line {
-    word-wrap: break-word !important;
-    white-space: pre-wrap !important;
-  }
+.vertical-divider {
+  justify-self: flex-start;
+  height: 75%;
+  border-right: 1px solid var(--text-secondary);
 }
-
-.mat-list-item-header {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
+.goal-title {
 }
