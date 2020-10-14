@@ -9,6 +9,7 @@ import { TimeLeftPipe } from './pipes/time-left.pipe';
 import { AchieveGoalDialogComponent } from './components/achieve-goal-dialog/achieve-goal-dialog.component';
 import { UnachieveGoalDialogComponent } from './components/unachieve-goal-dialog/unachieve-goal-dialog.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ModalComponent } from './components/modal/modal.component';
     AchieveGoalDialogComponent,
     UnachieveGoalDialogComponent,
     ModalComponent,
+    ButtonComponent,
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
   exports: [GoalListComponent, TimeLeftPipe, ModalComponent, ButtonComponent],

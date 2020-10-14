@@ -1,0 +1,41 @@
+.vl-button {
+  padding: 1rem 1.5rem;
+
+  border-radius: 25px;
+  border: none;
+
+  color: var(--text-primary);
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+
+  &:focus {
+    outline: none;
+  }
+  &:focus:not(.disabled) {
+    animation: bounce;
+    animation-duration: 0.2s;
+    animation-iteration-count: 1;
+  }
+}
+.default {
+  background-color: var(--text-secondary);
+}
+.primary {
+  background-color: var(--primary-color);
+}
+.secondary {
+  background-color: var(--text-secondary);
+}
+.danger {
+  background-color: var(--text-secondary);
+}
+.disabled {
+  opacity: 0.5;
+}
+
+@keyframes bounce {
+  to {
+    transform: scale(1.1);
+  }
+}
