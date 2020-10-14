@@ -18,17 +18,18 @@
 .nav-link {
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 4rem;
+  text-decoration: none;
 }
-.nav-link svg {
-  width: 2rem;
-  height: auto;
-  fill: var(--text-secondary);
+.nav-link i.material-icons {
+  font-size: 2rem;
+  color: var(--text-secondary);
 }
 .nav-link.active {
   border-top: 3px solid var(--primary-color);
-  svg {
-    fill: var(--primary-color);
+  i.material-icons {
+    color: var(--primary-color);
   }
 }
 
