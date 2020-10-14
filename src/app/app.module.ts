@@ -21,6 +21,7 @@ import { CalendarsContainerComponent } from './calendars/calendars-container.com
 import { CalendarComponent } from './calendars/calendar/calendar.component';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { GoalsTabsComponent } from './goals/goals-tabs/goals-tabs.component';
+import { GoalDetailComponent } from './goals/goal-detail/goal-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { GoalsTabsComponent } from './goals/goals-tabs/goals-tabs.component';
     CalendarsContainerComponent,
     CalendarComponent,
     GoalsTabsComponent,
+    GoalDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,8 +8,8 @@ import { GoalModel } from '../../../core/models/goal.model';
 })
 export class GoalListComponent implements OnInit {
   @Input() goals: GoalModel<any>[];
+  @Output() goalAchieveBoxClicked = new EventEmitter<GoalModel<any>>();
   @Output() goalClicked = new EventEmitter<GoalModel<any>>();
-  @Output() goalDetailClicked = new EventEmitter<GoalModel<any>>();
 
   constructor() {}
 
