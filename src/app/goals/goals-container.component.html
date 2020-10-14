@@ -10,7 +10,10 @@
   </div>
   <vl-goal-list
     [goals]="goals"
+    (goalAchieveBoxClicked)="handleGoalAchieveBoxClicked($event)"
     (goalClicked)="handleGoalClicked($event)"
-    (goalDetailClicked)="handleGoalDetailClicked($event)"
   ></vl-goal-list>
+  <vl-modal id="goal-detail-modal">
+    <vl-goal-detail [goal]="goalSelected" (deleteClicked)="handleGoalDetailDeleteClicked()"></vl-goal-detail>
+  </vl-modal>
 </div>

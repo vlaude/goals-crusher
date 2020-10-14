@@ -1,12 +1,7 @@
-<div
-  *ngFor="let goal of goals"
-  class="goal-card"
-  [class.achieved]="goal.achieved"
-  (click)="goalDetailClicked.emit(goal)"
->
+<div *ngFor="let goal of goals" class="goal-card" [class.achieved]="goal.achieved" (click)="goalClicked.emit(goal)">
   <i
     class="material-icons"
-    (click)="$event.stopPropagation(); goalClicked.emit(goal)"
+    (click)="$event.stopPropagation(); goalAchieveBoxClicked.emit(goal)"
     [innerHTML]="goal.achieved ? 'check_circle_outline' : 'radio_button_unchecked'"
   >
   </i>

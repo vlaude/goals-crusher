@@ -1,17 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { SidenavService } from '../core/services/sidenav.service';
 import { GoalsFacade } from '../facades/goals.facade';
 import { ActivatedRoute } from '@angular/router';
 import { GoalType } from '../core/models/goal.type';
 import { GoalModel } from '../core/models/goal.model';
-import {
-  GoalDetailDialogAction,
-  GoalDetailDialogComponent,
-} from '../shared/components/goal-detail-dialog/goal-detail-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { GoalFormDialogComponent } from '../shared/components/goal-form-dialog/goal-form-dialog.component';
 import { FormGroup } from '@angular/forms';
 import { GoalService } from '../core/services/goal.service';
+import { ModalService } from '../core/services/modal.service';
 
 @Component({
   selector: 'vl-goals-container',
@@ -20,7 +16,7 @@ import { GoalService } from '../core/services/goal.service';
 })
 export class GoalsContainerComponent implements OnInit {
   public goals: GoalModel<any>[];
-  public title = '';
+  public goalSelected: GoalModel<any>;
   public goalType: GoalType;
   public hoursLeft: number;
 
@@ -33,11 +29,10 @@ export class GoalsContainerComponent implements OnInit {
     private readonly goalService: GoalService,
     private readonly route: ActivatedRoute,
     private readonly dialog: MatDialog,
-    public readonly sidenavService: SidenavService
+    private readonly modalService: ModalService
   ) {}
 
   ngOnInit(): void {
-    this.title = this.route.snapshot.data.title || 'Daily Goals';
     this.goalType = this.route.snapshot.data.type || 'daily';
     this.goalsFacade.getGoalsByTypeWithCurrentAchievements$(this.goalType).subscribe((goals) => {
       this.goals = goals;
@@ -45,7 +40,15 @@ export class GoalsContainerComponent implements OnInit {
     this.hoursLeft = this.goalService.getHoursLeftToAchieve(this.goalType);
   }
 
-  handleGoalClicked(goal: GoalModel<any>) {
+  private openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  private closeModal(id: string) {
+    this.modalService.close(id);
+  }
+
+  handleGoalAchieveBoxClicked(goal: GoalModel<any>) {
     if (!goal.achieved) {
       this.goalsFacade.achievedGoal(goal);
     } else {
@@ -53,33 +56,15 @@ export class GoalsContainerComponent implements OnInit {
     }
   }
 
-  handleGoalDetailClicked(goal: GoalModel<any>) {
-    const dialogRef = this.dialog.open(GoalDetailDialogComponent, {
-      width: '600px',
-      data: { goal },
-    });
-    dialogRef.afterClosed().subscribe((action: GoalDetailDialogAction) => {
-      switch (action) {
-        case 'edit':
-          break;
-        case 'remove':
-          this.goalsFacade.removeGoal(goal);
-          break;
-      }
-    });
+  handleGoalClicked(goal: GoalModel<any>) {
+    this.goalSelected = goal;
+    this.openModal('goal-detail-modal');
   }
 
-  openForm() {
-    const dialogRef = this.dialog.open(GoalFormDialogComponent, {
-      width: '400px',
-      data: {
-        defaultGoalType: this.goalType,
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((form) => {
-      this.addGoal(form);
-    });
+  handleGoalDetailDeleteClicked() {
+    this.closeModal('goal-detail-modal');
+    this.goalsFacade.removeGoal(this.goalSelected);
+    this.goalSelected = null;
   }
 
   addGoal(form: FormGroup) {

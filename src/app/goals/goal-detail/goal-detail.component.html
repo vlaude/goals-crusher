@@ -1,0 +1,13 @@
+<div *ngIf="goal" class="wrapper">
+  <span class="goal-type">{{ goal.type }}</span>
+  <span class="goal-title">{{ goal.title }}</span>
+  <p *ngIf="goal.description; else noDesc" class="goal-description">{{ goal.description }}</p>
+  <ng-template #noDesc>
+    <p class="goal-description">No description yet.</p>
+  </ng-template>
+
+  <div class="actions">
+    <vl-button color="primary" (click)="editClicked.emit()" disabled>Edit</vl-button>
+    <vl-button color="danger" (click)="deleteClicked.emit()">Delete</vl-button>
+  </div>
+</div>

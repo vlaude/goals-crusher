@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.goal-type {
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.goal-title {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+.goal-description {
+  margin: 1.5rem 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+
+  vl-button:last-child {
+    margin-left: 0.5rem;
+  }
+}
