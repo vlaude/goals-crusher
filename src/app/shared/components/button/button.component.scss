@@ -33,6 +33,14 @@
 .disabled {
   opacity: 0.5;
 }
+.icon {
+  display: grid;
+  place-items: center;
+
+  padding: 0.5rem;
+
+  border-radius: 25px;
+}
 
 @keyframes bounce {
   to {
