@@ -1,3 +1,8 @@
-<button class="vl-button" [class]="color" [class.disabled]="disabled" [class.icon]="icon">
+<button
+  class="vl-button"
+  [type]="type"
+  [class]="color"
+  [ngClass]="{ disabled: disabled, icon: icon, 'full-width': fullWidth }"
+>
   <ng-content></ng-content>
 </button>
