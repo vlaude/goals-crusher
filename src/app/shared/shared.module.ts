@@ -11,6 +11,8 @@ import { UnachieveGoalDialogComponent } from './components/unachieve-goal-dialog
 import { ModalComponent } from './components/modal/modal.component';
 import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/input/input.component';
+import { TextareaComponent } from './components/textarea/textarea.component';
+import { FormFieldComponent } from './components/form-field/form-field.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { InputComponent } from './components/input/input.component';
     ModalComponent,
     ButtonComponent,
     InputComponent,
+    TextareaComponent,
+    FormFieldComponent,
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -31,6 +35,8 @@ import { InputComponent } from './components/input/input.component';
     ModalComponent,
     ButtonComponent,
     InputComponent,
+    TextareaComponent,
+    FormFieldComponent,
   ],
 })
 export class SharedModule {}
