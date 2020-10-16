@@ -1,0 +1,17 @@
+.vl-textarea {
+  padding: 1rem;
+
+  background-color: var(--bg-secondary);
+  border: none;
+  border-radius: 5px;
+
+  font-family: var(--font-family);
+  font-size: 1rem;
+  color: var(--text-secondary);
+
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+  }
+}
