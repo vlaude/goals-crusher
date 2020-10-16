@@ -10,6 +10,7 @@ import { AchieveGoalDialogComponent } from './components/achieve-goal-dialog/ach
 import { UnachieveGoalDialogComponent } from './components/unachieve-goal-dialog/unachieve-goal-dialog.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { ButtonComponent } from './components/button/button.component';
+import { InputComponent } from './components/input/input.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,15 @@ import { ButtonComponent } from './components/button/button.component';
     UnachieveGoalDialogComponent,
     ModalComponent,
     ButtonComponent,
+    InputComponent,
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
-  exports: [GoalListComponent, TimeLeftPipe, ModalComponent, ButtonComponent],
+  exports: [
+    GoalListComponent,
+    TimeLeftPipe,
+    ModalComponent,
+    ButtonComponent,
+    InputComponent,
+  ],
 })
 export class SharedModule {}

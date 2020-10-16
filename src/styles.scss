@@ -8,6 +8,7 @@
   --text-primary: #eeeeee;
   --text-secondary: #9e9e9e;
   --primary-color: #ff9800;
+  --font-family: 'Montserrat', san-serif;
 }
 
 html,
@@ -16,7 +17,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-family);
   background-color: var(--bg-primary);
   color: var(--text-primary);
 }
