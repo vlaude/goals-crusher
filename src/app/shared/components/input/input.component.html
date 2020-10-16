@@ -1,0 +1,10 @@
+<input
+  class="vl-input"
+  [type]="type"
+  [placeholder]="placeholder"
+  [style.width]="width"
+  [required]="required"
+  [disabled]="disabled"
+  (input)="onChange($event.target.value)"
+  (blur)="onTouched()"
+/>
