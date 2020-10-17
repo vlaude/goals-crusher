@@ -1,0 +1,7 @@
+<div class="wrapper">
+  <label class="container" *ngFor="let item of items">
+    <input type="radio" [value]="item.value" [ngModel]="value" (ngModelChange)="change($event)" [name]="name" />
+    {{ item.name }}
+    <span class="checkmark"> </span>
+  </label>
+</div>
