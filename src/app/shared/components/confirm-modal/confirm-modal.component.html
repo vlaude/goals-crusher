@@ -1,0 +1,8 @@
+<vl-modal [id]="id">
+  <h3>{{ title }}</h3>
+  <p>{{ text }}</p>
+  <div class="actions">
+    <vl-button (click)="canceled.emit()" fullWidth>{{ cancelText }}</vl-button>
+    <vl-button color="primary" class="confirm-btn" (click)="confirmed.emit()" fullWidth>{{ confirmText }}</vl-button>
+  </div>
+</vl-modal>
