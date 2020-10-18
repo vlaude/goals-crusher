@@ -16,6 +16,7 @@ import { FormFieldComponent } from './components/form-field/form-field.component
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { CardComponent } from './components/card/card.component';
 import { SelectComponent } from './components/select/select.component';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SelectComponent } from './components/select/select.component';
     RadioButtonComponent,
     CardComponent,
     SelectComponent,
+    ConfirmModalComponent,
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -46,6 +48,7 @@ import { SelectComponent } from './components/select/select.component';
     RadioButtonComponent,
     CardComponent,
     SelectComponent,
+    ConfirmModalComponent,
   ],
 })
 export class SharedModule {}
