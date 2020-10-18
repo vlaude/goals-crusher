@@ -1,0 +1,75 @@
+.vl-select {
+  position: relative;
+}
+
+.select-selected {
+  width: 100%;
+
+  background-color: var(--bg-primary);
+  border: 1px solid var(--bg-secondary);
+  border-radius: 5px;
+
+  font-family: var(--font-family);
+  font-size: 1rem;
+  color: var(--text-secondary);
+
+  box-sizing: border-box;
+
+  &.expended {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.select-items {
+  position: absolute;
+  top: calc(3rem + 2px);
+  left: 0;
+  right: 0;
+
+  width: 100%;
+  z-index: 99;
+}
+
+.select-selected,
+.select-items div {
+  padding: 1rem;
+  cursor: pointer;
+}
+.select-items div {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--bg-secondary);
+  &:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+}
+
+.select-hide {
+  display: none;
+}
+
+.same-as-selected {
+  font-weight: bold;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: '';
+  top: 50%;
+  right: 1rem;
+
+  width: 0;
+  height: 0;
+
+  border: 6px solid transparent;
+  border-top-color: var(--text-secondary);
+
+  transform-origin: center 0;
+  transition-duration: 0.5s;
+}
+/* Rotate the arrow when expended: */
+.select-selected.expended:after {
+  transform: rotate(180deg);
+}

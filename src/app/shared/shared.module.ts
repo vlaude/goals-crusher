@@ -15,6 +15,7 @@ import { TextareaComponent } from './components/textarea/textarea.component';
 import { FormFieldComponent } from './components/form-field/form-field.component';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { CardComponent } from './components/card/card.component';
+import { SelectComponent } from './components/select/select.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CardComponent } from './components/card/card.component';
     FormFieldComponent,
     RadioButtonComponent,
     CardComponent,
+    SelectComponent,
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -43,6 +45,7 @@ import { CardComponent } from './components/card/card.component';
     FormFieldComponent,
     RadioButtonComponent,
     CardComponent,
+    SelectComponent,
   ],
 })
 export class SharedModule {}
