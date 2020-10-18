@@ -1,0 +1,8 @@
+<div class="vl-card">
+  <div class="title" #title [class.title-empty]="title.childNodes.length === 0">
+    <ng-content select="[title]"></ng-content>
+  </div>
+  <div class="content">
+    <ng-content select="[content]"></ng-content>
+  </div>
+</div>
