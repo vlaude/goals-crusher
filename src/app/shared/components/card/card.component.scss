@@ -1,0 +1,22 @@
+.vl-card {
+  display: flex;
+  flex-direction: column;
+
+  padding: 1rem;
+
+  background-color: var(--bg-secondary);
+  font-size: 1rem;
+  color: var(--text-secondary);
+  border-radius: 5px;
+}
+.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  &:not(.title-empty) {
+    margin-bottom: 1rem;
+  }
+}
+.content {
+}
