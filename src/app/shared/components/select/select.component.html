@@ -1,0 +1,12 @@
+<div class="vl-select">
+  <div class="select-selected" (click)="showItems = !showItems" [class.expended]="showItems">
+    <span>{{ itemSelected?.name }}</span>
+    <span *ngIf="!value">{{ placeholder }}</span>
+  </div>
+
+  <div class="select-items" [class.select-hide]="!showItems">
+    <div *ngFor="let item of items" [class.same-as-selected]="item.value === value" (click)="selectItem(item)">
+      {{ item.name }}
+    </div>
+  </div>
+</div>
