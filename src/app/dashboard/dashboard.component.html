@@ -1,74 +1,46 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="sidenavService.toggle()"><mat-icon>menu</mat-icon></button>
-  <h1 class="app-name">Dashboard</h1>
-</mat-toolbar>
 <div class="dashboard-layout container-layout">
+  <div class="background-shape"></div>
+
+  <h1 class="dashboard-title">Dashboard</h1>
+
   <!-- Summary -->
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Summary</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-list class="summary-list">
-        <!-- Daily -->
-        <mat-list-item [class.completed]="isGoalsCompletedByType('daily')" routerLink="/daily">
-          <mat-icon matListIcon>today</mat-icon>
-          <p matLine class="flex-space-between">
-            <span>Daily</span>
-            <span>{{ getGoalsAchievedCountByType('daily') }} / {{ getGoalsCountByType('daily') }}</span>
-          </p>
-        </mat-list-item>
-        <!-- Weekly -->
-        <mat-list-item [class.completed]="isGoalsCompletedByType('weekly')" routerLink="/weekly">
-          <mat-icon matListIcon>date_range</mat-icon>
-          <p matLine class="flex-space-between">
-            <span>Weekly</span>
-            <span>{{ getGoalsAchievedCountByType('weekly') }} / {{ getGoalsCountByType('weekly') }}</span>
-          </p>
-        </mat-list-item>
-        <!-- Lifelong -->
-        <mat-list-item [class.completed]="isGoalsCompletedByType('lifelong')" routerLink="/lifelong">
-          <mat-icon matListIcon>whatshot</mat-icon>
-          <p matLine class="flex-space-between">
-            <span>Lifelong</span>
-            <span>{{ getGoalsAchievedCountByType('lifelong') }} / {{ getGoalsCountByType('lifelong') }}</span>
-          </p></mat-list-item
-        >
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+  <vl-card>
+    <div title>Summary</div>
+    <div content>
+      <div class="card-line">
+        <span>Daily</span>
+        <span>{{ getGoalsAchievedCountByType('daily') }} / {{ getGoalsCountByType('daily') }}</span>
+      </div>
+      <div class="card-line">
+        <span>Weekly</span>
+        <span>{{ getGoalsAchievedCountByType('weekly') }} / {{ getGoalsCountByType('weekly') }}</span>
+      </div>
+      <div class="card-line">
+        <span>Lifelong</span>
+        <span>{{ getGoalsAchievedCountByType('lifelong') }} / {{ getGoalsCountByType('lifelong') }}</span>
+      </div>
+    </div>
+  </vl-card>
+
   <!-- Last Achieved -->
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Last Achieved</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item *ngFor="let goal of getLastGoalsAchieved()">
-          <p matLine class="flex-space-between">
-            <span>{{ goal.title }} </span
-            ><span>{{
-              goal.achievedAt | date: (momentService.isToday(goal.achievedAt) ? 'shortTime' : 'shortDate')
-            }}</span>
-          </p>
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+  <vl-card>
+    <div title>Last Achieved</div>
+    <div content>
+      <div class="card-line" *ngFor="let goal of getLastGoalsAchieved()">
+        <span>{{ goal.title }} </span
+        ><span>{{ goal.achievedAt | date: (momentService.isToday(goal.achievedAt) ? 'shortTime' : 'shortDate') }}</span>
+      </div>
+    </div>
+  </vl-card>
+
   <!-- Last Created -->
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Last Created</mat-card-title>
-    </mat-card-header>
-    <mat-card-content
-      ><mat-list>
-        <mat-list-item *ngFor="let goal of getLastCreatedGoals()">
-          <p matLine class="flex-space-between">
-            <span>{{ goal.title }}</span
-            ><span> {{ goal.createdAt | date: 'shortDate' }} </span>
-          </p>
-        </mat-list-item>
-      </mat-list></mat-card-content
-    >
-  </mat-card>
+  <vl-card>
+    <div title>Last Created</div>
+    <div content>
+      <div class="card-line" *ngFor="let goal of getLastCreatedGoals()">
+        <span>{{ goal.title }} </span>
+        <span> {{ goal.createdAt | date: 'shortDate' }} </span>
+      </div>
+    </div>
+  </vl-card>
 </div>
