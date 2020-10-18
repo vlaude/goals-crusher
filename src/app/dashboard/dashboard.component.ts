@@ -17,11 +17,7 @@ export class DashboardComponent implements OnInit {
   goals: GoalModel<any>[];
   achievements: GoalAchievementModel<any>[];
 
-  constructor(
-    private readonly goalsFacade: GoalsFacade,
-    public readonly sidenavService: SidenavService,
-    public readonly momentService: MomentService
-  ) {}
+  constructor(private readonly goalsFacade: GoalsFacade, public readonly momentService: MomentService) {}
 
   ngOnInit(): void {
     zip(
@@ -63,6 +59,7 @@ export class DashboardComponent implements OnInit {
     return this.goals.sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1)).slice(0, count);
   }
 
+  // TODO Highlight goal type when all goals of this type are achieved.
   public isGoalsCompletedByType(type: GoalType): boolean {
     const goalsByType = this.goals.filter((goal) => goal.type === type);
     return goalsByType.filter((goal) => goal.achieved).length === goalsByType.length;
