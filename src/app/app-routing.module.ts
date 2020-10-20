@@ -29,7 +29,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'goals',
         pathMatch: 'full',
       },
       {
@@ -48,17 +48,17 @@ const routes: Routes = [
           {
             path: 'daily',
             component: GoalsContainerComponent,
-            data: { type: 'daily', title: 'Daily Goals' },
+            data: { type: 'daily', title: 'Daily Goals', animation: 'DailyTab' },
           },
           {
             path: 'weekly',
             component: GoalsContainerComponent,
-            data: { type: 'weekly', title: 'Weekly Goals' },
+            data: { type: 'weekly', title: 'Weekly Goals', animation: 'WeeklyTab' },
           },
           {
             path: 'lifelong',
             component: GoalsContainerComponent,
-            data: { type: 'lifelong', title: 'Lifelong Goals' },
+            data: { type: 'lifelong', title: 'Lifelong Goals', animation: 'LifelongTab' },
           },
         ],
       },
