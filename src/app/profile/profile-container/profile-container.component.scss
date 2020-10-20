@@ -1,51 +1,47 @@
-h1.app-name {
-  margin-left: 8px;
-}
+.background-shape {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
 
-.profile-container {
-  padding: 3em;
-  display: flex;
-  flex-direction: column;
+  background-color: var(--primary-color);
+
+  z-index: -1;
 }
 
 .profile-layout {
-  display: grid;
-  grid-template-columns: 300px 1fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 img {
-  width: 250px;
+  width: 150px;
   height: auto;
+
+  border-radius: 75px;
+  align-self: center;
+
+  margin-top: calc(75px - 1rem);
+}
+
+h1 {
   align-self: center;
 }
 
-button.logout-btn {
-  align-self: flex-end;
-  margin-top: 3rem;
+vl-card {
+  margin-bottom: 1rem;
 }
 
-@media screen and (max-width: 640px) {
-  .profile-container {
-    padding: 1em;
-  }
+.card-line {
+  display: flex;
+  align-items: center;
+}
+i.material-icons {
+  margin-right: 0.5rem;
+}
 
-  .profile-layout {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .user-display-name {
-    text-align: center;
-  }
-
-  img {
-    width: 150px;
-    border-radius: 75px;
-    margin-bottom: 1em;
-  }
-
-  .mat-line {
-    // TODO Customize typography => https://material.angular.io/guide/typography
-    font-size: 0.9rem !important;
-  }
+.logout-btn {
+  margin-top: 2rem;
 }

@@ -1,29 +1,20 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="sidenavService.toggle()"><mat-icon>menu</mat-icon></button>
-  <h1 class="app-name">Profile</h1>
-  <span class="spacer"></span>
-</mat-toolbar>
-<div class="profile-container">
-  <div class="profile-layout">
-    <!-- Avatar -->
-    <img [src]="user?.photoURL || 'assets/blank-avatar.png'" alt="" />
-    <div>
-      <!-- User info -->
-      <h1 class="user-display-name">{{ user?.displayName || 'Hello Stranger !' }}</h1>
-      <mat-divider></mat-divider>
-      <mat-list>
-        <mat-list-item>
-          <mat-icon matListIcon>email</mat-icon>
-          <span matLine>{{ user?.email }}</span>
-        </mat-list-item>
-        <mat-list-item>
-          <mat-icon matListIcon>phone</mat-icon>
-          <span matLine>{{ user?.phoneNumber || 'None' }}</span>
-        </mat-list-item>
-      </mat-list>
-    </div>
-  </div>
+<div class="container-layout" *ngIf="user">
+  <div class="background-shape"></div>
 
-  <!-- Logout button -->
-  <button mat-stroked-button (click)="logout()" class="logout-btn">Log Out</button>
+  <div class="profile-layout">
+    <img [src]="user.photoURL || 'assets/blank-avatar.png'" alt="" />
+    <h1>{{ user.displayName || 'Hello Stranger !' }}</h1>
+
+    <vl-card>
+      <div content>
+        <span class="card-line"> <i class="material-icons">mail_outline</i> {{ user.email }}</span>
+      </div>
+    </vl-card>
+    <vl-card>
+      <div content>
+        <span class="card-line"> <i class="material-icons">phone</i> {{ user.phoneNumber || 'Unknown' }}</span>
+      </div>
+    </vl-card>
+    <!--    <vl-button (click)="logout()" class="logout-btn" fullWidth>Log Out</vl-button>-->
+  </div>
 </div>
