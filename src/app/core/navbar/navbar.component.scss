@@ -1,6 +1,9 @@
 .navbar {
   position: fixed;
   background-color: var(--bg-secondary);
+  bottom: 0;
+  width: 100vw;
+  height: 4rem;
 }
 .navbar-nav {
   list-style: none;
@@ -30,18 +33,5 @@
   border-top: 3px solid var(--primary-color);
   i.material-icons {
     color: var(--primary-color);
-  }
-}
-
-/* Small screens */
-@media only screen and (max-width: 600px) {
-  .navbar {
-    bottom: 0;
-    width: 100vw;
-    height: 4rem;
-  }
-
-  .navbar-nav {
-    flex-direction: row;
   }
 }
