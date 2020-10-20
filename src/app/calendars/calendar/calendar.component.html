@@ -1,20 +1,19 @@
 <div class="calendar-layout">
   <!-- Calendar Header -->
   <div class="calendar-header">
-    <!-- Previous Button -->
-    <button mat-icon-button (click)="switchMonth$.next('Previous')">
-      <mat-icon>keyboard_arrow_left</mat-icon>
-    </button>
+    <vl-button icon (click)="switchMonth$.next('Previous')">
+      <i class="material-icons">keyboard_arrow_left</i>
+    </vl-button>
     <!-- Current Month and Year -->
     <span class="calendar-header-title">
       <span class="calendar-header-title-month">{{ currentMonth }}</span>
       <br />
       <span class="calendar-header-title-year">{{ currentYear }}</span>
     </span>
-    <!-- Next Button -->
-    <button mat-icon-button (click)="switchMonth$.next('Next')">
-      <mat-icon>keyboard_arrow_right</mat-icon>
-    </button>
+    <!-- Next month Button -->
+    <vl-button icon (click)="switchMonth$.next('Next')">
+      <i class="material-icons">keyboard_arrow_right</i>
+    </vl-button>
   </div>
   <!-- calendar-header -->
 
@@ -29,14 +28,14 @@
       *ngFor="let calendarDay of calendarDays"
       class="calendar-day"
       (click)="onCalendarDayClicked(calendarDay)"
-      [style.backgroundColor]="calendarDay.color"
+      [class.highlight]="calendarDay.color"
       [class.calendar-day-today]="isToday(calendarDay)"
       [class.calendar-day-out]="calendarDay.isOutOfMonth"
       [class.disabled]="isAfterToday(calendarDay)"
     >
-      <span class="calendar-day-number" [matBadge]="calendarDay.badge" matBadgeOverlap="false" matBadgeSize="small">{{
-        calendarDay.dayNumber
-      }}</span>
+      <div class="calendar-day-number">
+        {{ calendarDay.dayNumber }}
+      </div>
     </div>
   </div>
   <!-- calendar-grid -->

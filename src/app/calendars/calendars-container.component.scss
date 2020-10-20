@@ -1,27 +1,15 @@
-h1.app-name {
-  margin-left: 8px;
+.calendar-title {
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
 }
 
-.calendars-container-layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.calendars-container-header {
+.background-shape {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  .mat-form-field:first-child {
-    width: 30%;
-  }
-  .mat-form-field:nth-child(2) {
-    width: 65%;
-  }
-}
-
-.mat-card {
-  width: 100%;
-  margin-top: 1em;
+  height: 300px;
+  background-color: var(--primary-color);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 50%);
 }

@@ -5,14 +5,14 @@ import { Moment } from 'moment';
 
 export interface CalendarDay {
   dayNumber?: number;
-  color?: string;
+  color?: boolean;
   badge?: string;
   isOutOfMonth?: boolean;
 }
 
 export interface HighlightDate {
   date: Date;
-  color?: string;
+  color?: boolean;
   badge?: string;
 }
 
