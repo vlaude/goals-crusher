@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SidenavService } from '../core/services/sidenav.service';
 import { GoalType } from '../core/models/goal.type';
 import { GoalModel } from '../core/models/goal.model';
 import { GoalsFacade } from '../facades/goals.facade';
 import { combineLatest, Observable, Subject, zip } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
 import { GoalAchievementModel } from '../core/models/goal-achievement.model';
 import { MomentService } from '../core/services/moment.service';
 import { HighlightDate } from './calendar/calendar.component';
@@ -12,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AchieveGoalDialogComponent } from '../shared/components/achieve-goal-dialog/achieve-goal-dialog.component';
 import { GoalService } from '../core/services/goal.service';
 import { UnachieveGoalDialogComponent } from '../shared/components/unachieve-goal-dialog/unachieve-goal-dialog.component';
+import { SelectItem } from '../shared/components/select/select.component';
+import { ModalService } from '../core/services/modal.service';
 
 @Component({
   selector: 'vl-calendars-container',
@@ -21,7 +22,7 @@ import { UnachieveGoalDialogComponent } from '../shared/components/unachieve-goa
 export class CalendarsContainerComponent implements OnInit {
   goalType$ = new Subject<GoalType>();
   allGoals$: Observable<GoalModel<any>[]>;
-  selectableGoals$: Observable<GoalModel<any>[]>;
+  selectableGoalsItems: SelectItem[];
 
   achievements: GoalAchievementModel<any>[];
   goalTypeSelected: GoalType = 'daily';
@@ -33,7 +34,7 @@ export class CalendarsContainerComponent implements OnInit {
     private readonly goalService: GoalService,
     private readonly momentService: MomentService,
     private readonly dialog: MatDialog,
-    public readonly sidenavService: SidenavService
+    private readonly modalService: ModalService
   ) {}
 
   ngOnInit(): void {
@@ -43,9 +44,22 @@ export class CalendarsContainerComponent implements OnInit {
       this.goalsFacade.getGoalsByTypeWithCurrentAchievements$('lifelong')
     ).pipe(map((arrays) => arrays.reduce((flat, val) => flat.concat(val), [])));
 
-    this.selectableGoals$ = combineLatest([this.allGoals$, this.goalType$.pipe(startWith(this.goalTypeSelected))]).pipe(
-      map(([goals, goalType]) => goals?.filter((goal) => goal.type === goalType))
-    );
+    combineLatest([this.allGoals$.pipe(startWith([])), this.goalType$.pipe(startWith('daily'))])
+      .pipe(
+        map(([goals, goalType]) => goals?.filter((goal) => goal.type === goalType)),
+        map((goals) =>
+          goals.map((goal) => {
+            return {
+              name: goal.title,
+              value: goal,
+            };
+          })
+        )
+      )
+      .subscribe((selectItems: SelectItem[]) => {
+        console.log(selectItems);
+        this.selectableGoalsItems = selectItems;
+      });
 
     this.goalsFacade.getAchievements$().subscribe((achievements) => {
       this.achievements = achievements;
@@ -74,7 +88,7 @@ export class CalendarsContainerComponent implements OnInit {
   ): HighlightDate {
     return {
       date: achievement.achievedAt,
-      color: '#c2185b',
+      color: true,
       badge: this.momentService.isSameDay(achievement.achievedAt, goal.createdAt) ? '★' : '',
     };
   }
@@ -89,7 +103,7 @@ export class CalendarsContainerComponent implements OnInit {
     return this.momentService.getAllWeekDays(achievement.achievedAt).map((day) => {
       return {
         date: day,
-        color: '#c2185b',
+        color: true,
         badge: this.momentService.isSameDay(day, goal.createdAt) ? '★' : '',
       };
     });
@@ -135,6 +149,8 @@ export class CalendarsContainerComponent implements OnInit {
       .map((achievement) => this.generateHighlightDates(this.goalSelected, achievement))
       .concat([{ date: this.goalSelected.createdAt, color: null, badge: '★' }])
       .reduce((acc, val) => acc.concat(val), []);
+
+    this.modalService.open('calendar-modal');
   }
 
   public handleDateClicked(event: Date): void {

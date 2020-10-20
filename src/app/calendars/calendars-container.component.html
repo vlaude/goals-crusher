@@ -1,46 +1,34 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="sidenavService.toggle()"><mat-icon>menu</mat-icon></button>
-  <h1 class="app-name">Calendars</h1>
-</mat-toolbar>
 <div class="calendars-container-layout container-layout">
-  <div class="calendars-container-header">
-    <!-- Goal type select -->
-    <mat-form-field>
-      <input
-        type="text"
-        placeholder="Select a goal type"
-        matInput
-        value="daily"
-        [matAutocomplete]="autoGoalType"
-        [(ngModel)]="goalTypeSelected"
-        (ngModelChange)="goalType$.next(goalTypeSelected)"
-      />
-      <mat-autocomplete autoActiveFirstOption #autoGoalType="matAutocomplete">
-        <mat-option *ngFor="let goalType of ['daily', 'weekly']" [value]="goalType">
-          {{ goalType }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <!-- Goal select -->
-    <mat-form-field>
-      <input
-        type="text"
-        placeholder="Select a goal"
-        matInput
-        [matAutocomplete]="autoGoal"
-        [(ngModel)]="goalSelected"
-        (ngModelChange)="handleGoalSelected()"
-      />
-      <mat-autocomplete autoActiveFirstOption #autoGoal="matAutocomplete" [displayWith]="displayGoal">
-        <mat-option *ngFor="let goal of selectableGoals$ | async" [value]="goal"> {{ goal.title }} </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </div>
-  <!-- calendars-container-header -->
+  <div class="background-shape"></div>
 
-  <!-- Calendar Card -->
-  <mat-card *ngIf="goalSelected">
-    <vl-calendar [highlightDates]="highlightDates" (dateClicked)="handleDateClicked($event)"></vl-calendar>
-  </mat-card>
+  <h1 class="calendar-title">Calendar</h1>
+  <vl-card>
+    <div title>
+      Select a goal
+    </div>
+    <div content>
+      <div style="margin-bottom: 0.5rem;">
+        <vl-select
+          [(value)]="goalTypeSelected"
+          (valueChange)="goalType$.next($event)"
+          [items]="[
+            { name: 'Daily', value: 'daily' },
+            { name: 'Weekly', value: 'weekly' }
+          ]"
+        ></vl-select>
+      </div>
+      <div>
+        <vl-select
+          placeholder="Select a goal"
+          [(value)]="goalSelected"
+          (valueChange)="handleGoalSelected()"
+          [items]="selectableGoalsItems"
+        ></vl-select>
+      </div>
+    </div>
+  </vl-card>
 </div>
-<!-- calendars-container-layout -->
+
+<vl-modal id="calendar-modal">
+  <vl-calendar [highlightDates]="highlightDates" (dateClicked)="handleDateClicked($event)"></vl-calendar>
+</vl-modal>
