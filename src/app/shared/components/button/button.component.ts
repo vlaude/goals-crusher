@@ -24,8 +24,9 @@ export class ButtonComponent implements OnInit {
   }
 
   onClick(event: MouseEvent) {
-    if (this.disabled) return;
-    event.stopPropagation();
-    this.click.emit();
+    if (this.disabled) {
+      event.stopPropagation();
+      return;
+    }
   }
 }
