@@ -39,6 +39,11 @@ export class AppState {
     return this.goalsCollection.add(goal);
   }
 
+  updateGoal(goal: Partial<GoalModel<any>>): Promise<void> {
+    const goalDoc = this.goalsCollection.doc(goal.id);
+    return goalDoc.update(goal);
+  }
+
   removeGoal(goal: GoalModel<any>): Promise<void> {
     const goalDoc = this.goalsCollection.doc(goal.id);
     return goalDoc.delete();
