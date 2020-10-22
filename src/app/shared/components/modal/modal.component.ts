@@ -1,4 +1,13 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+  EventEmitter,
+} from '@angular/core';
 import { ModalService } from '../../../core/services/modal.service';
 
 @Component({
@@ -9,6 +18,8 @@ import { ModalService } from '../../../core/services/modal.service';
 })
 export class ModalComponent implements OnInit, OnDestroy {
   @Input() id: string;
+  @Output() closed = new EventEmitter<void>();
+
   private readonly element: any;
 
   constructor(private readonly modalService: ModalService, private el: ElementRef) {
@@ -52,5 +63,6 @@ export class ModalComponent implements OnInit, OnDestroy {
   close(): void {
     this.element.style.display = 'none';
     document.body.classList.remove('vl-modal-open');
+    this.closed.emit();
   }
 }
