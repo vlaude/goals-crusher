@@ -1,5 +1,5 @@
 <div *ngIf="goal" class="wrapper">
-  <span class="goal-type">{{ goal.type }}</span>
+  <h3 class="goal-type">{{ goal.type }}</h3>
   <span class="goal-title">{{ goal.title }}</span>
   <p *ngIf="goal.description; else noDesc" class="goal-description">{{ goal.description }}</p>
   <ng-template #noDesc>
