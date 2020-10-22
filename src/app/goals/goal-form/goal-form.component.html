@@ -1,0 +1,24 @@
+<h3>Create a new Goal</h3>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <!-- Title -->
+  <vl-form-field>
+    <vl-input placeholder="Title" formControlName="title" required></vl-input>
+    <ng-container *ngIf="!titleFormControl.valid && (titleFormControl.dirty || titleFormControl.touched)">
+      <span *ngIf="titleFormControl.hasError('required')">Title required.</span>
+      <span *ngIf="titleFormControl.hasError('minlength')">2 characters minimum.</span>
+      <span *ngIf="titleFormControl.hasError('maxlength')">100 characters maximum.</span>
+    </ng-container>
+  </vl-form-field>
+  <!-- Description -->
+  <vl-form-field>
+    <vl-textarea placeholder="Describe your goal..." formControlName="description"></vl-textarea>
+    <span *ngIf="descriptionFormControl.hasError('maxlength')">250 characters maximum.</span>
+  </vl-form-field>
+  <!-- Type -->
+  <vl-form-field>
+    <vl-radio-button [items]="goalTypesItems" formControlName="type"></vl-radio-button>
+  </vl-form-field>
+  <!-- Actions -->
+  <vl-button fullWidth (click)="cancel()">Cancel</vl-button>
+  <vl-button type="submit" color="primary" fullWidth [disabled]="!form.valid">Submit</vl-button>
+</form>
