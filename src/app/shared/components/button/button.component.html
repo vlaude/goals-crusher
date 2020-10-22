@@ -3,6 +3,7 @@
   [type]="type"
   [class]="color"
   [ngClass]="{ disabled: disabled, icon: icon, 'full-width': fullWidth }"
+  (click)="onClick($event)"
 >
   <ng-content></ng-content>
 </button>
