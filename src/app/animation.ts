@@ -1,7 +1,7 @@
 import { animate, group, query, style, transition, trigger } from '@angular/animations';
 
 export const slider = trigger('routeAnimations', [
-  transition('DailyTab => WeeklyTab', slideTo('right')),
+  transition('DailyTab => *', slideTo('right')),
   transition('WeeklyTab => DailyTab', slideTo('left')),
   transition('WeeklyTab => LifelongTab', slideTo('right')),
   transition('LifelongTab => *', slideTo('left')),
