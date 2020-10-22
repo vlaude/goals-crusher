@@ -1,19 +1,50 @@
 <div class="goals-container-layout container-layout">
-  <div class="goals-summary">
-    <div class="goals-summary-count">
-      <i class="material-icons">check_circle_outline</i> <span>{{ achievedGoalsCount }} / {{ goals.length }}</span>
+  <div class="goals-toolbar">
+    <!-- Goals summary -->
+    <div class="goals-summary">
+      <i class="material-icons">check_circle_outline</i>
+      <span>{{ achievedGoalsCount }} / {{ goals.length }}</span>
+      <ng-template [ngIf]="hoursLeft">
+        <i class="material-icons">hourglass_empty</i>
+        <span>{{ hoursLeft | timeLeft }} left</span>
+      </ng-template>
     </div>
-    <div class="goals-summary-timeleft">
-      <span>{{ hoursLeft | timeLeft }} left</span>
-      <i class="material-icons">hourglass_empty</i>
-    </div>
+
+    <!-- Create goal button -->
+    <vl-button color="primary" icon (click)="goalSelected = null; openModal('goal-form-modal')">
+      <i class="material-icons">add</i>
+    </vl-button>
   </div>
+  <!-- Goal list -->
   <vl-goal-list
     [goals]="goals"
     (goalAchieveBoxClicked)="handleGoalAchieveBoxClicked($event)"
     (goalClicked)="handleGoalClicked($event)"
   ></vl-goal-list>
-  <vl-modal id="goal-detail-modal">
-    <vl-goal-detail [goal]="goalSelected" (deleteClicked)="handleGoalDetailDeleteClicked()"></vl-goal-detail>
-  </vl-modal>
 </div>
+
+<!-- Modals -->
+<!-- Goal detail modal -->
+<vl-modal id="goal-detail-modal">
+  <vl-goal-detail
+    [goal]="goalSelected"
+    (editClicked)="handleGoalDetailEditClicked()"
+    (deleteClicked)="handleGoalDetailDeleteClicked()"
+  ></vl-goal-detail>
+</vl-modal>
+<!-- Goal form modal -->
+<vl-modal id="goal-form-modal">
+  <vl-goal-form
+    [goal]="goalSelected"
+    (formSubmitted)="handleGoalFormSubmitted($event)"
+    (cancelBtnClicked)="closeModal('goal-form-modal')"
+  ></vl-goal-form>
+</vl-modal>
+<!-- Confirm delete goal modal -->
+<vl-confirm-modal
+  id="goal-deletion-confirm-modal"
+  [text]="'Are you sure you wanna delete ' + goalSelected?.title + ' ?'"
+  (confirmed)="onConfirmDeleteGoal()"
+  (canceled)="onCancelDeleteGoal()"
+>
+</vl-confirm-modal>

@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { GoalType } from '../core/models/goal.type';
 import { GoalModel } from '../core/models/goal.model';
 import { MatDialog } from '@angular/material/dialog';
-import { GoalFormDialogComponent } from '../shared/components/goal-form-dialog/goal-form-dialog.component';
 import { FormGroup } from '@angular/forms';
 import { GoalService } from '../core/services/goal.service';
 import { ModalService } from '../core/services/modal.service';
@@ -40,11 +39,11 @@ export class GoalsContainerComponent implements OnInit {
     this.hoursLeft = this.goalService.getHoursLeftToAchieve(this.goalType);
   }
 
-  private openModal(id: string) {
+  public openModal(id: string) {
     this.modalService.open(id);
   }
 
-  private closeModal(id: string) {
+  public closeModal(id: string) {
     this.modalService.close(id);
   }
 
@@ -61,16 +60,33 @@ export class GoalsContainerComponent implements OnInit {
     this.openModal('goal-detail-modal');
   }
 
+  handleGoalDetailEditClicked() {
+    this.closeModal('goal-detail-modal');
+    this.openModal('goal-form-modal');
+  }
+
   handleGoalDetailDeleteClicked() {
     this.closeModal('goal-detail-modal');
+    this.openModal('goal-deletion-confirm-modal');
+  }
+
+  handleGoalFormSubmitted(form: FormGroup): void {
+    if (!form.valid) return;
+    if (form.value.id) {
+      this.goalsFacade.updateGoal(form.value);
+    } else {
+      this.goalsFacade.addGoal(form.value);
+    }
+    this.closeModal('goal-form-modal');
+  }
+
+  onConfirmDeleteGoal(): void {
+    this.closeModal('goal-deletion-confirm-modal');
     this.goalsFacade.removeGoal(this.goalSelected);
     this.goalSelected = null;
   }
 
-  addGoal(form: FormGroup) {
-    if (!form?.valid) {
-      return;
-    }
-    this.goalsFacade.addGoal(form.value);
+  onCancelDeleteGoal(): void {
+    this.closeModal('goal-deletion-confirm-modal');
   }
 }

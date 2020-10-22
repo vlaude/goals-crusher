@@ -1,17 +1,18 @@
-.goals-summary {
+.goals-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: var(--text-secondary);
 }
-.goals-summary-count,
-.goals-summary-timeleft {
+
+.goals-summary {
   display: flex;
   align-items: center;
-}
-.goals-summary-count .material-icons {
-  margin-right: 0.5rem;
-}
-.goals-summary-timeleft .material-icons {
-  margin-left: 0.5rem;
+
+  i.material-icons {
+    margin-right: 0.25rem;
+  }
+  span {
+    margin-right: 1rem;
+  }
 }
