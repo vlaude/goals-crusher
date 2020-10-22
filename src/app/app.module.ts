@@ -24,6 +24,7 @@ import { CalendarComponent } from './calendars/calendar/calendar.component';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { GoalsTabsComponent } from './goals/goals-tabs/goals-tabs.component';
 import { GoalDetailComponent } from './goals/goal-detail/goal-detail.component';
+import { GoalFormComponent } from './goals/goal-form/goal-form.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -41,6 +42,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     CalendarComponent,
     GoalsTabsComponent,
     GoalDetailComponent,
+    GoalFormComponent,
   ],
   imports: [
     BrowserModule,
