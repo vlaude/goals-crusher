@@ -8,4 +8,5 @@ export interface GoalModel<T extends GoalType> {
   achieved?: boolean;
   achievedAt?: Date;
   createdAt?: Date;
+  updatedAt?: Date;
 }

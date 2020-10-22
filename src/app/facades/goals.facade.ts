@@ -47,7 +47,7 @@ export class GoalsFacade {
     return this.state.achievements$.pipe(map((achievements) => achievements.map((a) => this.convertDate(a))));
   }
 
-  addGoal(goal: GoalModel<'weekly'>) {
+  addGoal(goal: GoalModel<any>) {
     goal.createdAt = new Date();
     this.state
       .addGoal(goal)
@@ -57,6 +57,19 @@ export class GoalsFacade {
       .catch((err) => {
         console.error(err);
         this.snackbarService.show(`❌ Error, unable to create the goal, please try again later.`);
+      });
+  }
+
+  updateGoal(goal: Partial<GoalModel<any>>) {
+    goal.updatedAt = new Date();
+    this.state
+      .updateGoal(goal)
+      .then((_) => {
+        this.snackbarService.show(`Goal ${goal.title} updated. 🤠`);
+      })
+      .catch((err) => {
+        console.error(err);
+        this.snackbarService.show(`❌ Error, unable to update the goal, please try again later.`);
       });
   }
 
