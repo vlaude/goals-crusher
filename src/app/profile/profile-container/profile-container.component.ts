@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SidenavService } from '../../core/services/sidenav.service';
 import { UserModel } from '../../core/models/user.model';
 import { AuthService } from '../../core/auth/auth.service';
 import { UserFacade } from '../../facades/user.facade';
+import { GoalsFacade } from '../../facades/goals.facade';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'vl-profile-container',
@@ -11,15 +12,19 @@ import { UserFacade } from '../../facades/user.facade';
 })
 export class ProfileContainerComponent implements OnInit {
   user: UserModel;
+  goalsCount$: Observable<number>;
+  achivementsCount$: Observable<number>;
 
   constructor(
     private readonly userFacade: UserFacade,
-    private readonly authService: AuthService,
-    public sidenavService: SidenavService
+    private readonly goalsFacade: GoalsFacade,
+    private readonly authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.user = this.userFacade.getCurrentUser();
+    this.goalsCount$ = this.goalsFacade.getGoalsCount$();
+    this.achivementsCount$ = this.goalsFacade.getAchievementsCount$();
   }
 
   logout() {

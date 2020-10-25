@@ -1,20 +1,41 @@
 <div class="container-layout" *ngIf="user">
   <div class="background-shape"></div>
+  <!-- Settings -->
+  <i class="material-icons settings-icon">settings</i>
 
   <div class="profile-layout">
-    <img [src]="user.photoURL || 'assets/blank-avatar.png'" alt="" />
-    <h1>{{ user.displayName || 'Hello Stranger !' }}</h1>
+    <vl-card class="main-card">
+      <div content class="main-card-content">
+        <!-- Avatar -->
+        <img [src]="user.photoURL || 'assets/blank-avatar.png'" alt="" />
+        <div></div>
+        <!-- Display name -->
+        <span class="display-name">{{ user.displayName || 'Hello Stranger !' }}</span>
+        <!-- Goals summaries-->
+        <div class="goals-summary">
+          <strong class="goals-summary-count">{{ goalsCount$ | async }}</strong>
+          <span>Goals created</span>
+        </div>
+        <div class="goals-summary">
+          <strong class="goals-summary-count">{{ achivementsCount$ | async }}</strong>
+          <span>Goals achieved</span>
+        </div>
+      </div>
+    </vl-card>
 
+    <h3>Your informations</h3>
+    <!-- Email -->
     <vl-card>
       <div content>
         <span class="card-line"> <i class="material-icons">mail_outline</i> {{ user.email }}</span>
       </div>
     </vl-card>
+    <!-- Phone -->
     <vl-card>
       <div content>
         <span class="card-line"> <i class="material-icons">phone</i> {{ user.phoneNumber || 'Unknown' }}</span>
       </div>
     </vl-card>
-    <!--    <vl-button (click)="logout()" class="logout-btn" fullWidth>Log Out</vl-button>-->
   </div>
+  <!-- profile-layout -->
 </div>

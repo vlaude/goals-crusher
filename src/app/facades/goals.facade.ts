@@ -43,8 +43,16 @@ export class GoalsFacade {
     );
   }
 
+  getGoalsCount$(): Observable<number> {
+    return this.state.goals$.pipe(map((goals) => goals.length));
+  }
+
   getAchievements$(): Observable<GoalAchievementModel<any>[]> {
     return this.state.achievements$.pipe(map((achievements) => achievements.map((a) => this.convertDate(a))));
+  }
+
+  getAchievementsCount$(): Observable<number> {
+    return this.state.achievements$.pipe(map((achievements) => achievements.length));
   }
 
   addGoal(goal: GoalModel<any>) {
