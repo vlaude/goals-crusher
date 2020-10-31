@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SidenavService } from '../core/services/sidenav.service';
 import { GoalsFacade } from '../facades/goals.facade';
 import { zip } from 'rxjs';
 import { map } from 'rxjs/operators';

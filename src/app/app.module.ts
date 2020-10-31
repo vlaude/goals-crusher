@@ -25,6 +25,8 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { GoalsTabsComponent } from './goals/goals-tabs/goals-tabs.component';
 import { GoalDetailComponent } from './goals/goal-detail/goal-detail.component';
 import { GoalFormComponent } from './goals/goal-form/goal-form.component';
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -62,6 +64,10 @@ export class MyHammerConfig extends HammerGestureConfig {
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
+    {
+      provide: RouteReuseStrategy,
+      useClass: CustomRouteReuseStrategy,
+    },
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig,
