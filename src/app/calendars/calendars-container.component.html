@@ -32,3 +32,24 @@
 <vl-modal id="calendar-modal">
   <vl-calendar [highlightDates]="highlightDates" (dateClicked)="handleDateClicked($event)"></vl-calendar>
 </vl-modal>
+
+<!-- Confirm Achieve goal modal -->
+<vl-confirm-modal
+  id="achieve-goal-confirm-modal"
+  [text]="achieveGoalModalText"
+  [confirmText]="achieveGoalModalConfirmText"
+  (confirmed)="achieveSeletedGoalAtSelectedDate()"
+  (canceled)="modalService.open('calendar-modal')"
+  (closed)="modalService.open('calendar-modal')"
+>
+</vl-confirm-modal>
+<!-- Confirm Unachieve goal modal -->
+<vl-confirm-modal
+  id="unachieve-goal-confirm-modal"
+  [text]="unachieveGoalModalText"
+  [confirmText]="unachieveGoalModalConfirmText"
+  (confirmed)="unachieveSeletedGoalAtSelectedDate()"
+  (canceled)="modalService.open('calendar-modal')"
+  (closed)="modalService.open('calendar-modal')"
+>
+</vl-confirm-modal>
