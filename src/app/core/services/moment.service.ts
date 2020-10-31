@@ -7,6 +7,10 @@ import * as moment from 'moment';
 export class MomentService {
   constructor() {}
 
+  format(date: Date, format?: string) {
+    return moment(date).format(format || 'MMMM Do YYYY');
+  }
+
   // TODO remove duplicate functions.
   isToday(date: Date): boolean {
     return moment(date).isSame(new Date(), 'day');
