@@ -14,6 +14,7 @@ export class ConfirmModalComponent implements OnInit {
 
   @Output() confirmed = new EventEmitter<void>();
   @Output() canceled = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<void>();
 
   constructor() {}
 
