@@ -3,14 +3,11 @@ import { GoalType } from '../core/models/goal.type';
 import { GoalModel } from '../core/models/goal.model';
 import { GoalsFacade } from '../facades/goals.facade';
 import { combineLatest, Observable, Subject, zip } from 'rxjs';
-import { map, startWith, tap } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { GoalAchievementModel } from '../core/models/goal-achievement.model';
 import { MomentService } from '../core/services/moment.service';
 import { HighlightDate } from './calendar/calendar.component';
-import { MatDialog } from '@angular/material/dialog';
-import { AchieveGoalDialogComponent } from '../shared/components/achieve-goal-dialog/achieve-goal-dialog.component';
 import { GoalService } from '../core/services/goal.service';
-import { UnachieveGoalDialogComponent } from '../shared/components/unachieve-goal-dialog/unachieve-goal-dialog.component';
 import { SelectItem } from '../shared/components/select/select.component';
 import { ModalService } from '../core/services/modal.service';
 
@@ -27,14 +24,19 @@ export class CalendarsContainerComponent implements OnInit {
   achievements: GoalAchievementModel<any>[];
   goalTypeSelected: GoalType = 'daily';
   goalSelected: GoalModel<any>;
+  dateSelected: Date;
   highlightDates: HighlightDate[] = [];
+
+  achieveGoalModalText = '';
+  achieveGoalModalConfirmText = 'Achieve';
+  unachieveGoalModalText = '';
+  unachieveGoalModalConfirmText = 'Unachieve';
 
   constructor(
     private readonly goalsFacade: GoalsFacade,
     private readonly goalService: GoalService,
     private readonly momentService: MomentService,
-    private readonly dialog: MatDialog,
-    private readonly modalService: ModalService
+    public readonly modalService: ModalService
   ) {}
 
   ngOnInit(): void {
@@ -109,40 +111,6 @@ export class CalendarsContainerComponent implements OnInit {
     });
   }
 
-  private openAchieveGoalModal(goal: GoalModel<any>, date?: Date): void {
-    const dialogRef = this.dialog.open(AchieveGoalDialogComponent, {
-      width: '400px',
-      data: {
-        goal,
-        date,
-      },
-    });
-    dialogRef.afterClosed().subscribe((achieve) => {
-      if (achieve) {
-        this.goalsFacade.achievedGoal(goal, date);
-      }
-    });
-  }
-
-  private openUnachieveGoalModal(goal: GoalModel<any>, date?: Date): void {
-    const dialogRef = this.dialog.open(UnachieveGoalDialogComponent, {
-      width: '400px',
-      data: {
-        goal,
-        date,
-      },
-    });
-    dialogRef.afterClosed().subscribe((unachieve) => {
-      if (unachieve) {
-        this.goalsFacade.unAchievedGoal(goal, date);
-      }
-    });
-  }
-
-  public displayGoal(goal: GoalModel<any>): string {
-    return goal?.title;
-  }
-
   public handleGoalSelected() {
     this.highlightDates = this.achievements
       .filter((achievement) => achievement.goalId === this.goalSelected.id)
@@ -153,17 +121,31 @@ export class CalendarsContainerComponent implements OnInit {
     this.modalService.open('calendar-modal');
   }
 
-  public handleDateClicked(event: Date): void {
-    if (this.momentService.isAfterToday(event)) return;
-    const isGoalSelectedAchievedAtClickedDate = this.goalService.isAchieved(
-      this.goalSelected,
-      this.achievements,
-      event
-    );
+  public handleDateClicked(date: Date): void {
+    if (this.momentService.isAfterToday(date)) return;
+    this.dateSelected = date;
+    const isGoalSelectedAchievedAtClickedDate = this.goalService.isAchieved(this.goalSelected, this.achievements, date);
+    this.modalService.close('calendar-modal');
     if (!isGoalSelectedAchievedAtClickedDate) {
-      this.openAchieveGoalModal(this.goalSelected, event);
+      this.modalService.open('achieve-goal-confirm-modal');
+      this.achieveGoalModalText = `Are you sure you want to mark ${
+        this.goalSelected.title
+      } as achieved on ${this.momentService.format(date)} ?`;
     } else {
-      this.openUnachieveGoalModal(this.goalSelected, event);
+      this.unachieveGoalModalText = `Are you sure you want to mark ${
+        this.goalSelected.title
+      } as non achieved on ${this.momentService.format(date)} ?`;
+      this.modalService.open('unachieve-goal-confirm-modal');
     }
+  }
+
+  public achieveSeletedGoalAtSelectedDate() {
+    this.modalService.close('achieve-goal-confirm-modal');
+    this.goalsFacade.achievedGoal(this.goalSelected, this.dateSelected);
+  }
+
+  public unachieveSeletedGoalAtSelectedDate() {
+    this.modalService.close('unachieve-goal-confirm-modal');
+    this.goalsFacade.unAchievedGoal(this.goalSelected, this.dateSelected);
   }
 }
