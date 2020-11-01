@@ -49,3 +49,7 @@ Thumbs.db
 **/firebase-debug.log
 .firebase/
 .firebaserc
+
+# Gradle files
+.gradle/
+build/
