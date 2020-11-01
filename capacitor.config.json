@@ -1,0 +1,21 @@
+{
+  "appId": "com.vlaude.goalscrusher",
+  "appName": "goals-crusher-webapp",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/goals-crusher-webapp",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    },
+    "CapacitorFirebaseAuth": {
+      "providers": ["google.com"],
+      "languageCode": "en",
+      "nativeAuth": false,
+      "permissions": {
+        "google": ["profile"]
+      }
+    }
+  },
+  "cordova": {}
+}

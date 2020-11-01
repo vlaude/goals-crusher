@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { mergeMapTo } from 'rxjs/operators';
+import { Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'vl-root',
