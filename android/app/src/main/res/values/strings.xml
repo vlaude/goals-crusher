@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">goals-crusher-webapp</string>
+    <string name="title_activity_main">goals-crusher-webapp</string>
+    <string name="package_name">com.vlaude.goalscrusher</string>
+    <string name="custom_url_scheme">com.vlaude.goalscrusher</string>
+</resources>

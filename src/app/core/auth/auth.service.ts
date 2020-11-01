@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
+import { UserInfo } from 'firebase/app';
+import { cfaSignIn, mapUserToUserInfo } from 'capacitor-firebase-auth';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,10 @@ export class AuthService {
   }
 
   loginWithGoogle() {
-    return this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
+    // Auth using Capacitor plugin https://github.com/baumblatt/capacitor-firebase-auth#usage
+    return cfaSignIn('google.com')
+      .pipe(mapUserToUserInfo())
+      .subscribe((user: UserInfo) => console.log(user));
   }
 
   registerWithEmailAndPassword(email: string, password: string) {

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "807076644137",
+    "firebase_url": "https://goals-crusher-13ccd.firebaseio.com",
+    "project_id": "goals-crusher-13ccd",
+    "storage_bucket": "goals-crusher-13ccd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807076644137:android:98b50301257c9bd3f06338",
+        "android_client_info": {
+          "package_name": "com.vlaude.goalscrusher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807076644137-9jjup2cm84p5fif91hporv31lvkadkfo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vlaude.goalscrusher",
+            "certificate_hash": "dfed14f67593f6297957466367a8803fabba58a0"
+          }
+        },
+        {
+          "client_id": "807076644137-843hclcvptlrir7sregphlnlc2u43nak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfjio_GQzOMyIEjWCewsF-Qw-sckrsgNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807076644137-843hclcvptlrir7sregphlnlc2u43nak.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
