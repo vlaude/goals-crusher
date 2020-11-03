@@ -9,6 +9,7 @@ import { ProfileContainerComponent } from './profile/profile-container/profile-c
 import { GoalsContainerComponent } from './goals/goals-container.component';
 import { CalendarsContainerComponent } from './calendars/calendars-container.component';
 import { GoalsTabsComponent } from './goals/goals-tabs/goals-tabs.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -69,6 +70,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileContainerComponent,
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent,
       },
     ],
   },

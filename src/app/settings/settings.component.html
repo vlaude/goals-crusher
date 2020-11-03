@@ -1,0 +1,173 @@
+<!-- Header -->
+<div class="header">
+  <i class="material-icons" routerLink="/profile">arrow_back</i>
+  <span>Settings</span>
+</div>
+
+<div class="settings-layout">
+  <!-- User Settings -->
+  <h4>User Settings</h4>
+
+  <!-- Email verification -->
+  <div *ngIf="isUserEmailVerified; else userEmailNotVerified" class="settings-item">
+    <div class="setings-item-content">
+      <span class="settings-item-text-title">
+        Your email has been verified
+      </span>
+    </div>
+    <i class="material-icons done-icon">done</i>
+  </div>
+  <ng-template #userEmailNotVerified>
+    <div class="settings-item" (click)="modalService.open('confirm-send-verification-email-modal')">
+      <div class="setings-item-content">
+        <span class="settings-item-content-title">
+          Email not verified
+        </span>
+        <br />
+        <span class="settings-item-content-desc">
+          Click to sent an email with a link to verify your email address.
+        </span>
+      </div>
+      <i class="material-icons">warning</i>
+    </div>
+  </ng-template>
+
+  <!-- Reset password -->
+  <div class="settings-item" (click)="openResetPasswordRequestModal()">
+    <div class="setings-item-content">
+      <span class="settings-item-content-title">
+        Reset your password
+      </span>
+      <br />
+      <span class="settings-item-content-desc" *ngIf="isUserEmailVerified">
+        Provide your email address to sent an email with a link in order to reset your password. </span
+      ><span class="settings-item-content-desc" *ngIf="!isUserEmailVerified"
+        >You need to verify your email in order to reset your password.</span
+      >
+    </div>
+    <i class="material-icons" *ngIf="isUserEmailVerified">chevron_right</i>
+  </div>
+
+  <!-- Edit profile -->
+  <div class="settings-item">
+    <div class="setings-item-content">
+      <span class="settings-item-content-title">
+        Edit your profile
+      </span>
+      <br />
+      <span class="settings-item-content-desc">
+        Change your email, phone, name, or avatar.
+      </span>
+    </div>
+    <i class="material-icons">chevron_right</i>
+  </div>
+
+  <!-- App Settings -->
+  <h4>App Settings</h4>
+
+  <!-- Language -->
+  <div class="settings-item">
+    <div class="setings-item-content">
+      <span class="settings-item-content-title">
+        Language
+      </span>
+      <br />
+      <span class="settings-item-content-desc">
+        English
+      </span>
+    </div>
+    <!--    <i class="material-icons">chevron_right</i>-->
+  </div>
+
+  <!-- Appearance -->
+  <div class="settings-item">
+    <div class="setings-item-content">
+      <span class="settings-item-content-title">
+        Appearance
+      </span>
+      <br />
+      <span class="settings-item-content-desc appearance-desc">
+        <span class="primary-color-preview"></span>
+        Primary color
+      </span>
+    </div>
+    <!--    <i class="material-icons">chevron_right</i>-->
+  </div>
+
+  <!-- Connections -->
+  <h4>Connections</h4>
+
+  <!-- Google -->
+  <div class="settings-item" *ngIf="hasGoogleAuthProviderLinked; else googleAccountNotLinked">
+    <div class="setings-item-content">
+      <span class="settings-item-content-title">
+        Google
+      </span>
+      <br />
+      <span class="settings-item-content-desc">
+        Your google account is linked. Click to unlink.
+      </span>
+    </div>
+    <i class="material-icons done-icon">done</i>
+  </div>
+  <ng-template #googleAccountNotLinked
+    ><div class="settings-item">
+      <div class="setings-item-content">
+        <span class="settings-item-content-title">
+          Google
+        </span>
+        <br />
+        <span class="settings-item-content-desc">
+          Click to link your google account.
+        </span>
+      </div>
+      <i class="material-icons">chevron_right</i>
+    </div></ng-template
+  >
+
+  <!-- About -->
+  <h4>About</h4>
+
+  <!-- App Version -->
+  <div class="settings-item">
+    <div class="setings-item-content">
+      <span class="settings-item-content-title">
+        App Version
+      </span>
+      <br />
+      <span class="settings-item-content-desc">
+        {{ version }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Other -->
+  <h4>Other</h4>
+
+  <!-- Log Out -->
+  <div class="settings-item" (click)="logOut()">
+    <div class="setings-item-content">
+      <span class="settings-item-content-title">
+        Log Out
+      </span>
+      <br />
+      <span class="settings-item-content-desc"> You are logged in as {{ user.displayName }} </span>
+    </div>
+  </div>
+</div>
+
+<!-- Modals -->
+<vl-confirm-modal
+  id="confirm-send-verification-email-modal"
+  [title]="'Send a verification email ?'"
+  [text]="'Do you want to receive an email with a link in order to verify your email address ?'"
+  [confirmText]="'Send email'"
+  (confirmed)="handleSendVerificationEmailConfirmed()"
+  (canceled)="handleSendVerificationEmailCanceled()"
+>
+</vl-confirm-modal>
+
+<vl-send-reset-password-request-modal
+  (cancelClicked)="handleResetPasswordRequestCancelClicked()"
+  (sendRequestClicked)="handleResetPasswordRequestSendRequestClicked($event)"
+></vl-send-reset-password-request-modal>
