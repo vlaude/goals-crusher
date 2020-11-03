@@ -26,10 +26,4 @@ export class ProfileContainerComponent implements OnInit {
     this.goalsCount$ = this.goalsFacade.getGoalsCount$();
     this.achivementsCount$ = this.goalsFacade.getAchievementsCount$();
   }
-
-  logout() {
-    this.authService.logout().then((_) => {
-      window.location.reload();
-    });
-  }
 }

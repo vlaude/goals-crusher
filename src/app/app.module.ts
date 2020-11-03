@@ -25,6 +25,7 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { GoalsTabsComponent } from './goals/goals-tabs/goals-tabs.component';
 import { GoalDetailComponent } from './goals/goal-detail/goal-detail.component';
 import { GoalFormComponent } from './goals/goal-form/goal-form.component';
+import { SettingsComponent } from './settings/settings.component';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
 import { SendResetPasswordRequestModalComponent } from './auth/send-reset-password-request-modal/send-reset-password-request-modal.component';
@@ -46,6 +47,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     GoalsTabsComponent,
     GoalDetailComponent,
     GoalFormComponent,
+    SettingsComponent,
     SendResetPasswordRequestModalComponent,
   ],
   imports: [

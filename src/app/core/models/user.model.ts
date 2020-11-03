@@ -4,4 +4,5 @@ export interface UserModel {
   displayName?: string;
   phoneNumber?: string;
   photoURL?: string;
+  emailVerified?: boolean;
 }
