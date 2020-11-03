@@ -27,6 +27,7 @@ import { GoalDetailComponent } from './goals/goal-detail/goal-detail.component';
 import { GoalFormComponent } from './goals/goal-form/goal-form.component';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
+import { SendResetPasswordRequestModalComponent } from './auth/send-reset-password-request-modal/send-reset-password-request-modal.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -45,6 +46,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     GoalsTabsComponent,
     GoalDetailComponent,
     GoalFormComponent,
+    SendResetPasswordRequestModalComponent,
   ],
   imports: [
     BrowserModule,
