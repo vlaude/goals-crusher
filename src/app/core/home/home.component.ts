@@ -15,5 +15,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  isOnGoalsRoute(): boolean {
+    return this.router.url.startsWith('/goals');
+  }
+
   ngOnInit(): void {}
 }
