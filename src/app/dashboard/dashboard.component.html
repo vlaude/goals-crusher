@@ -7,17 +7,17 @@
   <vl-card>
     <div title>Summary</div>
     <div content>
-      <div class="card-line">
-        <span>Daily</span>
-        <span>{{ getGoalsAchievedCountByType('daily') }} / {{ getGoalsCountByType('daily') }}</span>
+      <div class="card-line" [class.done]="dailyGoalsDone$ | async">
+        <span class="underline" routerLink="/goals">Daily</span>
+        <span> {{ (dailyGoalSummary$ | async).achieved }} / {{ (dailyGoalSummary$ | async).count }} </span>
       </div>
-      <div class="card-line">
-        <span>Weekly</span>
-        <span>{{ getGoalsAchievedCountByType('weekly') }} / {{ getGoalsCountByType('weekly') }}</span>
+      <div class="card-line" [class.done]="weeklyGoalsDone$ | async">
+        <span class="underline" routerLink="/goals">Weekly</span>
+        <span> {{ (weeklyGoalSummary$ | async).achieved }} / {{ (weeklyGoalSummary$ | async).count }} </span>
       </div>
-      <div class="card-line">
-        <span>Lifelong</span>
-        <span>{{ getGoalsAchievedCountByType('lifelong') }} / {{ getGoalsCountByType('lifelong') }}</span>
+      <div class="card-line" [class.done]="lifelongGoalsDone$ | async">
+        <span class="underline" routerLink="/goals">Lifelong</span>
+        <span> {{ (lifelongGoalSummary$ | async).achieved }} / {{ (lifelongGoalSummary$ | async).count }}</span>
       </div>
     </div>
   </vl-card>
@@ -26,7 +26,7 @@
   <vl-card>
     <div title>Last Achieved</div>
     <div content>
-      <div class="card-line" *ngFor="let goal of getLastGoalsAchieved()">
+      <div class="card-line" *ngFor="let goal of lastGoalsAchieved$ | async">
         <span>{{ goal.title }} </span
         ><span>{{ goal.achievedAt | date: (momentService.isToday(goal.achievedAt) ? 'shortTime' : 'shortDate') }}</span>
       </div>
@@ -37,7 +37,7 @@
   <vl-card>
     <div title>Last Created</div>
     <div content>
-      <div class="card-line" *ngFor="let goal of getLastCreatedGoals()">
+      <div class="card-line" *ngFor="let goal of lastGoalsCreated$ | async">
         <span>{{ goal.title }} </span>
         <span> {{ goal.createdAt | date: 'shortDate' }} </span>
       </div>

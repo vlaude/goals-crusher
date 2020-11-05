@@ -24,8 +24,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 20px;
+  min-height: 26px;
 }
 .card-line:not(:last-child) {
   margin-bottom: 0.5rem;
+}
+
+.done {
+  color: var(--primary-color);
+}
+
+.underline {
+  text-decoration: underline;
 }
