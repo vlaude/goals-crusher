@@ -24,6 +24,22 @@ export class GoalsFacade {
     private readonly snackbarService: SnackbarService
   ) {}
 
+  getGoalsWithCurrentAchievements$(): Observable<GoalModel<any>[]> {
+    return combineLatest([this.state.goals$, this.state.achievements$]).pipe(
+      map(([goals, achievements]) => {
+        this.achievements = achievements.map((a) => this.convertDate(a));
+        return goals.map((g) => {
+          let goal = {
+            achieved: this.goalService.isAchieved(g, this.achievements),
+            ...g,
+          };
+          goal = this.convertDate(goal);
+          return goal;
+        });
+      })
+    );
+  }
+
   getGoalsByTypeWithCurrentAchievements$(type: GoalType): Observable<GoalModel<any>[]> {
     return combineLatest([
       this.state.goals$.pipe(map((goals) => goals.filter((goal) => goal.type === type))),

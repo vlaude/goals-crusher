@@ -30,7 +30,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'goals',
+        redirectTo: 'dashboard',
         pathMatch: 'full',
       },
       {
