@@ -14,6 +14,7 @@ import { CardComponent } from './components/card/card.component';
 import { SelectComponent } from './components/select/select.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
     SelectComponent,
     ConfirmModalComponent,
     SnackbarComponent,
+    LoaderComponent,
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
   exports: [
