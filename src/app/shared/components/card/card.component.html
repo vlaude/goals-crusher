@@ -3,6 +3,9 @@
     <ng-content select="[title]"></ng-content>
   </div>
   <div class="content">
-    <ng-content select="[content]"></ng-content>
+    <ng-content select="[content]" *ngIf="!loading; else loader"></ng-content>
+    <ng-template #loader>
+      <vl-loader></vl-loader>
+    </ng-template>
   </div>
 </div>
