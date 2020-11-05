@@ -1,4 +1,4 @@
-<main>
+<main [class.main-container]="!isOnGoalsRoute()">
   <router-outlet></router-outlet>
 </main>
 <vl-navbar [hidden]="!showNavbar"></vl-navbar>

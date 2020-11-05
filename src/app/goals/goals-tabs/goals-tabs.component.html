@@ -5,7 +5,7 @@
     <div class="tab-item" routerLink="weekly" routerLinkActive="active">Weekly</div>
     <div class="tab-item" routerLink="lifelong" routerLinkActive="active">Lifelong</div>
   </div>
-  <div [@routeAnimations]="prepareRoute(outlet)">
+  <div [@routeAnimations]="prepareRoute(outlet)" class="main-container">
     <router-outlet #outlet="outlet"></router-outlet>
   </div>
 </div>
