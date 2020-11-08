@@ -23,11 +23,12 @@ export interface HighlightDate {
 })
 export class CalendarComponent implements OnInit, OnChanges {
   @Input() highlightDates: HighlightDate[];
+  @Input() title: string;
   @Output() dateClicked = new EventEmitter<Date>();
 
-  public currentMoment: Moment;
-  public calendarDays: CalendarDay[] = [];
-  public switchMonth$ = new BehaviorSubject<'Previous' | 'Next'>(null);
+  calendarDays: CalendarDay[] = [];
+  currentMoment: Moment;
+  switchMonth$ = new BehaviorSubject<'Previous' | 'Next'>(null);
 
   get currentMonth(): string {
     return this.currentMoment.format('MMMM');
@@ -49,26 +50,31 @@ export class CalendarComponent implements OnInit, OnChanges {
     }
   }
 
-  private initSwitchMonthStream() {
-    this.switchMonth$.subscribe((change) => {
-      this.refreshCalendar(change);
-    });
+  isAfterToday(calendarDay: CalendarDay): boolean {
+    const date = moment();
+    date.set('date', calendarDay.dayNumber);
+    date.set('month', this.currentMoment.month());
+    date.set('year', this.currentMoment.year());
+    return date.isAfter(moment());
   }
 
-  private refreshCalendar(change?: 'Previous' | 'Next') {
-    this.switchCurrentMomentMonth(change);
-    this.calendarDays = this.generateCalendarDays();
+  isToday(calendarDay: CalendarDay): boolean {
+    return this.currentMoment.isSame(moment(), 'month') && calendarDay.dayNumber === new Date().getDate();
   }
 
-  private switchCurrentMomentMonth(change: 'Previous' | 'Next') {
-    this.currentMoment =
-      change === 'Previous'
-        ? this.currentMoment.subtract(1, 'month')
-        : change === 'Next'
-        ? this.currentMoment.add(1, 'month')
-        : this.currentMoment
-        ? this.currentMoment
-        : moment().startOf('month');
+  onCalendarDayClicked(calendarDay: CalendarDay): void {
+    if (calendarDay.isOutOfMonth) return;
+    const date = this.currentMoment.set('date', calendarDay.dayNumber).toDate();
+    this.dateClicked.emit(date);
+  }
+
+  /**
+   * Return the highlight date according to the day number.
+   */
+  private getHighlightDateByDayNumber(dayNumber: number): HighlightDate {
+    return this.highlightDates.find(
+      (hd) => moment(hd.date).isSame(this.currentMoment, 'month') && hd.date.getDate() === dayNumber
+    );
   }
 
   private generateCalendarDays(): CalendarDay[] {
@@ -96,30 +102,25 @@ export class CalendarComponent implements OnInit, OnChanges {
     return Array(dayStart - 1).fill({ isOutOfMonth: true });
   }
 
-  /**
-   * Return the highlight date according to the day number.
-   */
-  private getHighlightDateByDayNumber(dayNumber: number): HighlightDate {
-    return this.highlightDates.find(
-      (hd) => moment(hd.date).isSame(this.currentMoment, 'month') && hd.date.getDate() === dayNumber
-    );
+  private initSwitchMonthStream() {
+    this.switchMonth$.subscribe((change) => {
+      this.refreshCalendar(change);
+    });
   }
 
-  public isToday(calendarDay: CalendarDay): boolean {
-    return this.currentMoment.isSame(moment(), 'month') && calendarDay.dayNumber === new Date().getDate();
+  private refreshCalendar(change?: 'Previous' | 'Next') {
+    this.switchCurrentMomentMonth(change);
+    this.calendarDays = this.generateCalendarDays();
   }
 
-  public isAfterToday(calendarDay: CalendarDay): boolean {
-    const date = moment();
-    date.set('date', calendarDay.dayNumber);
-    date.set('month', this.currentMoment.month());
-    date.set('year', this.currentMoment.year());
-    return date.isAfter(moment());
-  }
-
-  public onCalendarDayClicked(calendarDay: CalendarDay): void {
-    if (calendarDay.isOutOfMonth) return;
-    const date = this.currentMoment.set('date', calendarDay.dayNumber).toDate();
-    this.dateClicked.emit(date);
+  private switchCurrentMomentMonth(change: 'Previous' | 'Next') {
+    this.currentMoment =
+      change === 'Previous'
+        ? this.currentMoment.subtract(1, 'month')
+        : change === 'Next'
+        ? this.currentMoment.add(1, 'month')
+        : this.currentMoment
+        ? this.currentMoment
+        : moment().startOf('month');
   }
 }
