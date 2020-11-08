@@ -3,7 +3,6 @@ import { GoalsFacade } from '../facades/goals.facade';
 import { ActivatedRoute } from '@angular/router';
 import { GoalType } from '../core/models/goal.type';
 import { GoalModel } from '../core/models/goal.model';
-import { MatDialog } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
 import { GoalService } from '../core/services/goal.service';
 import { ModalService } from '../core/services/modal.service';
@@ -27,7 +26,6 @@ export class GoalsContainerComponent implements OnInit {
     private readonly goalsFacade: GoalsFacade,
     private readonly goalService: GoalService,
     private readonly route: ActivatedRoute,
-    private readonly dialog: MatDialog,
     private readonly modalService: ModalService
   ) {}
 
@@ -39,11 +37,7 @@ export class GoalsContainerComponent implements OnInit {
     this.hoursLeft = this.goalService.getHoursLeftToAchieve(this.goalType);
   }
 
-  public openModal(id: string) {
-    this.modalService.open(id);
-  }
-
-  public closeModal(id: string) {
+  closeModal(id: string) {
     this.modalService.close(id);
   }
 
@@ -60,14 +54,14 @@ export class GoalsContainerComponent implements OnInit {
     this.openModal('goal-detail-modal');
   }
 
-  handleGoalDetailEditClicked() {
-    this.closeModal('goal-detail-modal');
-    this.openModal('goal-form-modal');
-  }
-
   handleGoalDetailDeleteClicked() {
     this.closeModal('goal-detail-modal');
     this.openModal('goal-deletion-confirm-modal');
+  }
+
+  handleGoalDetailEditClicked() {
+    this.closeModal('goal-detail-modal');
+    this.openModal('goal-form-modal');
   }
 
   handleGoalFormSubmitted(form: FormGroup): void {
@@ -80,13 +74,17 @@ export class GoalsContainerComponent implements OnInit {
     this.closeModal('goal-form-modal');
   }
 
+  onCancelDeleteGoal(): void {
+    this.closeModal('goal-deletion-confirm-modal');
+  }
+
   onConfirmDeleteGoal(): void {
     this.closeModal('goal-deletion-confirm-modal');
     this.goalsFacade.removeGoal(this.goalSelected);
     this.goalSelected = null;
   }
 
-  onCancelDeleteGoal(): void {
-    this.closeModal('goal-deletion-confirm-modal');
+  openModal(id: string) {
+    this.modalService.open(id);
   }
 }
