@@ -38,14 +38,14 @@
   width: 100%;
   display: grid;
   place-items: center;
-  &:before {
-    content: '';
-    display: block;
-    padding-top: 100%;
-  }
+
   &:not(.calendar-day-header) {
     border-radius: 100%;
-
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
     .calendar-day-number {
       position: absolute;
       top: 0;
@@ -69,9 +69,6 @@
     z-index: 2;
     border: 1px solid #fafafa;
   }
-  //&.calendar-day-out {
-  //  border: none;
-  //}
   &.highlight {
     background-color: var(--primary-color);
     color: var(--text-primary);
