@@ -1,7 +1,9 @@
 <div class="vl-select">
   <div class="select-selected" (click)="showItems = !showItems" [class.expended]="showItems">
-    <span>{{ itemSelected?.name }}</span>
-    <span *ngIf="!value">{{ placeholder }}</span>
+    <span *ngIf="value; else novalue">{{ itemSelected?.name }}</span>
+    <ng-template #novalue>
+      <span>{{ placeholder }}</span>
+    </ng-template>
   </div>
 
   <div class="select-items" [class.select-hide]="!showItems">
