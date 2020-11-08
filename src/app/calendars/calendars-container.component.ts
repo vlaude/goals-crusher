@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GoalType } from '../core/models/goal.type';
 import { GoalModel } from '../core/models/goal.model';
 import { GoalsFacade } from '../facades/goals.facade';
-import { combineLatest, Observable, Subject, zip } from 'rxjs';
+import { combineLatest, Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { GoalAchievementModel } from '../core/models/goal-achievement.model';
 import { MomentService } from '../core/services/moment.service';
@@ -17,52 +17,44 @@ import { ModalService } from '../core/services/modal.service';
   styleUrls: ['./calendars-container.component.scss'],
 })
 export class CalendarsContainerComponent implements OnInit {
+  allGoals$: Observable<GoalModel<any>[]> = this.goalsFacade.getGoalsWithCurrentAchievements$();
   goalType$ = new Subject<GoalType>();
-  allGoals$: Observable<GoalModel<any>[]>;
-  selectableGoalsItems: SelectItem[];
+  /**
+   * Transform goals that can be selected (according to the goal type) into selectable items by vl-select component.
+   */
+  selectableGoalsItems$: Observable<SelectItem[]> = combineLatest([
+    this.allGoals$.pipe(startWith([])),
+    this.goalType$.pipe(startWith('daily')),
+  ]).pipe(
+    map(([goals, goalType]) => goals?.filter((goal) => goal.type === goalType)),
+    map((goals) =>
+      goals.map((goal) => {
+        return {
+          name: goal.title,
+          value: goal,
+        };
+      })
+    )
+  );
 
   achievements: GoalAchievementModel<any>[];
+  achieveGoalModalConfirmText = 'Achieve';
+  achieveGoalModalText = '';
+  dateSelected: Date;
   goalTypeSelected: GoalType = 'daily';
   goalSelected: GoalModel<any>;
-  dateSelected: Date;
   highlightDates: HighlightDate[] = [];
-
-  achieveGoalModalText = '';
-  achieveGoalModalConfirmText = 'Achieve';
-  unachieveGoalModalText = '';
   unachieveGoalModalConfirmText = 'Unachieve';
+  unachieveGoalModalText = '';
 
   constructor(
-    private readonly goalsFacade: GoalsFacade,
+    public readonly modalService: ModalService,
     private readonly goalService: GoalService,
-    private readonly momentService: MomentService,
-    public readonly modalService: ModalService
+    private readonly goalsFacade: GoalsFacade,
+    private readonly momentService: MomentService
   ) {}
 
   ngOnInit(): void {
-    this.allGoals$ = zip(
-      this.goalsFacade.getGoalsByTypeWithCurrentAchievements$('daily'),
-      this.goalsFacade.getGoalsByTypeWithCurrentAchievements$('weekly'),
-      this.goalsFacade.getGoalsByTypeWithCurrentAchievements$('lifelong')
-    ).pipe(map((arrays) => arrays.reduce((flat, val) => flat.concat(val), [])));
-
-    combineLatest([this.allGoals$.pipe(startWith([])), this.goalType$.pipe(startWith('daily'))])
-      .pipe(
-        map(([goals, goalType]) => goals?.filter((goal) => goal.type === goalType)),
-        map((goals) =>
-          goals.map((goal) => {
-            return {
-              name: goal.title,
-              value: goal,
-            };
-          })
-        )
-      )
-      .subscribe((selectItems: SelectItem[]) => {
-        console.log(selectItems);
-        this.selectableGoalsItems = selectItems;
-      });
-
     this.goalsFacade.getAchievements$().subscribe((achievements) => {
       this.achievements = achievements;
       if (this.goalSelected) {
@@ -72,56 +64,12 @@ export class CalendarsContainerComponent implements OnInit {
     });
   }
 
-  /**
-   * Generate highlight dates according to the goal type and its achievements.
-   * Highlight the dates when the goal has been achieved.
-   */
-  private generateHighlightDates(goal: GoalModel<any>, achievement: GoalAchievementModel<any>): HighlightDate[] {
-    return goal.type === 'daily'
-      ? [this.generateDailyGoalHighlightDate(goal, achievement)]
-      : goal.type === 'weekly'
-      ? this.generateWeeklyGoalHighlightDates(goal, achievement)
-      : [];
+  achieveSeletedGoalAtSelectedDate() {
+    this.modalService.close('achieve-goal-confirm-modal');
+    this.goalsFacade.achievedGoal(this.goalSelected, this.dateSelected);
   }
 
-  private generateDailyGoalHighlightDate(
-    goal: GoalModel<'daily'>,
-    achievement: GoalAchievementModel<'daily'>
-  ): HighlightDate {
-    return {
-      date: achievement.achievedAt,
-      color: true,
-      badge: this.momentService.isSameDay(achievement.achievedAt, goal.createdAt) ? '★' : '',
-    };
-  }
-
-  /**
-   * When a weekly goal is achieved, highlight the whole week.
-   */
-  private generateWeeklyGoalHighlightDates(
-    goal: GoalModel<'weekly'>,
-    achievement: GoalAchievementModel<'weekly'>
-  ): HighlightDate[] {
-    return this.momentService.getAllWeekDays(achievement.achievedAt).map((day) => {
-      return {
-        date: day,
-        color: true,
-        badge: this.momentService.isSameDay(day, goal.createdAt) ? '★' : '',
-      };
-    });
-  }
-
-  public handleGoalSelected() {
-    this.highlightDates = this.achievements
-      .filter((achievement) => achievement.goalId === this.goalSelected.id)
-      .map((achievement) => this.generateHighlightDates(this.goalSelected, achievement))
-      .concat([{ date: this.goalSelected.createdAt, color: null, badge: '★' }])
-      .reduce((acc, val) => acc.concat(val), []);
-
-    this.modalService.open('calendar-modal');
-  }
-
-  public handleDateClicked(date: Date): void {
+  handleDateClicked(date: Date): void {
     if (this.momentService.isAfterToday(date)) return;
     this.dateSelected = date;
     const isGoalSelectedAchievedAtClickedDate = this.goalService.isAchieved(this.goalSelected, this.achievements, date);
@@ -139,13 +87,57 @@ export class CalendarsContainerComponent implements OnInit {
     }
   }
 
-  public achieveSeletedGoalAtSelectedDate() {
-    this.modalService.close('achieve-goal-confirm-modal');
-    this.goalsFacade.achievedGoal(this.goalSelected, this.dateSelected);
+  handleGoalSelected() {
+    this.highlightDates = this.achievements
+      .filter((achievement) => achievement.goalId === this.goalSelected.id)
+      .map((achievement) => this.generateHighlightDates(this.goalSelected, achievement))
+      .concat([{ date: this.goalSelected.createdAt, color: null, badge: '★' }])
+      .reduce((acc, val) => acc.concat(val), []);
+
+    this.modalService.open('calendar-modal');
   }
 
-  public unachieveSeletedGoalAtSelectedDate() {
+  unachieveSeletedGoalAtSelectedDate() {
     this.modalService.close('unachieve-goal-confirm-modal');
     this.goalsFacade.unAchievedGoal(this.goalSelected, this.dateSelected);
+  }
+
+  private generateDailyGoalHighlightDate(
+    goal: GoalModel<'daily'>,
+    achievement: GoalAchievementModel<'daily'>
+  ): HighlightDate {
+    return {
+      date: achievement.achievedAt,
+      color: true,
+      badge: this.momentService.isSameDay(achievement.achievedAt, goal.createdAt) ? '★' : '',
+    };
+  }
+
+  /**
+   * Generate highlight dates according to the goal type and its achievements.
+   * Highlight the dates when the goal has been achieved.
+   */
+  private generateHighlightDates(goal: GoalModel<any>, achievement: GoalAchievementModel<any>): HighlightDate[] {
+    return goal.type === 'daily'
+      ? [this.generateDailyGoalHighlightDate(goal, achievement)]
+      : goal.type === 'weekly'
+      ? this.generateWeeklyGoalHighlightDates(goal, achievement)
+      : [];
+  }
+
+  /**
+   * When a weekly goal is achieved, highlight the whole week.
+   */
+  private generateWeeklyGoalHighlightDates(
+    goal: GoalModel<'weekly'>,
+    achievement: GoalAchievementModel<'weekly'>
+  ): HighlightDate[] {
+    return this.momentService.getAllWeekDays(achievement.achievedAt).map((day) => {
+      return {
+        date: day,
+        color: true,
+        badge: this.momentService.isSameDay(day, goal.createdAt) ? '★' : '',
+      };
+    });
   }
 }

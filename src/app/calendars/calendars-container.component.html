@@ -7,30 +7,33 @@
       Select a goal
     </div>
     <div content>
-      <div style="margin-bottom: 0.5rem;">
-        <vl-select
-          [(value)]="goalTypeSelected"
-          (valueChange)="goalType$.next($event)"
-          [items]="[
-            { name: 'Daily', value: 'daily' },
-            { name: 'Weekly', value: 'weekly' }
-          ]"
-        ></vl-select>
-      </div>
-      <div>
-        <vl-select
-          placeholder="Select a goal"
-          [(value)]="goalSelected"
-          (valueChange)="handleGoalSelected()"
-          [items]="selectableGoalsItems"
-        ></vl-select>
-      </div>
+      <p>You'll get a calendar view to see when you've achieved your goal 🗓.</p>
+      <vl-select
+        style="margin-bottom: 0.5rem;"
+        [(value)]="goalTypeSelected"
+        (valueChange)="goalType$.next($event)"
+        [items]="[
+          { name: 'Daily', value: 'daily' },
+          { name: 'Weekly', value: 'weekly' }
+        ]"
+      ></vl-select>
+      <vl-select
+        placeholder="Select a goal"
+        [(value)]="goalSelected"
+        (valueChange)="handleGoalSelected()"
+        [items]="selectableGoalsItems$ | async"
+      ></vl-select>
     </div>
   </vl-card>
 </div>
 
+<!-- Calendar modal -->
 <vl-modal id="calendar-modal">
-  <vl-calendar [highlightDates]="highlightDates" (dateClicked)="handleDateClicked($event)"></vl-calendar>
+  <vl-calendar
+    [highlightDates]="highlightDates"
+    [title]="goalSelected?.title"
+    (dateClicked)="handleDateClicked($event)"
+  ></vl-calendar>
 </vl-modal>
 
 <!-- Confirm Achieve goal modal -->
@@ -39,7 +42,7 @@
   [text]="achieveGoalModalText"
   [confirmText]="achieveGoalModalConfirmText"
   (confirmed)="achieveSeletedGoalAtSelectedDate()"
-  (canceled)="modalService.open('calendar-modal')"
+  (canceled)="modalService.close('achieve-goal-confirm-modal'); modalService.open('calendar-modal')"
   (closed)="modalService.open('calendar-modal')"
 >
 </vl-confirm-modal>
@@ -49,7 +52,7 @@
   [text]="unachieveGoalModalText"
   [confirmText]="unachieveGoalModalConfirmText"
   (confirmed)="unachieveSeletedGoalAtSelectedDate()"
-  (canceled)="modalService.open('calendar-modal')"
+  (canceled)="modalService.close('unachieve-goal-confirm-modal'); modalService.open('calendar-modal')"
   (closed)="modalService.open('calendar-modal')"
 >
 </vl-confirm-modal>
