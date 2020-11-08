@@ -1,13 +1,15 @@
-<div *ngFor="let goal of goals" class="goal-card" [class.achieved]="goal.achieved" (click)="goalClicked.emit(goal)">
-  <i
-    class="material-icons"
-    (click)="$event.stopPropagation(); goalAchieveBoxClicked.emit(goal)"
-    [innerHTML]="goal.achieved ? 'check_circle_outline' : 'radio_button_unchecked'"
-  >
-  </i>
-  <span class="vertical-divider"></span>
-  <span class="goal-title">{{ goal.title }}</span>
-</div>
+<vl-card *ngFor="let goal of goals" [class.achieved]="goal.achieved" (click)="goalClicked.emit(goal)">
+  <div content class="card-content">
+    <i
+      class="material-icons"
+      (click)="$event.stopPropagation(); goalAchieveBoxClicked.emit(goal)"
+      [innerHTML]="goal.achieved ? 'check_circle_outline' : 'radio_button_unchecked'"
+    >
+    </i>
+    <span class="vertical-divider"></span>
+    <span>{{ goal.title }}</span>
+  </div>
+</vl-card>
 <span *ngIf="goals?.length === 0">
   No goal yet, create one and crush it ! 💪
 </span>
