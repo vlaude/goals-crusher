@@ -1,27 +1,25 @@
-.goal-card {
-  display: grid;
-  grid-template-columns: 20% 5% 75%;
-  align-items: center;
-  height: 3rem;
-  padding: 1rem 0.5rem;
+vl-card {
   margin: 1rem 0;
-  background-color: var(--bg-secondary);
-  color: var(--text-secondary);
-  border-radius: 5px;
   &.achieved {
     .material-icons {
       color: var(--primary-color);
     }
   }
 }
+.card-content {
+  display: grid;
+  grid-template-columns: 15% 5% 80%;
+  align-items: center;
+  height: 3rem;
+}
+
 .material-icons {
   font-size: 2rem;
-  justify-self: center;
+  justify-self: flex-start;
 }
+
 .vertical-divider {
   justify-self: flex-start;
   height: 75%;
   border-right: 1px solid var(--text-secondary);
-}
-.goal-title {
 }
