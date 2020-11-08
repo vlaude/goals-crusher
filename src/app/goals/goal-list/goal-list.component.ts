@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { GoalModel } from '../../../core/models/goal.model';
+import { GoalModel } from '../../core/models/goal.model';
 
 @Component({
   selector: 'vl-goal-list',

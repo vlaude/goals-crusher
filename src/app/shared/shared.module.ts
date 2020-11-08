@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GoalListComponent } from './components/goal-list/goal-list.component';
 import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimeLeftPipe } from './pipes/time-left.pipe';
@@ -18,7 +17,6 @@ import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
-    GoalListComponent,
     TimeLeftPipe,
     ModalComponent,
     ButtonComponent,
@@ -34,7 +32,6 @@ import { LoaderComponent } from './components/loader/loader.component';
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
   exports: [
-    GoalListComponent,
     TimeLeftPipe,
     ModalComponent,
     ButtonComponent,

@@ -29,6 +29,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
 import { SendResetPasswordRequestModalComponent } from './auth/send-reset-password-request-modal/send-reset-password-request-modal.component';
+import { GoalListComponent } from './goals/goal-list/goal-list.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -45,6 +46,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     CalendarsContainerComponent,
     CalendarComponent,
     GoalsTabsComponent,
+    GoalListComponent,
     GoalDetailComponent,
     GoalFormComponent,
     SettingsComponent,
