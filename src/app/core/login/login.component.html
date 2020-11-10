@@ -1,78 +1,31 @@
+<div class="background-shape top-right"></div>
+<div class="background-shape bottom-left"></div>
 <div class="container">
-  <mat-card>
-    <mat-tab-group>
-      <!-- Sign In -->
-      <mat-tab label="Sign In">
-        <mat-card-title>Signing in</mat-card-title>
-        <mat-card-content>
-          <form [formGroup]="signInForm" (ngSubmit)="signIn()">
-            <div class="form-layout">
-              <!-- Email -->
-              <mat-form-field class="full-width">
-                <mat-label>E-mail</mat-label>
-                <input matInput formControlName="email" required />
-                <mat-icon matSuffix color="primary">email</mat-icon>
-                <mat-error *ngIf="signInEmailFormControl.hasError('required')">Email required.</mat-error>
-              </mat-form-field>
-              <!-- Password -->
-              <mat-form-field class="full-width">
-                <mat-label>Password</mat-label>
-                <input matInput formControlName="password" type="password" required />
-                <mat-icon matSuffix color="primary">lock</mat-icon>
-                <mat-error *ngIf="signInPasswordFormControl.hasError('required')">Password required.</mat-error>
-              </mat-form-field>
-            </div>
-            <!-- Submit -->
-            <button mat-raised-button style="margin: 20px 0;" class="full-width" type="submit" color="primary">
-              Log In
-            </button>
-          </form>
-          <mat-progress-bar mode="indeterminate" style="margin-bottom: 1em;" *ngIf="isLoading"></mat-progress-bar>
+  <div></div>
+  <form [formGroup]="form" (ngSubmit)="signIn()">
+    <h1>Login</h1>
+    <!-- Email -->
+    <vl-form-field>
+      <vl-input type="email" placeholder="Email" formControlName="email" required></vl-input>
+    </vl-form-field>
+    <!-- Password -->
+    <vl-form-field>
+      <vl-input type="password" placeholder="Password" formControlName="password" required></vl-input>
+    </vl-form-field>
+    <p>Forgot password ?</p>
 
-          Or
-          <!-- Google Sign In -->
-          <button
-            mat-raised-button
-            style="margin: 20px 0;"
-            class="full-width"
-            color="accent"
-            (click)="authService.loginWithGoogle()"
-          >
-            Google
-          </button>
-        </mat-card-content>
-      </mat-tab>
-      <!-- Register -->
-      <mat-tab label="Register">
-        <mat-card-title>Register</mat-card-title>
-        <mat-card-content>
-          <form [formGroup]="registerForm" (ngSubmit)="register()">
-            <div class="form-layout">
-              <!-- Email -->
-              <mat-form-field class="full-width">
-                <mat-label>E-mail</mat-label>
-                <input matInput formControlName="email" required />
-                <mat-icon matSuffix color="primary">email</mat-icon>
-                <mat-error *ngIf="registerEmailFormControl.hasError('required')">Enter your email address.</mat-error>
-                <mat-error *ngIf="registerEmailFormControl.hasError('email')">Email invalid.</mat-error>
-              </mat-form-field>
-              <!-- Password -->
-              <mat-form-field class="full-width">
-                <mat-label>Password</mat-label>
-                <input matInput formControlName="password" type="password" required />
-                <mat-icon matSuffix color="primary">lock</mat-icon>
-                <mat-error *ngIf="registerPasswordFormControl.hasError('required')">Choose a password.</mat-error>
-                <mat-error *ngIf="registerPasswordFormControl.hasError('minlength')">8 characters minimum.</mat-error>
-              </mat-form-field>
-            </div>
-            <!-- Submit -->
-            <button mat-raised-button style="margin: 20px 0;" class="full-width" type="submit" color="primary">
-              Register
-            </button>
-          </form>
-          <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-        </mat-card-content>
-      </mat-tab>
-    </mat-tab-group>
-  </mat-card>
+    <!-- Submit -->
+    <vl-button type="submit" color="primary" [disabled]="form.invalid" fullWidth>Login</vl-button>
+    <p>or</p>
+
+    <!-- Social media -->
+    <section class="social-media">
+      <div class="google-btn" (click)="authService.loginWithGoogle()">
+        <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
+      </div>
+    </section>
+  </form>
+
+  <!-- Sign Up -->
+  <p class="sign-up">Don't have an account ? <a routerLink="/register">SIGN UP !</a></p>
 </div>
