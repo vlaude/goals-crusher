@@ -14,6 +14,7 @@ import { SelectComponent } from './components/select/select.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { InputErrorComponent } from './components/input-error/input-error.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     ConfirmModalComponent,
     SnackbarComponent,
     LoaderComponent,
+    InputErrorComponent,
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -43,6 +45,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     SelectComponent,
     ConfirmModalComponent,
     SnackbarComponent,
+    InputErrorComponent,
   ],
 })
 export class SharedModule {}
