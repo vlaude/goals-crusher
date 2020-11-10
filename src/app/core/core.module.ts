@@ -7,10 +7,20 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SharedModule } from '../shared/shared.module';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
-  declarations: [LoginComponent, HomeComponent, NavbarComponent],
+  declarations: [LoginComponent, HomeComponent, NavbarComponent, RegisterComponent],
   exports: [],
-  imports: [CommonModule, BrowserAnimationsModule, RouterModule, MaterialModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule,
+    BrowserAnimationsModule,
+    RouterModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule,
+  ],
 })
 export class CoreModule {}

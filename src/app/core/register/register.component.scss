@@ -1,0 +1,72 @@
+.background-shape {
+  position: fixed;
+  z-index: -1;
+  background-color: var(--primary-color);
+  &.top-right {
+    top: 0;
+    right: 0;
+
+    width: 75vw;
+    height: 50vw;
+
+    clip-path: ellipse(60% 50% at 100% 0%);
+  }
+  &.bottom-left {
+    bottom: -25vw;
+    left: -25vw;
+
+    width: 50vw;
+    height: 50vw;
+
+    border-radius: 50%;
+  }
+}
+
+div.container {
+  display: grid;
+  place-items: center;
+
+  padding: 0 1.5rem;
+
+  height: 100vh;
+}
+
+form {
+  width: 100%;
+  text-align: center;
+
+  vl-form-field {
+    margin: 1rem 0;
+  }
+  vl-button {
+    margin-top: 2rem;
+  }
+  p {
+    color: var(--text-secondary);
+  }
+}
+
+section.social-media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .google-btn {
+    width: 2rem;
+    height: 2rem;
+
+    padding: 0.75rem;
+    border-radius: 50%;
+
+    background-color: var(--text-primary);
+  }
+}
+
+p.sign-in {
+  align-self: flex-end;
+  a {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+}
