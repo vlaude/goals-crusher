@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { UserInfo } from 'firebase/app';
 import { cfaSignIn, cfaSignOut, mapUserToUserInfo } from 'capacitor-firebase-auth';
 import { Router } from '@angular/router';
+import UserCredential = firebase.auth.UserCredential;
 
 @Injectable({
   providedIn: 'root',
@@ -11,13 +11,7 @@ export class AuthService {
   readonly USER_NOT_FOUND_CODE = 'auth/user-not-found';
   readonly WRONG_PASSWORD_CODE = 'auth/wrong-password';
 
-  constructor(private afAuth: AngularFireAuth, private router: Router) {
-    this.afAuth.authState.subscribe((user) => {
-      if (user) {
-        this.router.navigate(['']);
-      }
-    });
-  }
+  constructor(private afAuth: AngularFireAuth, private router: Router) {}
 
   async hasGoogleAuthProviderLinked(): Promise<boolean> {
     return !!(await this.afAuth.currentUser).providerData.find((provider) => provider.providerId === 'google.com');
@@ -29,9 +23,11 @@ export class AuthService {
 
   loginWithGoogle() {
     // Auth using Capacitor plugin https://github.com/baumblatt/capacitor-firebase-auth#usage
-    return cfaSignIn('google.com')
+    cfaSignIn('google.com')
       .pipe(mapUserToUserInfo())
-      .subscribe((user: UserInfo) => console.log(user));
+      .subscribe((_) => {
+        location.reload();
+      });
   }
 
   logout() {
@@ -40,8 +36,16 @@ export class AuthService {
     });
   }
 
-  registerWithEmailAndPassword(email: string, password: string) {
-    return this.afAuth.createUserWithEmailAndPassword(email, password);
+  async registerWithEmailAndPassword(email: string, password: string, name?: string) {
+    const userCredential: UserCredential = await this.afAuth.createUserWithEmailAndPassword(email, password);
+    if (name) {
+      try {
+        await userCredential.user.updateProfile({ displayName: name });
+      } catch (err) {
+        throw Error('Unable to set the display name of the new user.' + err.message);
+      }
+    }
+    return userCredential;
   }
 
   async sendEmailVerification(): Promise<void> {
