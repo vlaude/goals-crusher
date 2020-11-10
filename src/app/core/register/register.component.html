@@ -1,0 +1,47 @@
+<div class="background-shape top-right"></div>
+<div class="background-shape bottom-left"></div>
+<div class="container">
+  <div></div>
+  <form [formGroup]="form" (ngSubmit)="register()">
+    <h1>Register</h1>
+    <!-- Name -->
+    <vl-form-field>
+      <vl-input type="text" placeholder="Name" formControlName="name" required></vl-input>
+      <ng-container *ngIf="nameFormControl.invalid && (nameFormControl.dirty || nameFormControl.touched)">
+        <vl-input-error *ngIf="nameFormControl.hasError('required')">Name is required.</vl-input-error>
+        <vl-input-error *ngIf="nameFormControl.hasError('minlength')">2 characters minimum.</vl-input-error>
+        <vl-input-error *ngIf="nameFormControl.hasError('maxlength')">30 characters maximum.</vl-input-error>
+      </ng-container>
+    </vl-form-field>
+    <!-- Email -->
+    <vl-form-field>
+      <vl-input type="email" placeholder="Email" formControlName="email" required></vl-input>
+      <ng-container *ngIf="emailFormControl.invalid && (emailFormControl.dirty || emailFormControl.touched)">
+        <vl-input-error *ngIf="emailFormControl.hasError('required')">Email is required.</vl-input-error>
+        <vl-input-error *ngIf="emailFormControl.hasError('email')">Wrong email format.</vl-input-error>
+      </ng-container>
+    </vl-form-field>
+    <!-- Password -->
+    <vl-form-field>
+      <vl-input type="password" placeholder="Password" formControlName="password" required></vl-input>
+      <ng-container *ngIf="passwordFormControl.invalid && (passwordFormControl.dirty || passwordFormControl.touched)">
+        <vl-input-error *ngIf="passwordFormControl.hasError('required')">Password is required.</vl-input-error>
+        <vl-input-error *ngIf="passwordFormControl.hasError('minlength')">8 characters minimum.</vl-input-error>
+      </ng-container>
+    </vl-form-field>
+
+    <!-- Submit -->
+    <vl-button type="submit" color="primary" [disabled]="form.invalid" fullWidth>Register</vl-button>
+    <p>or</p>
+
+    <!-- Social media -->
+    <section class="social-media">
+      <div class="google-btn" (click)="authService.loginWithGoogle()">
+        <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
+      </div>
+    </section>
+  </form>
+
+  <!-- Sign In -->
+  <p class="sign-in">Already have an account ? <a routerLink="/login">sign in !</a></p>
+</div>
