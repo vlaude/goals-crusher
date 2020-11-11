@@ -11,7 +11,7 @@ export class SendResetPasswordRequestModalComponent implements OnInit {
   @Output() sendRequestClicked = new EventEmitter<string>();
   @Output() submitted = new EventEmitter<void>();
 
-  @Input() id: string = 'send-reset-password-request-modal';
+  @Input() id = 'send-reset-password-request-modal';
 
   form: FormGroup;
 
@@ -21,12 +21,12 @@ export class SendResetPasswordRequestModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  submitForm() {
-    const email = this.form.controls['email'].value;
+  submitForm(): void {
+    const email = this.form.controls.email.value;
     this.sendRequestClicked.emit(email);
   }
 
-  private initForm() {
+  private initForm(): void {
     this.form = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
     });

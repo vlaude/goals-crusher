@@ -41,21 +41,23 @@ export class GoalFormComponent implements OnInit, OnChanges {
     }
   }
 
-  private buildForm() {
+  submit(): void {
+    if (!this.form.valid) {
+      return;
+    }
+    this.formSubmitted.emit(this.form);
+  }
+
+  cancel(): void {
+    this.cancelBtnClicked.emit();
+  }
+
+  private buildForm(): void {
     this.form = this.fb.group({
       id: [this.goal?.id || null],
       title: [this.goal?.title || '', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       description: [this.goal?.description || '', Validators.maxLength(250)],
       type: [this.goal?.type || 'daily', Validators.required],
     });
-  }
-
-  submit() {
-    if (!this.form.valid) return;
-    this.formSubmitted.emit(this.form);
-  }
-
-  cancel() {
-    this.cancelBtnClicked.emit();
   }
 }

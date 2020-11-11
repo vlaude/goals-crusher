@@ -37,11 +37,11 @@ export class GoalsContainerComponent implements OnInit {
     this.hoursLeft = this.goalService.getHoursLeftToAchieve(this.goalType);
   }
 
-  closeModal(id: string) {
+  closeModal(id: string): void {
     this.modalService.close(id);
   }
 
-  handleGoalAchieveBoxClicked(goal: GoalModel<any>) {
+  handleGoalAchieveBoxClicked(goal: GoalModel<any>): void {
     if (!goal.achieved) {
       this.goalsFacade.achievedGoal(goal);
     } else {
@@ -49,23 +49,25 @@ export class GoalsContainerComponent implements OnInit {
     }
   }
 
-  handleGoalClicked(goal: GoalModel<any>) {
+  handleGoalClicked(goal: GoalModel<any>): void {
     this.goalSelected = goal;
     this.openModal('goal-detail-modal');
   }
 
-  handleGoalDetailDeleteClicked() {
+  handleGoalDetailDeleteClicked(): void {
     this.closeModal('goal-detail-modal');
     this.openModal('goal-deletion-confirm-modal');
   }
 
-  handleGoalDetailEditClicked() {
+  handleGoalDetailEditClicked(): void {
     this.closeModal('goal-detail-modal');
     this.openModal('goal-form-modal');
   }
 
   handleGoalFormSubmitted(form: FormGroup): void {
-    if (!form.valid) return;
+    if (!form.valid) {
+      return;
+    }
     if (form.value.id) {
       this.goalsFacade.updateGoal(form.value);
     } else {
@@ -84,7 +86,7 @@ export class GoalsContainerComponent implements OnInit {
     this.goalSelected = null;
   }
 
-  openModal(id: string) {
+  openModal(id: string): void {
     this.modalService.open(id);
   }
 }

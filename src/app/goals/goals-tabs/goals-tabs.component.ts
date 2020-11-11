@@ -24,7 +24,7 @@ export class GoalsTabsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  swipe(event) {
+  swipe(event): void {
     if (event.type === this.SWIPE_ACTION.LEFT && this.currentIndex < this.tabRoutes.length - 1) {
       this.currentIndex++;
       this.navigateToCurrentIndex();
@@ -34,11 +34,11 @@ export class GoalsTabsComponent implements OnInit {
     }
   }
 
-  private navigateToCurrentIndex() {
-    this.router.navigate([this.tabRoutes[this.currentIndex]], { relativeTo: this.route });
+  prepareRoute(outlet: RouterOutlet): void {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 
-  prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+  private navigateToCurrentIndex(): void {
+    this.router.navigate([this.tabRoutes[this.currentIndex]], { relativeTo: this.route });
   }
 }

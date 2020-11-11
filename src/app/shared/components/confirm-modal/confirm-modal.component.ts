@@ -7,10 +7,10 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class ConfirmModalComponent implements OnInit {
   @Input() id: string;
-  @Input() title: string = 'Confirm';
-  @Input() text: string = 'Are you sure you wanna do this ?';
-  @Input() confirmText: string = 'Yes';
-  @Input() cancelText: string = 'No';
+  @Input() title = 'Confirm';
+  @Input() text = 'Are you sure you wanna do this ?';
+  @Input() confirmText = 'Yes';
+  @Input() cancelText = 'No';
 
   @Output() confirmed = new EventEmitter<void>();
   @Output() canceled = new EventEmitter<void>();

@@ -7,7 +7,7 @@ import * as moment from 'moment';
 export class MomentService {
   constructor() {}
 
-  format(date: Date, format?: string) {
+  format(date: Date, format?: string): string {
     return moment(date).format(format || 'MMMM Do YYYY');
   }
 
@@ -36,11 +36,11 @@ export class MomentService {
     return moment(date).isAfter(moment());
   }
 
-  endOfTheDayHoursLeft() {
+  endOfTheDayHoursLeft(): number {
     return moment().endOf('day').diff(moment(), 'hours');
   }
 
-  endOfTheWeekHoursLeft() {
+  endOfTheWeekHoursLeft(): number {
     return moment().endOf('isoWeek').diff(moment(), 'hours');
   }
 

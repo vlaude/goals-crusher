@@ -13,7 +13,7 @@ const { version } = require('../../../package.json');
 })
 export class SettingsComponent implements OnInit {
   hasGoogleAuthProviderLinked: boolean;
-  hasFacebookAuthProviderLinked: boolean = false;
+  hasFacebookAuthProviderLinked = false;
   user: UserModel;
   version: string = version;
 
@@ -34,11 +34,11 @@ export class SettingsComponent implements OnInit {
     this.user = this.userFacade.getCurrentUser();
   }
 
-  handleResetPasswordRequestCancelClicked() {
+  handleResetPasswordRequestCancelClicked(): void {
     this.closeResetPasswordRequestModal();
   }
 
-  handleResetPasswordRequestSendRequestClicked(email: string) {
+  handleResetPasswordRequestSendRequestClicked(email: string): void {
     this.closeResetPasswordRequestModal();
     this.authService
       .sendPasswordResetEmail(email)
@@ -50,34 +50,38 @@ export class SettingsComponent implements OnInit {
       });
   }
 
-  handleSendVerificationEmailCanceled() {
+  handleSendVerificationEmailCanceled(): void {
     this.closeConfirmSendVerificationEmailModal();
   }
 
-  handleSendVerificationEmailConfirmed() {
+  handleSendVerificationEmailConfirmed(): void {
     this.closeConfirmSendVerificationEmailModal();
     this.sendEmailVerification();
   }
 
-  logOut() {
+  logOut(): void {
     this.authService.logout();
   }
 
-  openResetPasswordRequestModal() {
-    if (!this.isUserEmailVerified) return;
+  openResetPasswordRequestModal(): void {
+    if (!this.isUserEmailVerified) {
+      return;
+    }
     this.modalService.open('send-reset-password-request-modal');
   }
 
-  private closeConfirmSendVerificationEmailModal() {
+  private closeConfirmSendVerificationEmailModal(): void {
     this.modalService.close('confirm-send-verification-email-modal');
   }
 
-  private closeResetPasswordRequestModal() {
+  private closeResetPasswordRequestModal(): void {
     this.modalService.close('send-reset-password-request-modal');
   }
 
-  private sendEmailVerification() {
-    if (this.isUserEmailVerified) return;
+  private sendEmailVerification(): void {
+    if (this.isUserEmailVerified) {
+      return;
+    }
     this.authService
       .sendEmailVerification()
       .then((_) => {

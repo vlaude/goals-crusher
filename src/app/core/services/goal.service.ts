@@ -58,7 +58,7 @@ export class GoalService {
     }
   }
 
-  public getHoursLeftToAchieve(goalType: GoalType) {
+  public getHoursLeftToAchieve(goalType: GoalType): number {
     switch (goalType) {
       case 'daily':
         return this.momentService.endOfTheDayHoursLeft();

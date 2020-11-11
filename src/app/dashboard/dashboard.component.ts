@@ -1,3 +1,4 @@
+/* tslint:disable:member-ordering semicolon */
 import { Component, OnInit } from '@angular/core';
 import { GoalsFacade } from '../facades/goals.facade';
 import { combineLatest, Observable } from 'rxjs';
@@ -18,11 +19,6 @@ interface GoalSummary {
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  goals$: Observable<GoalModel<any>[]> = this.goalsFacade.getGoalsWithCurrentAchievements$();
-  achievements$: Observable<GoalAchievementModel<any>[]> = this.goalsFacade
-    .getAchievements$()
-    .pipe(map((achievements) => achievements.sort((a, b) => (a.achievedAt < b.achievedAt ? 1 : -1))));
-
   mapToGoalSummaryOperator = (type: GoalType) =>
     map((goals: GoalModel<any>[]) => {
       return {
@@ -46,6 +42,11 @@ export class DashboardComponent implements OnInit {
 
   mapToGoalsDoneOperator = () =>
     map((goalSummary: GoalSummary) => goalSummary.achieved === goalSummary.count && goalSummary.count !== 0);
+
+  goals$: Observable<GoalModel<any>[]> = this.goalsFacade.getGoalsWithCurrentAchievements$();
+  achievements$: Observable<GoalAchievementModel<any>[]> = this.goalsFacade
+    .getAchievements$()
+    .pipe(map((achievements) => achievements.sort((a, b) => (a.achievedAt < b.achievedAt ? 1 : -1))));
 
   dailyGoalSummary$: Observable<GoalSummary> = this.goals$.pipe(this.mapToGoalSummaryOperator('daily'));
   weeklyGoalSummary$: Observable<GoalSummary> = this.goals$.pipe(this.mapToGoalSummaryOperator('weekly'));

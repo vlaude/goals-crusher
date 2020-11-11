@@ -7,12 +7,12 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
   styleUrls: ['./textarea.component.scss'],
 })
 export class TextareaComponent implements OnInit, ControlValueAccessor {
-  @Input() placeholder: string = '';
+  @Input() placeholder = '';
   @Input() required: boolean;
-  @Input() width: string = '100%';
+  @Input() width = '100%';
   @Input() disabled: boolean;
 
-  value: string = '';
+  value = '';
 
   constructor(
     @Self()

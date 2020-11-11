@@ -8,12 +8,12 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 })
 export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() type: 'text' | 'email' | 'password' = 'text';
-  @Input() placeholder: string = '';
+  @Input() placeholder = '';
   @Input() required: boolean;
-  @Input() width: string = '100%';
+  @Input() width = '100%';
   @Input() disabled: boolean;
 
-  value: string = '';
+  value = '';
 
   constructor(
     @Self()
@@ -34,11 +34,11 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     this.value = value;
   }
 
-  registerOnChange(fn: Function): void {
+  registerOnChange(fn: () => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: Function): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 

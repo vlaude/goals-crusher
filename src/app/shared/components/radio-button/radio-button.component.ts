@@ -14,7 +14,8 @@ let nextUniqueId = 0;
   styleUrls: ['./radio-button.component.scss'],
 })
 export class RadioButtonComponent implements OnInit, ControlValueAccessor {
-  private _name: string = `group-${nextUniqueId++}`;
+  // tslint:disable-next-line:variable-name
+  private _name = `group-${nextUniqueId++}`;
 
   @Input() items: Array<RadioButtonItem>;
 
@@ -48,21 +49,21 @@ export class RadioButtonComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {}
 
-  writeValue(value: string | number | boolean) {
+  writeValue(value: string | number | boolean): void {
     if (value !== this.innerValue) {
       this.innerValue = value;
     }
   }
 
-  registerOnChange(fn: Function): void {
+  registerOnChange(fn: () => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: Function): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
-  change(value: string | number | boolean) {
+  change(value: string | number | boolean): void {
     this.innerValue = value;
     this.onChange(value);
     this.onTouched(value);

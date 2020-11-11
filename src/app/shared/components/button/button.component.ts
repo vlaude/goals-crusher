@@ -13,6 +13,7 @@ export class ButtonComponent implements OnInit {
   @Input() disabled: boolean;
   @Input() icon: boolean;
   @Input() fullWidth: boolean;
+  // tslint:disable-next-line:no-output-native
   @Output() click = new EventEmitter();
 
   constructor() {}
@@ -23,7 +24,7 @@ export class ButtonComponent implements OnInit {
     this.fullWidth = this.fullWidth !== undefined;
   }
 
-  onClick(event: MouseEvent) {
+  onClick(event: MouseEvent): void {
     if (this.disabled) {
       event.stopPropagation();
       return;

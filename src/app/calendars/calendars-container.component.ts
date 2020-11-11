@@ -64,13 +64,15 @@ export class CalendarsContainerComponent implements OnInit {
     });
   }
 
-  achieveSeletedGoalAtSelectedDate() {
+  achieveSeletedGoalAtSelectedDate(): void {
     this.modalService.close('achieve-goal-confirm-modal');
     this.goalsFacade.achievedGoal(this.goalSelected, this.dateSelected);
   }
 
   handleDateClicked(date: Date): void {
-    if (this.momentService.isAfterToday(date)) return;
+    if (this.momentService.isAfterToday(date)) {
+      return;
+    }
     this.dateSelected = date;
     const isGoalSelectedAchievedAtClickedDate = this.goalService.isAchieved(this.goalSelected, this.achievements, date);
     this.modalService.close('calendar-modal');
@@ -87,7 +89,7 @@ export class CalendarsContainerComponent implements OnInit {
     }
   }
 
-  handleGoalSelected() {
+  handleGoalSelected(): void {
     this.highlightDates = this.achievements
       .filter((achievement) => achievement.goalId === this.goalSelected.id)
       .map((achievement) => this.generateHighlightDates(this.goalSelected, achievement))
@@ -97,7 +99,7 @@ export class CalendarsContainerComponent implements OnInit {
     this.modalService.open('calendar-modal');
   }
 
-  unachieveSeletedGoalAtSelectedDate() {
+  unachieveSeletedGoalAtSelectedDate(): void {
     this.modalService.close('unachieve-goal-confirm-modal');
     this.goalsFacade.unAchievedGoal(this.goalSelected, this.dateSelected);
   }

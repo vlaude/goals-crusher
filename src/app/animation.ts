@@ -7,7 +7,7 @@ export const slider = trigger('routeAnimations', [
   transition('LifelongTab => *', slideTo('left')),
 ]);
 
-function slideTo(direction) {
+function slideTo(direction): any {
   const optional = { optional: true };
   return [
     query(

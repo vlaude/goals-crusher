@@ -17,11 +17,11 @@ export class AuthService {
     return !!(await this.afAuth.currentUser).providerData.find((provider) => provider.providerId === 'google.com');
   }
 
-  loginWithEmailAndPassword(email: string, password: string) {
+  loginWithEmailAndPassword(email: string, password: string): Promise<UserCredential> {
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
-  loginWithGoogle() {
+  loginWithGoogle(): void {
     // Auth using Capacitor plugin https://github.com/baumblatt/capacitor-firebase-auth#usage
     cfaSignIn('google.com')
       .pipe(mapUserToUserInfo())
@@ -30,13 +30,13 @@ export class AuthService {
       });
   }
 
-  logout() {
+  logout(): void {
     cfaSignOut().subscribe((_) => {
       this.router.navigate(['/login']);
     });
   }
 
-  async registerWithEmailAndPassword(email: string, password: string, name?: string) {
+  async registerWithEmailAndPassword(email: string, password: string, name?: string): Promise<UserCredential> {
     const userCredential: UserCredential = await this.afAuth.createUserWithEmailAndPassword(email, password);
     if (name) {
       try {
@@ -52,7 +52,7 @@ export class AuthService {
     return (await this.afAuth.currentUser).sendEmailVerification();
   }
 
-  async sendPasswordResetEmail(email: string) {
+  async sendPasswordResetEmail(email: string): Promise<any> {
     return this.afAuth.sendPasswordResetEmail(email);
   }
 }

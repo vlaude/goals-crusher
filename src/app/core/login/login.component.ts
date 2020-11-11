@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     this.initSignInForm();
   }
 
-  signIn() {
+  signIn(): void {
     if (!this.form.valid) {
       return;
     }
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  private initSignInForm() {
+  private initSignInForm(): void {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],

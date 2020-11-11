@@ -35,13 +35,13 @@ import { animate, style, transition, trigger } from '@angular/animations';
 })
 export class SnackbarComponent implements OnInit, OnDestroy {
   public show = false;
-  public message: string = 'This is snackbar';
-  public type: string = 'success';
+  public message = 'This is snackbar';
+  public type = 'success';
   private snackbarSubscription: Subscription;
 
   constructor(private snackbarService: SnackbarService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.snackbarSubscription = this.snackbarService.snackbarState.subscribe((state) => {
       if (state.type) {
         this.type = state.type;
@@ -56,7 +56,7 @@ export class SnackbarComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.snackbarSubscription.unsubscribe();
   }
 }
