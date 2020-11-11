@@ -14,3 +14,10 @@ jobs:
       name: node/default
     steps:
       - run: echo "Quality !"
+      
+workflows:
+  version: 2
+  my-workflow:
+    jobs:
+      - build
+      - quality
