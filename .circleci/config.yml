@@ -8,13 +8,13 @@ jobs:
     steps:
       - checkout
       - node/install-packages
-      - run: npm run build --prod
+      - run: npm run build:prod
   test:
     executor:
       name: node/default
     steps:
       - run: echo "We need to implement some UT ! What is the developer doing ? 😒"
-    
+
   quality:
     executor:
       name: node/default
@@ -22,7 +22,7 @@ jobs:
       - checkout
       - node/install-packages
       - run: npm run lint
-      
+
 workflows:
   version: 2
   build-quality-and-test:
