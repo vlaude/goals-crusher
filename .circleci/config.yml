@@ -13,6 +13,7 @@ jobs:
     executor:
       name: node/default
     steps:
+      - checkout
       - run: npm run lint
       
 workflows:
