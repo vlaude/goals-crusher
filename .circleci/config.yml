@@ -9,3 +9,8 @@ jobs:
       - checkout
       - node/install-packages
       - run: npm run build --prod
+  quality:
+    executor:
+      name: node/default
+    steps:
+      - run: echo "Quality !"
