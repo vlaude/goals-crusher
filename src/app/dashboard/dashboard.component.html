@@ -30,6 +30,9 @@
         <span>{{ goal.title }} </span
         ><span>{{ goal.achievedAt | date: (momentService.isToday(goal.achievedAt) ? 'shortTime' : 'shortDate') }}</span>
       </div>
+      <span *ngIf="(lastGoalsAchieved$ | async).length === 0">
+        You don't have achieved goal yet. 🤔
+      </span>
     </div>
   </vl-card>
 
@@ -41,6 +44,9 @@
         <span>{{ goal.title }} </span>
         <span> {{ goal.createdAt | date: 'shortDate' }} </span>
       </div>
+      <span *ngIf="(lastGoalsCreated$ | async).length === 0">
+        You don't have created goal yet. 😥
+      </span>
     </div>
   </vl-card>
 </div>
