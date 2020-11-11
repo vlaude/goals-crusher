@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserModel } from '../../core/models/user.model';
-import { AuthService } from '../../core/auth/auth.service';
 import { UserFacade } from '../../facades/user.facade';
 import { GoalsFacade } from '../../facades/goals.facade';
 import { Observable } from 'rxjs';
@@ -15,11 +14,7 @@ export class ProfileContainerComponent implements OnInit {
   goalsCount$: Observable<number>;
   achivementsCount$: Observable<number>;
 
-  constructor(
-    private readonly userFacade: UserFacade,
-    private readonly goalsFacade: GoalsFacade,
-    private readonly authService: AuthService
-  ) {}
+  constructor(private readonly userFacade: UserFacade, private readonly goalsFacade: GoalsFacade) {}
 
   ngOnInit(): void {
     this.user = this.userFacade.getCurrentUser();
