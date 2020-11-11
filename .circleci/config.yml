@@ -7,6 +7,5 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - node/with-cache
-      - run: npm install
+      - node/install-packages
       - run: npm run build --prod
