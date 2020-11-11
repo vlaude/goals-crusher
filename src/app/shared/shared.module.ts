@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TimeLeftPipe } from './pipes/time-left.pipe';
 import { ModalComponent } from './components/modal/modal.component';
@@ -32,7 +31,7 @@ import { InputErrorComponent } from './components/input-error/input-error.compon
     LoaderComponent,
     InputErrorComponent,
   ],
-  imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [
     TimeLeftPipe,
     ModalComponent,

@@ -16,7 +16,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ProfileContainerComponent } from './profile/profile-container/profile-container.component';
 import { SharedModule } from './shared/shared.module';
-import { MaterialModule } from './material.module';
 import { GoalsContainerComponent } from './goals/goals-container.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { CalendarsContainerComponent } from './calendars/calendars-container.component';
@@ -66,7 +65,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     CoreModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
