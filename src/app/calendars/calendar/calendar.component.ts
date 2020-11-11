@@ -63,7 +63,9 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   onCalendarDayClicked(calendarDay: CalendarDay): void {
-    if (calendarDay.isOutOfMonth) return;
+    if (calendarDay.isOutOfMonth) {
+      return;
+    }
     const date = this.currentMoment.set('date', calendarDay.dayNumber).toDate();
     this.dateClicked.emit(date);
   }
@@ -102,18 +104,18 @@ export class CalendarComponent implements OnInit, OnChanges {
     return Array(dayStart - 1).fill({ isOutOfMonth: true });
   }
 
-  private initSwitchMonthStream() {
+  private initSwitchMonthStream(): void {
     this.switchMonth$.subscribe((change) => {
       this.refreshCalendar(change);
     });
   }
 
-  private refreshCalendar(change?: 'Previous' | 'Next') {
+  private refreshCalendar(change?: 'Previous' | 'Next'): void {
     this.switchCurrentMomentMonth(change);
     this.calendarDays = this.generateCalendarDays();
   }
 
-  private switchCurrentMomentMonth(change: 'Previous' | 'Next') {
+  private switchCurrentMomentMonth(change: 'Previous' | 'Next'): void {
     this.currentMoment =
       change === 'Previous'
         ? this.currentMoment.subtract(1, 'month')

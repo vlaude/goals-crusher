@@ -32,9 +32,9 @@ import { SendResetPasswordRequestModalComponent } from './auth/send-reset-passwo
 import { GoalListComponent } from './goals/goal-list/goal-list.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
-  overrides = <any>{
+  overrides = {
     swipe: { direction: Hammer.DIRECTION_ALL },
-  };
+  } as any;
 }
 
 @NgModule({

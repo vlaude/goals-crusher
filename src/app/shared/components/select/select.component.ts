@@ -11,7 +11,7 @@ export interface SelectItem {
   styleUrls: ['./select.component.scss'],
 })
 export class SelectComponent implements OnInit {
-  @Input() placeholder: string = 'Select an option';
+  @Input() placeholder = 'Select an option';
   @Input() items: Array<SelectItem>;
   @Input() value: any;
   @Output() valueChange = new EventEmitter<any>();
@@ -27,7 +27,7 @@ export class SelectComponent implements OnInit {
     }
   }
 
-  selectItem(item: SelectItem) {
+  selectItem(item: SelectItem): void {
     if (this.itemSelected === item) {
       this.showItems = false;
       return;

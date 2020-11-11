@@ -71,7 +71,7 @@ export class GoalsFacade {
     return this.state.achievements$.pipe(map((achievements) => achievements.length));
   }
 
-  addGoal(goal: GoalModel<any>) {
+  addGoal(goal: GoalModel<any>): void {
     goal.createdAt = new Date();
     this.state
       .addGoal(goal)
@@ -84,7 +84,7 @@ export class GoalsFacade {
       });
   }
 
-  updateGoal(goal: Partial<GoalModel<any>>) {
+  updateGoal(goal: Partial<GoalModel<any>>): void {
     goal.updatedAt = new Date();
     this.state
       .updateGoal(goal)
@@ -97,7 +97,7 @@ export class GoalsFacade {
       });
   }
 
-  removeGoal(goal: GoalModel<any>) {
+  removeGoal(goal: GoalModel<any>): void {
     this.state
       .removeGoal(goal)
       .then((_) => {
@@ -109,9 +109,11 @@ export class GoalsFacade {
       });
   }
 
-  achievedGoal(goal: GoalModel<any>, date?: Date) {
+  achievedGoal(goal: GoalModel<any>, date?: Date): void {
     const isAlreadyAchieved = this.goalService.isAchieved(goal, this.achievements, date);
-    if (isAlreadyAchieved) return;
+    if (isAlreadyAchieved) {
+      return;
+    }
     const newAchievement: GoalAchievementModel<any> = {
       goalId: goal.id,
       achievedAt: date || new Date(),
@@ -127,9 +129,11 @@ export class GoalsFacade {
       });
   }
 
-  unAchievedGoal(goal: GoalModel<any>, date?: Date) {
+  unAchievedGoal(goal: GoalModel<any>, date?: Date): void {
     const isAchieved = this.goalService.isAchieved(goal, this.achievements, date);
-    if (!isAchieved) return;
+    if (!isAchieved) {
+      return;
+    }
     const achievement = date
       ? this.goalService.getAchievementByDate(goal, this.achievements, date)
       : this.goalService.getCurrentAchievement(goal, this.achievements);
@@ -147,14 +151,18 @@ export class GoalsFacade {
   /**
    * Convert Firebase timestamp to javascript date format.
    * See https://medium.com/@peterkracik/firebase-timestamp-to-javascript-date-format-876a42978c10.
-   * @param firebaseObject
    */
+  // tslint:disable-next-line:typedef
   private convertDate(firebaseObject: any) {
-    if (!firebaseObject) return null;
+    if (!firebaseObject) {
+      return null;
+    }
 
     for (const [key, value] of Object.entries(firebaseObject)) {
       // covert items inside array
-      if (value && Array.isArray(value)) firebaseObject[key] = value.map((item) => this.convertDate(item));
+      if (value && Array.isArray(value)) {
+        firebaseObject[key] = value.map((item) => this.convertDate(item));
+      }
 
       // convert inner objects
       if (value && typeof value === 'object') {
@@ -162,7 +170,9 @@ export class GoalsFacade {
       }
 
       // convert simple properties
-      if (value && value.hasOwnProperty('seconds')) firebaseObject[key] = (value as firestore.Timestamp).toDate();
+      if (value && value.hasOwnProperty('seconds')) {
+        firebaseObject[key] = (value as firestore.Timestamp).toDate();
+      }
     }
     return firebaseObject;
   }

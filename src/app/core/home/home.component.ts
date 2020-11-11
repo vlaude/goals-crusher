@@ -7,7 +7,7 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  showNavbar: boolean = true;
+  showNavbar = true;
 
   constructor(private readonly router: Router) {
     this.router.events.subscribe((event) => {
