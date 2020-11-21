@@ -1,12 +1,7 @@
-.dashboard-layout {
+.dashboard-container {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
-}
-
-.dashboard-title {
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
 }
 
 .background-shape {
@@ -36,4 +31,7 @@
 
 .underline {
   text-decoration: underline;
+}
+.capitalize {
+  text-transform: capitalize;
 }

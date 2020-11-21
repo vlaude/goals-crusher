@@ -1,23 +1,15 @@
-<div class="dashboard-layout">
+<div class="dashboard-container">
   <div class="background-shape"></div>
 
-  <h1 class="dashboard-title">Dashboard</h1>
+  <h1 class="title">Dashboard</h1>
 
   <!-- Summary -->
   <vl-card>
     <div title>Summary</div>
     <div content>
-      <div class="card-line" [class.done]="dailyGoalsDone$ | async">
-        <span class="underline" routerLink="/goals/daily">Daily</span>
-        <span> {{ (dailyGoalSummary$ | async).achieved }} / {{ (dailyGoalSummary$ | async).count }} </span>
-      </div>
-      <div class="card-line" [class.done]="weeklyGoalsDone$ | async">
-        <span class="underline" routerLink="/goals/weekly">Weekly</span>
-        <span> {{ (weeklyGoalSummary$ | async).achieved }} / {{ (weeklyGoalSummary$ | async).count }} </span>
-      </div>
-      <div class="card-line" [class.done]="lifelongGoalsDone$ | async">
-        <span class="underline" routerLink="/goals/lifelong">Lifelong</span>
-        <span> {{ (lifelongGoalSummary$ | async).achieved }} / {{ (lifelongGoalSummary$ | async).count }}</span>
+      <div class="card-line" *ngFor="let goalSummary of goalSummaries$ | async" [class.done]="goalSummary.done">
+        <span class="underline capitalize" [routerLink]="'/goals/' + goalSummary.type">{{ goalSummary.type }}</span>
+        <span> {{ goalSummary.achieved }} / {{ goalSummary.count }} </span>
       </div>
     </div>
   </vl-card>

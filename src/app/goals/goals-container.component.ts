@@ -31,7 +31,7 @@ export class GoalsContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.goalType = this.route.snapshot.data.type || 'daily';
-    this.goalsFacade.getGoalsByTypeWithCurrentAchievements$(this.goalType).subscribe((goals) => {
+    this.goalsFacade.getGoalsWithCurrentAchievements$(this.goalType).subscribe((goals) => {
       this.goals = goals;
     });
     this.hoursLeft = this.goalService.getHoursLeftToAchieve(this.goalType);
@@ -43,9 +43,9 @@ export class GoalsContainerComponent implements OnInit {
 
   handleGoalAchieveBoxClicked(goal: GoalModel<any>): void {
     if (!goal.achieved) {
-      this.goalsFacade.achievedGoal(goal);
+      this.goalsFacade.achieveGoal(goal);
     } else {
-      this.goalsFacade.unAchievedGoal(goal);
+      this.goalsFacade.unAchieveGoal(goal);
     }
   }
 

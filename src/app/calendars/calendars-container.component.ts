@@ -66,7 +66,7 @@ export class CalendarsContainerComponent implements OnInit {
 
   achieveSeletedGoalAtSelectedDate(): void {
     this.modalService.close('achieve-goal-confirm-modal');
-    this.goalsFacade.achievedGoal(this.goalSelected, this.dateSelected);
+    this.goalsFacade.achieveGoal(this.goalSelected, this.dateSelected);
   }
 
   handleDateClicked(date: Date): void {
@@ -101,7 +101,7 @@ export class CalendarsContainerComponent implements OnInit {
 
   unachieveSeletedGoalAtSelectedDate(): void {
     this.modalService.close('unachieve-goal-confirm-modal');
-    this.goalsFacade.unAchievedGoal(this.goalSelected, this.dateSelected);
+    this.goalsFacade.unAchieveGoal(this.goalSelected, this.dateSelected);
   }
 
   private generateDailyGoalHighlightDate(

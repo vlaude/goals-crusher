@@ -3,9 +3,10 @@ import { GoalModel } from '../core/models/goal.model';
 import { Observable, Subject } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { GoalAchievementModel } from '../core/models/goal-achievement.model';
-import { startWith } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserModel } from '../core/models/user.model';
+import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -23,12 +24,18 @@ export class AppState {
     this.afAuth.authState.subscribe((user) => {
       this.user = user;
       this.goalsCollection = this.afs.collection(`goals`).doc(this.user.uid).collection('data');
-      this.goals$ = this.goalsCollection.valueChanges({ idField: 'id' }).pipe(startWith([]));
+      this.goals$ = this.goalsCollection.valueChanges({ idField: 'id' }).pipe(
+        startWith([]),
+        map((goals: GoalModel<any>[]) => goals.map((goal) => this.convertDate(goal)))
+      );
       this.achievementsCollection = this.afs
         .collection<GoalAchievementModel<any>>('goal-achievements')
         .doc(this.user.uid)
         .collection('data');
-      this.achievements$ = this.achievementsCollection.valueChanges({ idField: 'id' }).pipe(startWith([]));
+      this.achievements$ = this.achievementsCollection.valueChanges({ idField: 'id' }).pipe(
+        startWith([]),
+        map((achievements: GoalAchievementModel<any>[]) => achievements.map((a) => this.convertDate(a)))
+      );
 
       this.initialized.next();
       this.initialized.complete();
@@ -56,5 +63,34 @@ export class AppState {
   removeGoalAchievement(achievement: GoalAchievementModel<any>): Promise<void> {
     const achievementDoc = this.achievementsCollection.doc(achievement.id);
     return achievementDoc.delete();
+  }
+
+  /**
+   * Convert Firebase timestamp to javascript date format.
+   * See https://medium.com/@peterkracik/firebase-timestamp-to-javascript-date-format-876a42978c10.
+   */
+  // tslint:disable-next-line:typedef
+  private convertDate(firebaseObject: any) {
+    if (!firebaseObject) {
+      return null;
+    }
+
+    for (const [key, value] of Object.entries(firebaseObject)) {
+      // covert items inside array
+      if (value && Array.isArray(value)) {
+        firebaseObject[key] = value.map((item) => this.convertDate(item));
+      }
+
+      // convert inner objects
+      if (value && typeof value === 'object') {
+        firebaseObject[key] = this.convertDate(value);
+      }
+
+      // convert simple properties
+      if (value && value.hasOwnProperty('seconds')) {
+        firebaseObject[key] = (value as firestore.Timestamp).toDate();
+      }
+    }
+    return firebaseObject;
   }
 }
