@@ -59,17 +59,17 @@ const routes: Routes = [
           {
             path: 'daily',
             component: GoalsTypeContainerComponent,
-            data: { type: 'daily', title: 'Daily Goals', animation: 'DailyTab' },
+            data: { type: 'daily', animation: 'DailyTab' },
           },
           {
             path: 'weekly',
             component: GoalsTypeContainerComponent,
-            data: { type: 'weekly', title: 'Weekly Goals', animation: 'WeeklyTab' },
+            data: { type: 'weekly', animation: 'WeeklyTab' },
           },
           {
             path: 'lifelong',
             component: GoalsTypeContainerComponent,
-            data: { type: 'lifelong', title: 'Lifelong Goals', animation: 'LifelongTab' },
+            data: { type: 'lifelong', animation: 'LifelongTab' },
           },
         ],
       },

@@ -1,28 +1,26 @@
-<div class="goals-container-layout">
-  <div class="goals-toolbar">
-    <!-- Goals summary -->
-    <div class="goals-summary">
-      <i class="material-icons">check_circle_outline</i>
-      <span>{{ achievedGoalsCount }} / {{ goals.length }}</span>
-      <ng-template [ngIf]="hoursLeft">
-        <i class="material-icons">hourglass_empty</i>
-        <span>{{ hoursLeft | timeLeft }} left</span>
-      </ng-template>
-    </div>
-
-    <!-- Create goal button -->
-    <vl-button color="primary" icon (click)="goalSelected = null; openModal('goal-form-modal')">
-      <i class="material-icons">add</i>
-    </vl-button>
+<div class="toolbar">
+  <!-- Goals summary -->
+  <div class="summary">
+    <i class="material-icons">check_circle_outline</i>
+    <span>{{ achievedGoalsCount$ | async }} / {{ goalsCount$ | async }}</span>
+    <ng-template [ngIf]="hoursLeft">
+      <i class="material-icons">hourglass_empty</i>
+      <span>{{ hoursLeft | timeLeft }} left</span>
+    </ng-template>
   </div>
-  <!-- goals-toolbar -->
-  <!-- Goal list -->
-  <vl-goal-list
-    [goals]="goals"
-    (goalAchieveBoxClicked)="handleGoalAchieveBoxClicked($event)"
-    (goalClicked)="handleGoalClicked($event)"
-  ></vl-goal-list>
+
+  <!-- Create goal button -->
+  <vl-button color="primary" icon (click)="goalSelected = null; openModal('goal-form-modal')">
+    <i class="material-icons">add</i>
+  </vl-button>
 </div>
+<!-- toolbar -->
+<!-- Goal list -->
+<vl-goal-list
+  [goals]="goals$ | async"
+  (goalAchieveBoxClicked)="handleGoalAchieveBoxClicked($event)"
+  (goalClicked)="handleGoalClicked($event)"
+></vl-goal-list>
 
 <!-- Modals -->
 <!-- Goal detail modal -->

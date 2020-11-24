@@ -6,6 +6,8 @@ import { GoalModel } from '../../../core/models/goal.model';
 import { FormGroup } from '@angular/forms';
 import { GoalService } from '../../../core/services/goal.service';
 import { ModalService } from '../../../core/services/modal.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'vl-goals-type-container',
@@ -13,27 +15,28 @@ import { ModalService } from '../../../core/services/modal.service';
   styleUrls: ['./goals-type-container.component.scss'],
 })
 export class GoalsTypeContainerComponent implements OnInit {
-  public goals: GoalModel<any>[];
-  public goalSelected: GoalModel<any>;
-  public goalType: GoalType;
-  public hoursLeft: number;
+  goalType: GoalType = this.route.snapshot.data.type || 'daily';
+  goals$: Observable<GoalModel<any>[]> = this.goalsFacade.getGoalsWithCurrentAchievements$(this.goalType);
+  achievedGoalsCount$: Observable<number> = this.goals$.pipe(
+    map((goals) => goals.filter((goal) => goal.achieved).length)
+  );
+  goalsCount$: Observable<number> = this.goals$.pipe(map((goals) => goals.length));
 
-  get achievedGoalsCount(): number {
-    return this.goals.filter((goal) => goal.achieved).length;
-  }
+  goalSelected: GoalModel<any>;
+  /**
+   * Hours left to achieve the goals according to the goals type.
+   */
+  hoursLeft: number;
 
   constructor(
-    private readonly goalsFacade: GoalsFacade,
     private readonly goalService: GoalService,
-    private readonly route: ActivatedRoute,
-    private readonly modalService: ModalService
+    private readonly goalsFacade: GoalsFacade,
+    private readonly modalService: ModalService,
+    private readonly route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.goalType = this.route.snapshot.data.type || 'daily';
-    this.goalsFacade.getGoalsWithCurrentAchievements$(this.goalType).subscribe((goals) => {
-      this.goals = goals;
-    });
     this.hoursLeft = this.goalService.getHoursLeftToAchieve(this.goalType);
   }
 

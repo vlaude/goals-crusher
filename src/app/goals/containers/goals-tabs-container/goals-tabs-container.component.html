@@ -1,11 +1,11 @@
 <div class="goal-tabs-container" (swiperight)="swipe($event)" (swipeleft)="swipe($event)">
   <div class="background-shape"></div>
   <!-- Tabs -->
-  <div class="tabs">
+  <nav class="tabs">
     <div class="tab-item" routerLink="daily" routerLinkActive="active">Daily</div>
     <div class="tab-item" routerLink="weekly" routerLinkActive="active">Weekly</div>
     <div class="tab-item" routerLink="lifelong" routerLinkActive="active">Lifelong</div>
-  </div>
+  </nav>
   <!-- Outlet -->
   <div [@routeAnimations]="prepareRoute(outlet)" class="main-container">
     <router-outlet #outlet="outlet"></router-outlet>
