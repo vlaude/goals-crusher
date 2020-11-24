@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { GoalsFacade } from '../facades/goals.facade';
+import { GoalsFacade } from '../../../facades/goals.facade';
 import { ActivatedRoute } from '@angular/router';
-import { GoalType } from '../core/models/goal.type';
-import { GoalModel } from '../core/models/goal.model';
+import { GoalType } from '../../../core/models/goal.type';
+import { GoalModel } from '../../../core/models/goal.model';
 import { FormGroup } from '@angular/forms';
-import { GoalService } from '../core/services/goal.service';
-import { ModalService } from '../core/services/modal.service';
+import { GoalService } from '../../../core/services/goal.service';
+import { ModalService } from '../../../core/services/modal.service';
 
 @Component({
-  selector: 'vl-goals-container',
-  templateUrl: './goals-container.component.html',
-  styleUrls: ['./goals-container.component.scss'],
+  selector: 'vl-goals-type-container',
+  templateUrl: './goals-type-container.component.html',
+  styleUrls: ['./goals-type-container.component.scss'],
 })
-export class GoalsContainerComponent implements OnInit {
+export class GoalsTypeContainerComponent implements OnInit {
   public goals: GoalModel<any>[];
   public goalSelected: GoalModel<any>;
   public goalType: GoalType;

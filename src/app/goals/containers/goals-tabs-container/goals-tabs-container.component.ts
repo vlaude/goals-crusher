@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { slider } from '../../animation';
+import { slider } from '../../../animation';
 
 @Component({
-  selector: 'vl-goals-tabs',
-  templateUrl: './goals-tabs.component.html',
-  styleUrls: ['./goals-tabs.component.scss'],
+  selector: 'vl-goals-tabs-container',
+  templateUrl: './goals-tabs-container.component.html',
+  styleUrls: ['./goals-tabs-container.component.scss'],
   animations: [slider],
 })
-export class GoalsTabsComponent implements OnInit {
+export class GoalsTabsContainerComponent implements OnInit {
   SWIPE_ACTION = { LEFT: 'swipeleft', RIGHT: 'swiperight' };
   tabRoutes = ['daily', 'weekly', 'lifelong'];
   currentIndex = 0;

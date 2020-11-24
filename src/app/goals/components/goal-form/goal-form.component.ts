@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RadioButtonItem } from '../../shared/components/radio-button/radio-button.component';
-import { GoalModel } from '../../core/models/goal.model';
+import { RadioButtonItem } from '../../../shared/components/radio-button/radio-button.component';
+import { GoalModel } from '../../../core/models/goal.model';
 
 @Component({
   selector: 'vl-goal-form',

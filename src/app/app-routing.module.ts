@@ -6,9 +6,9 @@ import { HomeComponent } from './core/home/home.component';
 import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { StateInitializedResolver } from './core/resolvers/state-initialized.resolver';
 import { ProfileContainerComponent } from './profile/profile-container/profile-container.component';
-import { GoalsContainerComponent } from './goals/goals-container.component';
+import { GoalsTypeContainerComponent } from './goals/containers/goals-type-container/goals-type-container.component';
 import { CalendarsContainerComponent } from './calendars/calendars-container.component';
-import { GoalsTabsComponent } from './goals/goals-tabs/goals-tabs.component';
+import { GoalsTabsContainerComponent } from './goals/containers/goals-tabs-container/goals-tabs-container.component';
 import { SettingsComponent } from './settings/settings.component';
 import { RegisterComponent } from './core/register/register.component';
 
@@ -49,7 +49,7 @@ const routes: Routes = [
       },
       {
         path: 'goals',
-        component: GoalsTabsComponent,
+        component: GoalsTabsContainerComponent,
         children: [
           {
             path: '',
@@ -58,17 +58,17 @@ const routes: Routes = [
           },
           {
             path: 'daily',
-            component: GoalsContainerComponent,
+            component: GoalsTypeContainerComponent,
             data: { type: 'daily', title: 'Daily Goals', animation: 'DailyTab' },
           },
           {
             path: 'weekly',
-            component: GoalsContainerComponent,
+            component: GoalsTypeContainerComponent,
             data: { type: 'weekly', title: 'Weekly Goals', animation: 'WeeklyTab' },
           },
           {
             path: 'lifelong',
-            component: GoalsContainerComponent,
+            component: GoalsTypeContainerComponent,
             data: { type: 'lifelong', title: 'Lifelong Goals', animation: 'LifelongTab' },
           },
         ],

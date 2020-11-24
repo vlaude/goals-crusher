@@ -16,19 +16,19 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ProfileContainerComponent } from './profile/profile-container/profile-container.component';
 import { SharedModule } from './shared/shared.module';
-import { GoalsContainerComponent } from './goals/goals-container.component';
+import { GoalsTypeContainerComponent } from './goals/containers/goals-type-container/goals-type-container.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { CalendarsContainerComponent } from './calendars/calendars-container.component';
 import { CalendarComponent } from './calendars/calendar/calendar.component';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
-import { GoalsTabsComponent } from './goals/goals-tabs/goals-tabs.component';
-import { GoalDetailComponent } from './goals/goal-detail/goal-detail.component';
-import { GoalFormComponent } from './goals/goal-form/goal-form.component';
+import { GoalsTabsContainerComponent } from './goals/containers/goals-tabs-container/goals-tabs-container.component';
+import { GoalDetailComponent } from './goals/components/goal-detail/goal-detail.component';
+import { GoalFormComponent } from './goals/components/goal-form/goal-form.component';
 import { SettingsComponent } from './settings/settings.component';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
 import { SendResetPasswordRequestModalComponent } from './auth/send-reset-password-request-modal/send-reset-password-request-modal.component';
-import { GoalListComponent } from './goals/goal-list/goal-list.component';
+import { GoalListComponent } from './goals/components/goal-list/goal-list.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -41,10 +41,10 @@ export class MyHammerConfig extends HammerGestureConfig {
     AppComponent,
     DashboardComponent,
     ProfileContainerComponent,
-    GoalsContainerComponent,
+    GoalsTypeContainerComponent,
     CalendarsContainerComponent,
     CalendarComponent,
-    GoalsTabsComponent,
+    GoalsTabsContainerComponent,
     GoalListComponent,
     GoalDetailComponent,
     GoalFormComponent,
