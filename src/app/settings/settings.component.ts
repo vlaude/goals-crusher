@@ -22,10 +22,10 @@ export class SettingsComponent implements OnInit {
   }
 
   constructor(
+    public readonly modalService: ModalService,
     private readonly userFacade: UserFacade,
     private readonly authService: AuthService,
-    public readonly modalService: ModalService,
-    private snackbarService: SnackbarService
+    private readonly snackbarService: SnackbarService
   ) {
     this.authService.hasGoogleAuthProviderLinked().then((linked) => (this.hasGoogleAuthProviderLinked = linked));
   }

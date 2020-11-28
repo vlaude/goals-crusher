@@ -14,12 +14,12 @@ import * as Hammer from 'hammerjs';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { ProfileContainerComponent } from './profile/profile-container/profile-container.component';
+import { ProfileComponent } from './profile/profile.component';
 import { SharedModule } from './shared/shared.module';
 import { GoalsTypeContainerComponent } from './goals/containers/goals-type-container/goals-type-container.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { CalendarsContainerComponent } from './calendars/calendars-container.component';
-import { CalendarComponent } from './calendars/calendar/calendar.component';
+import { CalendarsContainerComponent } from './calendars/containers/calendars-container/calendars-container.component';
+import { CalendarComponent } from './calendars/components/calendar/calendar.component';
 import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { GoalsTabsContainerComponent } from './goals/containers/goals-tabs-container/goals-tabs-container.component';
 import { GoalDetailComponent } from './goals/components/goal-detail/goal-detail.component';
@@ -40,7 +40,7 @@ export class MyHammerConfig extends HammerGestureConfig {
   declarations: [
     AppComponent,
     DashboardComponent,
-    ProfileContainerComponent,
+    ProfileComponent,
     GoalsTypeContainerComponent,
     CalendarsContainerComponent,
     CalendarComponent,

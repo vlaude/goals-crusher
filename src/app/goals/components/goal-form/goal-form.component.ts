@@ -13,7 +13,7 @@ export class GoalFormComponent implements OnInit, OnChanges {
   @Output() formSubmitted = new EventEmitter<FormGroup>();
   @Output() cancelBtnClicked = new EventEmitter<void>();
 
-  public form: FormGroup;
+  form: FormGroup;
   goalTypesItems: RadioButtonItem[];
 
   get titleFormControl(): AbstractControl {

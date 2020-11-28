@@ -1,9 +1,9 @@
-<div *ngIf="user">
+<ng-container *ngIf="user">
   <div class="background-shape"></div>
   <!-- Settings -->
   <i class="material-icons settings-icon" routerLink="/settings">settings</i>
 
-  <div class="profile-layout">
+  <div class="profile-container">
     <vl-card class="main-card">
       <div content class="main-card-content">
         <!-- Avatar -->
@@ -37,5 +37,5 @@
       </div>
     </vl-card>
   </div>
-  <!-- profile-layout -->
-</div>
+  <!-- profile-container -->
+</ng-container>

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { GoalType } from '../core/models/goal.type';
-import { GoalModel } from '../core/models/goal.model';
-import { GoalsFacade } from '../facades/goals.facade';
+import { GoalType } from '../../../core/models/goal.type';
+import { GoalModel } from '../../../core/models/goal.model';
+import { GoalsFacade } from '../../../facades/goals.facade';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { GoalAchievementModel } from '../core/models/goal-achievement.model';
-import { MomentService } from '../core/services/moment.service';
-import { HighlightDate } from './calendar/calendar.component';
-import { GoalService } from '../core/services/goal.service';
-import { SelectItem } from '../shared/components/select/select.component';
-import { ModalService } from '../core/services/modal.service';
+import { GoalAchievementModel } from '../../../core/models/goal-achievement.model';
+import { MomentService } from '../../../core/services/moment.service';
+import { HighlightDate } from '../../components/calendar/calendar.component';
+import { GoalService } from '../../../core/services/goal.service';
+import { SelectItem } from '../../../shared/components/select/select.component';
+import { ModalService } from '../../../core/services/modal.service';
 
 @Component({
   selector: 'vl-calendars-container',
@@ -18,13 +18,13 @@ import { ModalService } from '../core/services/modal.service';
 })
 export class CalendarsContainerComponent implements OnInit {
   allGoals$: Observable<GoalModel<any>[]> = this.goalsFacade.getGoalsWithCurrentAchievements$();
-  goalType$ = new Subject<GoalType>();
+  selectedGoalType$ = new Subject<GoalType>();
   /**
-   * Transform goals that can be selected (according to the goal type) into selectable items by vl-select component.
+   * Transform goals that can be selected (according to the selected goal type) into selectable items by vl-select component.
    */
   selectableGoalsItems$: Observable<SelectItem[]> = combineLatest([
     this.allGoals$.pipe(startWith([])),
-    this.goalType$.pipe(startWith('daily')),
+    this.selectedGoalType$.pipe(startWith('daily')),
   ]).pipe(
     map(([goals, goalType]) => goals?.filter((goal) => goal.type === goalType)),
     map((goals) =>
@@ -104,17 +104,6 @@ export class CalendarsContainerComponent implements OnInit {
     this.goalsFacade.unAchieveGoal(this.goalSelected, this.dateSelected);
   }
 
-  private generateDailyGoalHighlightDate(
-    goal: GoalModel<'daily'>,
-    achievement: GoalAchievementModel<'daily'>
-  ): HighlightDate {
-    return {
-      date: achievement.achievedAt,
-      color: true,
-      badge: this.momentService.isSameDay(achievement.achievedAt, goal.createdAt) ? '★' : '',
-    };
-  }
-
   /**
    * Generate highlight dates according to the goal type and its achievements.
    * Highlight the dates when the goal has been achieved.
@@ -125,6 +114,17 @@ export class CalendarsContainerComponent implements OnInit {
       : goal.type === 'weekly'
       ? this.generateWeeklyGoalHighlightDates(goal, achievement)
       : [];
+  }
+
+  private generateDailyGoalHighlightDate(
+    goal: GoalModel<'daily'>,
+    achievement: GoalAchievementModel<'daily'>
+  ): HighlightDate {
+    return {
+      date: achievement.achievedAt,
+      color: true,
+      badge: this.momentService.isSameDay(achievement.achievedAt, goal.createdAt) ? '★' : '',
+    };
   }
 
   /**

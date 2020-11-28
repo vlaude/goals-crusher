@@ -1,4 +1,4 @@
-.calendar-layout {
+.calendar-container {
   display: flex;
   flex-direction: column;
 }
@@ -21,9 +21,6 @@
     span.calendar-header-title-year {
       font-size: 0.8rem;
     }
-  }
-  mat-icon {
-    font-size: 2.5rem;
   }
 }
 

@@ -1,31 +1,29 @@
-<div class="calendars-container-layout">
-  <div class="background-shape"></div>
+<div class="background-shape"></div>
 
-  <h1 class="calendar-title">Calendar</h1>
-  <vl-card>
-    <div title>
-      Select a goal
-    </div>
-    <div content>
-      <p>You'll get a calendar view to see when you've achieved your goal 🗓.</p>
-      <vl-select
-        style="margin-bottom: 0.5rem;"
-        [(value)]="goalTypeSelected"
-        (valueChange)="goalType$.next($event)"
-        [items]="[
-          { name: 'Daily', value: 'daily' },
-          { name: 'Weekly', value: 'weekly' }
-        ]"
-      ></vl-select>
-      <vl-select
-        placeholder="Select a goal"
-        [(value)]="goalSelected"
-        (valueChange)="handleGoalSelected()"
-        [items]="selectableGoalsItems$ | async"
-      ></vl-select>
-    </div>
-  </vl-card>
-</div>
+<h1 class="title">Calendar</h1>
+<vl-card>
+  <div title>
+    Select a goal
+  </div>
+  <div content>
+    <p>You'll get a calendar view to see when you've achieved your goal 🗓.</p>
+    <vl-select
+      style="margin-bottom: 0.5rem;"
+      [(value)]="goalTypeSelected"
+      (valueChange)="selectedGoalType$.next($event)"
+      [items]="[
+        { name: 'Daily', value: 'daily' },
+        { name: 'Weekly', value: 'weekly' }
+      ]"
+    ></vl-select>
+    <vl-select
+      placeholder="Select a goal"
+      [(value)]="goalSelected"
+      (valueChange)="handleGoalSelected()"
+      [items]="selectableGoalsItems$ | async"
+    ></vl-select>
+  </div>
+</vl-card>
 
 <!-- Calendar modal -->
 <vl-modal id="calendar-modal">

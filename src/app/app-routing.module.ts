@@ -5,9 +5,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './core/home/home.component';
 import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { StateInitializedResolver } from './core/resolvers/state-initialized.resolver';
-import { ProfileContainerComponent } from './profile/profile-container/profile-container.component';
+import { ProfileComponent } from './profile/profile.component';
 import { GoalsTypeContainerComponent } from './goals/containers/goals-type-container/goals-type-container.component';
-import { CalendarsContainerComponent } from './calendars/calendars-container.component';
+import { CalendarsContainerComponent } from './calendars/containers/calendars-container/calendars-container.component';
 import { GoalsTabsContainerComponent } from './goals/containers/goals-tabs-container/goals-tabs-container.component';
 import { SettingsComponent } from './settings/settings.component';
 import { RegisterComponent } from './core/register/register.component';
@@ -79,7 +79,7 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        component: ProfileContainerComponent,
+        component: ProfileComponent,
       },
       {
         path: 'settings',
