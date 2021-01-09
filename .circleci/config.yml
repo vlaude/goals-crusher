@@ -23,10 +23,26 @@ jobs:
       - node/install-packages
       - run: npm run lint
 
+  release:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: npm install
+      - run:
+          name: release
+          command: npm run semantic-release || true
+
 workflows:
   version: 2
-  build-quality-and-test:
+  build-quality-test-and-release:
     jobs:
       - build
       - quality
       - test
+      - release:
+          filters:
+            branches:
+              only: master
