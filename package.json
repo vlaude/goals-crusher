@@ -1,6 +1,6 @@
 {
   "name": "goals-crusher-webapp",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy",
+    "semantic-release": "semantic-release"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +27,7 @@
     "@capacitor/android": "^2.4.2",
     "@capacitor/angular": "^1.0.3",
     "@capacitor/core": "latest",
+    "@capacitor/ios": "^2.4.2",
     "animate.css": "^4.1.0",
     "capacitor-firebase-auth": "^2.3.2",
     "firebase": "^7.13.1",
@@ -40,6 +42,7 @@
     "@angular-devkit/build-angular": "~0.1000.5",
     "@angular/cli": "~10.0.5",
     "@angular/compiler-cli": "~10.0.6",
+    "@capacitor/cli": "latest",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
@@ -58,9 +61,13 @@
     "open": "^7.0.3",
     "prettier": "^2.0.5",
     "protractor": "~7.0.0",
+    "semantic-release": "^17.3.1",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.9.5",
-    "@capacitor/cli": "latest"
+    "typescript": "~3.9.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vlaude/goals-crusher-webapp.git"
   }
 }
