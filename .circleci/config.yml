@@ -43,6 +43,10 @@ workflows:
       - quality
       - test
       - release:
+          requires:
+            - build
+            - quality
+            - test
           filters:
             branches:
               only: master
