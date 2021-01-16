@@ -1,0 +1,22 @@
+<h3>Edit your profile</h3>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <!-- Email -->
+  <vl-form-field>
+    <vl-input placeholder="Email" type="email" formControlName="email" required></vl-input>
+    <ng-container *ngIf="!emailFormControl.valid && (emailFormControl.dirty || emailFormControl.touched)">
+      <span *ngIf="emailFormControl.hasError('required')">Email required.</span>
+      <span *ngIf="emailFormControl.hasError('email')">Email must be in a valid format.</span>
+    </ng-container>
+  </vl-form-field>
+  <!-- Phone -->
+  <vl-form-field>
+    <vl-input placeholder="Phone" type="tel" formControlName="phone"></vl-input>
+    <ng-container *ngIf="!phoneFormControl.valid && (phoneFormControl.dirty || phoneFormControl.touched)">
+      <span *ngIf="phoneFormControl.hasError('pattern')">Invalid phone number.</span>
+    </ng-container>
+  </vl-form-field>
+  <!-- Actions -->
+  <vl-button fullWidth (click)="cancel()">Cancel</vl-button>
+  <vl-button type="submit" color="primary" fullWidth [disabled]="!form.valid">Submit</vl-button>
+</form>

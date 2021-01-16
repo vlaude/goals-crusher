@@ -50,13 +50,13 @@
 
   <!-- Edit profile -->
   <div class="settings-item">
-    <div class="setings-item-content">
+    <div class="setings-item-content" (click)="modalService.open('profile-edit-modal')">
       <span class="settings-item-content-title">
         Edit your profile
       </span>
       <br />
       <span class="settings-item-content-desc">
-        Change your email, phone, name, or avatar.
+        Change your email, phone, or avatar.
       </span>
     </div>
     <i class="material-icons">chevron_right</i>
@@ -172,3 +172,12 @@
   (cancelClicked)="handleResetPasswordRequestCancelClicked()"
   (sendRequestClicked)="handleResetPasswordRequestSendRequestClicked($event)"
 ></vl-send-reset-password-request-modal>
+
+<!-- Edit profile modal -->
+<vl-modal id="profile-edit-modal">
+  <vl-profile-edit
+    [user]="user"
+    (formSubmitted)="handleEditProfileFormSubmitted($event)"
+    (cancelBtnClicked)="modalService.close('profile-edit-modal')"
+  ></vl-profile-edit>
+</vl-modal>
