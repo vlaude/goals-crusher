@@ -4,6 +4,7 @@ import { UserFacade } from '../facades/user.facade';
 import { UserModel } from '../core/models/user.model';
 import { ModalService } from '../core/services/modal.service';
 import { SnackbarService } from '../core/services/snackbar.service';
+import { FormGroup } from '@angular/forms';
 const { version } = require('../../../package.json');
 
 @Component({
@@ -32,6 +33,10 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userFacade.getCurrentUser();
+  }
+
+  handleEditProfileFormSubmitted(form: FormGroup): void {
+    this.userFacade.updateCurrentUser(form.value);
   }
 
   handleResetPasswordRequestCancelClicked(): void {

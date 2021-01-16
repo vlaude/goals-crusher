@@ -42,6 +42,14 @@ export class AppState {
     });
   }
 
+  async updateCurrentUserEmail(newEmail: string): Promise<void> {
+    return (await this.afAuth.currentUser).updateEmail(newEmail);
+  }
+
+  // async updateCurrentUserPhone(newPhoneNumber: string): Promise<void> {
+  //   return (await this.afAuth.currentUser).updatePhoneNumber(newPhoneNumber);
+  // }
+
   addGoal(goal: GoalModel<any>): Promise<DocumentReference> {
     return this.goalsCollection.add(goal);
   }
