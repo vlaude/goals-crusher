@@ -44,6 +44,8 @@
     "@angular/compiler-cli": "~10.0.6",
     "@capacitor/cli": "latest",
     "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.2.0",
+    "@semantic-release/npm": "^7.0.10",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
