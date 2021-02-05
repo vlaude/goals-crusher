@@ -96,12 +96,34 @@
         Appearance
       </span>
       <br />
-      <span class="settings-item-content-desc appearance-desc">
-        <span class="primary-color-preview"></span>
-        Primary color
-      </span>
+      <div class="primary-color-picker">
+        <span
+          [ngClass]="{ selected: (theme | async) === 'yellow' }"
+          class="primary-color-preview yellow selected"
+          (click)="handleChangeAppearance('yellow')"
+        ></span>
+        <span
+          [ngClass]="{ selected: (theme | async) === 'violet' }"
+          class="primary-color-preview violet"
+          (click)="handleChangeAppearance('violet')"
+        ></span>
+        <span
+          [ngClass]="{ selected: (theme | async) === 'green' }"
+          class="primary-color-preview green"
+          (click)="handleChangeAppearance('green')"
+        ></span
+        ><span
+          [ngClass]="{ selected: (theme | async) === 'red' }"
+          class="primary-color-preview red"
+          (click)="handleChangeAppearance('red')"
+        ></span
+        ><span
+          [ngClass]="{ selected: (theme | async) === 'blue' }"
+          class="primary-color-preview blue"
+          (click)="handleChangeAppearance('blue')"
+        ></span>
+      </div>
     </div>
-    <!--    <i class="material-icons">chevron_right</i>-->
   </div>
 
   <!-- Connections -->
