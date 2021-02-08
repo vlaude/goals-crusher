@@ -29,7 +29,8 @@ import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './custom-route-reuse-strategy';
 import { SendResetPasswordRequestModalComponent } from './auth/send-reset-password-request-modal/send-reset-password-request-modal.component';
 import { GoalListComponent } from './goals/components/goal-list/goal-list.component';
-import { ProfileEditComponent } from './profile/components/profile-edit/profile-edit.component';
+import { AvatarEditComponent } from './profile/components/avatar-edit/avatar-edit.component';
+import { EmailEditComponent } from './profile/components/email-edit/email-edit.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -51,7 +52,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     GoalFormComponent,
     SettingsComponent,
     SendResetPasswordRequestModalComponent,
-    ProfileEditComponent,
+    EmailEditComponent,
+    AvatarEditComponent,
   ],
   imports: [
     BrowserModule,

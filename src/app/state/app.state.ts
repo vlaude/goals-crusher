@@ -46,9 +46,9 @@ export class AppState {
     return (await this.afAuth.currentUser).updateEmail(newEmail);
   }
 
-  // async updateCurrentUserPhone(newPhoneNumber: string): Promise<void> {
-  //   return (await this.afAuth.currentUser).updatePhoneNumber(newPhoneNumber);
-  // }
+  async updateCurrentUserAvatar(avatarUrl: string): Promise<void> {
+    return (await this.afAuth.currentUser).updateProfile({ photoURL: avatarUrl });
+  }
 
   addGoal(goal: GoalModel<any>): Promise<DocumentReference> {
     return this.goalsCollection.add(goal);

@@ -7,11 +7,12 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit, ControlValueAccessor {
-  @Input() type: 'text' | 'email' | 'password' = 'text';
+  @Input() type: 'text' | 'email' | 'password' | 'file' = 'text';
   @Input() placeholder = '';
   @Input() required: boolean;
   @Input() width = '100%';
   @Input() disabled: boolean;
+  @Input() accept: string;
 
   value = '';
 

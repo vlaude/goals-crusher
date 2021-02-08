@@ -1,11 +1,16 @@
-<input
-  class="vl-input"
-  [type]="type"
-  [placeholder]="placeholder"
-  [style.width]="width"
-  [required]="required"
-  [disabled]="disabled"
-  [value]="value"
-  (input)="onChange($event.target.value)"
-  (blur)="onTouched()"
-/>
+<label *ngIf="type === 'file'">
+  <i class="material-icons">file_upload</i>
+  Choose a file
+  <input
+    class="vl-input"
+    [accept]="accept"
+    [type]="type"
+    [placeholder]="placeholder"
+    [style.width]="width"
+    [required]="required"
+    [disabled]="disabled"
+    [value]="value"
+    (input)="onChange($event.target.value)"
+    (blur)="onTouched()"
+  />
+</label>

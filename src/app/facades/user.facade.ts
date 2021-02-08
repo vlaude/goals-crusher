@@ -30,4 +30,21 @@ export class UserFacade {
         });
     }
   }
+
+  updateCurrentUserAvatar(avatarUrl: string): void {
+    this.state
+      .updateCurrentUserAvatar(avatarUrl)
+      .then((_) => {
+        this.snackbarService.show(`Avatar updated 🚀.`);
+      })
+      .catch((error) => {
+        console.log('Fail to update current user avatar 😥');
+        console.error(error);
+        if (error.code === 'auth/requires-recent-login') {
+          this.snackbarService.show('Oops ! You need to reauthenticate in order to update your avatar 😕.', 'danger');
+        } else {
+          this.snackbarService.show('Error while updating your avatar 😕. Please try again later.', 'danger');
+        }
+      });
+  }
 }

@@ -1,0 +1,10 @@
+<h3>Change your avatar</h3>
+<form (ngSubmit)="submit()">
+  <img [src]="avatarPreview" alt="User Avatar" class="avatar-preview" />
+  <vl-input type="file" accept="image/*" (change)="handleFileChange($event)"></vl-input>
+  <div style="margin-top: 0.5rem;" *ngIf="fileToUpload">file: {{ fileToUpload?.name }}</div>
+  <div class="progress" *ngIf="uploadProgress$">
+    <div class="progress-value" [style.width.%]="uploadProgress$ | async"></div>
+  </div>
+  <vl-button type="submit" color="primary" [disabled]="!fileToUpload" fullWidth>Upload</vl-button>
+</form>
