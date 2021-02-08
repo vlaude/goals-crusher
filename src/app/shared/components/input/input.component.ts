@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, Optional, Self } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
+let inputId = 0;
+
 @Component({
   selector: 'vl-input',
   templateUrl: './input.component.html',
@@ -14,6 +16,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() disabled: boolean;
   @Input() accept: string;
 
+  id: number;
   value = '';
 
   constructor(
@@ -27,6 +30,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit(): void {
+    this.id = inputId++;
     this.required = this.required !== undefined;
     this.disabled = this.disabled !== undefined;
   }
