@@ -1,4 +1,7 @@
-<main [class.main-container]="!shouldHaveContainer()">
+<main
+  [class.main-container]="!shouldHaveContainer"
+  [style.height]="showNavbar ? 'calc(100vh - ' + containerSizeOffest + 'rem)' : '100vh'"
+>
   <router-outlet></router-outlet>
 </main>
 <vl-navbar [hidden]="!showNavbar"></vl-navbar>

@@ -48,15 +48,25 @@
     <i class="material-icons" *ngIf="isUserEmailVerified">chevron_right</i>
   </div>
 
-  <!-- Edit profile -->
-  <div class="settings-item">
-    <div class="setings-item-content" (click)="modalService.open('profile-edit-modal')">
+  <!-- Edit email -->
+  <div class="settings-item" (click)="modalService.open('email-edit-modal')">
+    <div class="setings-item-content">
       <span class="settings-item-content-title">
-        Edit your profile
+        Change your email
       </span>
       <br />
       <span class="settings-item-content-desc">
-        Change your email, phone, or avatar.
+        {{ user.email }}
+      </span>
+    </div>
+    <i class="material-icons">chevron_right</i>
+  </div>
+
+  <!-- Edit Avatar -->
+  <div class="settings-item" (click)="modalService.open('avatar-edit-modal')">
+    <div class="setings-item-content">
+      <span class="settings-item-content-title">
+        Change your avatar
       </span>
     </div>
     <i class="material-icons">chevron_right</i>
@@ -173,11 +183,16 @@
   (sendRequestClicked)="handleResetPasswordRequestSendRequestClicked($event)"
 ></vl-send-reset-password-request-modal>
 
-<!-- Edit profile modal -->
-<vl-modal id="profile-edit-modal">
-  <vl-profile-edit
+<!-- Edit email modal -->
+<vl-modal id="email-edit-modal">
+  <vl-email-edit
     [user]="user"
-    (formSubmitted)="handleEditProfileFormSubmitted($event)"
-    (cancelBtnClicked)="modalService.close('profile-edit-modal')"
-  ></vl-profile-edit>
+    (formSubmitted)="handleEditEmailFormSubmitted($event)"
+    (cancelBtnClicked)="modalService.close('email-edit-modal')"
+  ></vl-email-edit>
+</vl-modal>
+
+<!-- Edit avatar modal -->
+<vl-modal id="avatar-edit-modal">
+  <vl-avatar-edit [user]="user" (done)="modalService.close('avatar-edit-modal')"></vl-avatar-edit>
 </vl-modal>

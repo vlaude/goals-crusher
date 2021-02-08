@@ -35,7 +35,7 @@ export class SettingsComponent implements OnInit {
     this.user = this.userFacade.getCurrentUser();
   }
 
-  handleEditProfileFormSubmitted(form: FormGroup): void {
+  handleEditEmailFormSubmitted(form: FormGroup): void {
     this.userFacade.updateCurrentUser(form.value);
   }
 
