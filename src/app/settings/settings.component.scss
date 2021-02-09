@@ -65,11 +65,38 @@ i.material-icons.done-icon {
   color: var(--primary-color);
 }
 
-.primary-color-preview {
-  display: block;
-  margin-right: 0.5rem;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  background-color: var(--primary-color);
+.primary-color-picker {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 15rem;
+  padding-top: 0.5rem;
+  .primary-color-preview {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.5s;
+    border: 2px solid transparent;
+    &.yellow {
+      background-color: var(--yellow-orange);
+    }
+    &.violet {
+      background-color: var(--electric-violet);
+    }
+    &.green {
+      background-color: var(--emerald);
+    }
+    &.red {
+      background-color: var(--brick-red);
+    }
+    &.blue {
+      background-color: var(--iceberg);
+    }
+    &.selected {
+      border-color: var(--text-primary);
+      transform: scale(1.1);
+    }
+  }
 }

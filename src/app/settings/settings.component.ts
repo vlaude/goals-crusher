@@ -4,7 +4,9 @@ import { UserFacade } from '../facades/user.facade';
 import { UserModel } from '../core/models/user.model';
 import { ModalService } from '../core/services/modal.service';
 import { SnackbarService } from '../core/services/snackbar.service';
+import { ThemeColor, ThemeService } from '../core/services/theme.service';
 import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 const { version } = require('../../../package.json');
 
 @Component({
@@ -22,17 +24,25 @@ export class SettingsComponent implements OnInit {
     return this.user.emailVerified;
   }
 
+  get theme(): Observable<ThemeColor> {
+    return this.themeService.getTheme();
+  }
+
   constructor(
     public readonly modalService: ModalService,
     private readonly userFacade: UserFacade,
     private readonly authService: AuthService,
-    private readonly snackbarService: SnackbarService
+    private readonly snackbarService: SnackbarService,
+    private readonly themeService: ThemeService
   ) {
     this.authService.hasGoogleAuthProviderLinked().then((linked) => (this.hasGoogleAuthProviderLinked = linked));
   }
 
   ngOnInit(): void {
     this.user = this.userFacade.getCurrentUser();
+  }
+  handleChangeAppearance(themeName: ThemeColor): void {
+    this.themeService.setTheme(themeName);
   }
 
   handleEditEmailFormSubmitted(form: FormGroup): void {

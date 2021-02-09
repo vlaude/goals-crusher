@@ -3,13 +3,32 @@
 @import '~animate.css/animate.min.css';
 
 :root {
+  --yellow-orange: #ff9800;
+  --electric-violet: #b647ff;
+  --emerald: #44cf6c;
+  --brick-red: #d1495b;
+  --iceberg: #79addc;
+
   --bg-primary: #212121;
   --bg-secondary: #333333;
   --text-primary: #eeeeee;
   --text-secondary: #9e9e9e;
-  --primary-color: #ff9800;
+  --primary-color: var(--yellow-orange);
   --error-color: #f44336;
   --font-family: 'Montserrat', san-serif;
+}
+
+html[data-theme='violet'] {
+  --primary-color: var(--electric-violet);
+}
+html[data-theme='green'] {
+  --primary-color: var(--emerald);
+}
+html[data-theme='red'] {
+  --primary-color: var(--brick-red);
+}
+html[data-theme='blue'] {
+  --primary-color: var(--iceberg);
 }
 
 html,
