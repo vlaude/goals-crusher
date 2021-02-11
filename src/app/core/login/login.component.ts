@@ -36,16 +36,21 @@ export class LoginComponent implements OnInit {
       .catch((error) => {
         switch (error.code) {
           case this.authService.WRONG_PASSWORD_CODE:
-            this.snackbarService.show('🤔 Password incorrect !');
+            this.snackbarService.show('🤔 Password incorrect !', 'danger');
             break;
           case this.authService.USER_NOT_FOUND_CODE:
-            this.snackbarService.show('Account not found 😥.');
+            this.snackbarService.show('Account not found 😥', 'danger');
             break;
         }
       })
       .finally(() => {
         this.isLoading = false;
       });
+  }
+
+  signInWithGoogle(): void {
+    this.isLoading = true;
+    this.authService.loginWithGoogle();
   }
 
   private initSignInForm(): void {

@@ -48,11 +48,20 @@ export class RegisterComponent implements OnInit {
       })
       .catch((err) => {
         console.error(err);
-        this.snackbarService.show('😭 Error, could not create your account, please try again later.');
+        if (err.code === 'auth/email-already-in-use') {
+          this.snackbarService.show('The email address is already in use by another account 😕', 'danger');
+        } else {
+          this.snackbarService.show('😭 Error, could not create your account, please try again later', 'danger');
+        }
       })
       .finally(() => {
         this.isLoading = false;
       });
+  }
+
+  signInWithGoogle(): void {
+    this.isLoading = true;
+    this.authService.loginWithGoogle();
   }
 
   private initRegisterForm(): void {

@@ -45,6 +45,7 @@ import { InputErrorComponent } from './components/input-error/input-error.compon
     ConfirmModalComponent,
     SnackbarComponent,
     InputErrorComponent,
+    LoaderComponent,
   ],
 })
 export class SharedModule {}
