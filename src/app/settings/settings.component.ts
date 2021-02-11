@@ -46,7 +46,9 @@ export class SettingsComponent implements OnInit {
   }
 
   handleEditEmailFormSubmitted(form: FormGroup): void {
-    this.userFacade.updateCurrentUser(form.value);
+    const { email } = form.value;
+    this.userFacade.updateCurrentUserEmail(email);
+    this.modalService.close('email-edit-modal');
   }
 
   handleResetPasswordRequestCancelClicked(): void {
@@ -100,10 +102,11 @@ export class SettingsComponent implements OnInit {
     this.authService
       .sendEmailVerification()
       .then((_) => {
-        this.snackbarService.show('Verification email sent 💌.');
+        this.snackbarService.show('Verification email sent 💌');
       })
       .catch((err) => {
-        this.snackbarService.show(`Error: ${err.message} 😥.`, 'danger');
+        console.error(err);
+        this.snackbarService.show(`Oops ! Cannot send you a verification email, please try again later 😥`, 'danger');
       });
   }
 }

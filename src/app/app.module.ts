@@ -20,7 +20,6 @@ import { GoalsTypeContainerComponent } from './goals/containers/goals-type-conta
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { CalendarsContainerComponent } from './calendars/containers/calendars-container/calendars-container.component';
 import { CalendarComponent } from './calendars/components/calendar/calendar.component';
-import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { GoalsTabsContainerComponent } from './goals/containers/goals-tabs-container/goals-tabs-container.component';
 import { GoalDetailComponent } from './goals/components/goal-detail/goal-detail.component';
 import { GoalFormComponent } from './goals/components/goal-form/goal-form.component';
@@ -64,7 +63,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireMessagingModule,
     AppRoutingModule,
     CoreModule,
     FormsModule,

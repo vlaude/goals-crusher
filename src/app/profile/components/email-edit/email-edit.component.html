@@ -1,21 +1,16 @@
-<h3>Edit your profile</h3>
+<h3>Change your email</h3>
 
 <form [formGroup]="form" (ngSubmit)="submit()">
   <!-- Email -->
   <vl-form-field>
-    <label
-      >Your Email
-      <vl-input placeholder="Email" type="email" formControlName="email" required></vl-input>
-    </label>
+    <vl-input placeholder="Email" type="email" formControlName="email" required></vl-input>
     <ng-container *ngIf="!emailFormControl.valid && (emailFormControl.dirty || emailFormControl.touched)">
       <span *ngIf="emailFormControl.hasError('required')">Email required.</span>
       <span *ngIf="emailFormControl.hasError('email')">Email must be in a valid format.</span>
+      <span *ngIf="emailFormControl.hasError('forbiddenEmail')">New email can't be previous email.</span>
     </ng-container>
   </vl-form-field>
-  <input type="file" accept="image/*" formControlName="avatar" (change)="handleFileChange($event)" />
-  <img *ngIf="avatarPreview" [src]="avatarPreview" alt="User Avatars" class="avatar-preview" />
 
   <!-- Actions -->
-  <vl-button fullWidth (click)="cancel()">Cancel</vl-button>
-  <vl-button type="submit" color="primary" fullWidth>Submit</vl-button>
+  <vl-button type="submit" color="primary" [disabled]="!form.valid" fullWidth>Submit</vl-button>
 </form>

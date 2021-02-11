@@ -1,6 +1,6 @@
 {
   "appId": "com.vlaude.goalscrusher",
-  "appName": "goals-crusher-webapp",
+  "appName": "goals-crusher",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "dist/goals-crusher-webapp",

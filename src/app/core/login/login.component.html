@@ -15,12 +15,16 @@
     <p>Forgot password ?</p>
 
     <!-- Submit -->
-    <vl-button type="submit" color="primary" [disabled]="form.invalid" fullWidth>Login</vl-button>
+    <div class="submit-wrapper">
+      <vl-button *ngIf="!isLoading" type="submit" color="primary" [disabled]="!form.valid" fullWidth>Login</vl-button>
+      <vl-loader *ngIf="isLoading"></vl-loader>
+    </div>
+
     <p>or</p>
 
     <!-- Social media -->
     <section class="social-media">
-      <div class="google-btn" (click)="authService.loginWithGoogle()">
+      <div class="google-btn" (click)="signInWithGoogle()">
         <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
       </div>
     </section>

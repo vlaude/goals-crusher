@@ -41,6 +41,17 @@ form {
   p {
     color: var(--text-secondary);
   }
+
+  .submit-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    vl-button {
+      flex-grow: 1;
+    }
+  }
 }
 
 section.social-media {

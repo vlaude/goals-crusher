@@ -207,11 +207,7 @@
 
 <!-- Edit email modal -->
 <vl-modal id="email-edit-modal">
-  <vl-email-edit
-    [user]="user"
-    (formSubmitted)="handleEditEmailFormSubmitted($event)"
-    (cancelBtnClicked)="modalService.close('email-edit-modal')"
-  ></vl-email-edit>
+  <vl-email-edit [user]="user" (formSubmitted)="handleEditEmailFormSubmitted($event)"></vl-email-edit>
 </vl-modal>
 
 <!-- Edit avatar modal -->
