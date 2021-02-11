@@ -10,11 +10,16 @@ export class SnackbarService {
 
   constructor() {}
 
-  show(message: string, type?: string): void {
+  show(message: string, type?: string, duration?: number): void {
+    // duration of 5s by default on danger message
+    if (type === 'danger' && !duration) {
+      duration = 5000;
+    }
     this.snackbarSubject.next({
       show: true,
       message,
       type,
+      duration,
     });
   }
 }
