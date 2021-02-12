@@ -24,7 +24,7 @@
 
 <!-- Modals -->
 <!-- Goal detail modal -->
-<vl-modal id="goal-detail-modal">
+<vl-modal [id]="'goal-detail-modal-' + goalType">
   <vl-goal-detail
     [goal]="goalSelected"
     (editClicked)="handleGoalDetailEditClicked()"
