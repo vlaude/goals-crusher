@@ -46,6 +46,7 @@ export class GoalFormComponent implements OnInit, OnChanges {
       return;
     }
     this.formSubmitted.emit(this.form);
+    this.form.reset();
   }
 
   cancel(): void {

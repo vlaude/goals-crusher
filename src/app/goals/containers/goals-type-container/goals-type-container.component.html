@@ -10,7 +10,7 @@
   </div>
 
   <!-- Create goal button -->
-  <vl-button color="primary" icon (click)="goalSelected = null; openModal('goal-form-modal')">
+  <vl-button color="primary" icon (click)="goalSelected = null; openModal('goal-form-modal-' + goalType)">
     <i class="material-icons">add</i>
   </vl-button>
 </div>
@@ -24,7 +24,7 @@
 
 <!-- Modals -->
 <!-- Goal detail modal -->
-<vl-modal id="goal-detail-modal">
+<vl-modal [id]="'goal-detail-modal-' + goalType">
   <vl-goal-detail
     [goal]="goalSelected"
     (editClicked)="handleGoalDetailEditClicked()"
@@ -32,11 +32,11 @@
   ></vl-goal-detail>
 </vl-modal>
 <!-- Goal form modal -->
-<vl-modal id="goal-form-modal">
+<vl-modal [id]="'goal-form-modal-' + goalType">
   <vl-goal-form
     [goal]="goalSelected"
     (formSubmitted)="handleGoalFormSubmitted($event)"
-    (cancelBtnClicked)="closeModal('goal-form-modal')"
+    (cancelBtnClicked)="closeModal('goal-form-modal-' + goalType)"
   ></vl-goal-form>
 </vl-modal>
 <!-- Confirm delete goal modal -->

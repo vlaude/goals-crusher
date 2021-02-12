@@ -54,17 +54,17 @@ export class GoalsTypeContainerComponent implements OnInit {
 
   handleGoalClicked(goal: GoalModel<any>): void {
     this.goalSelected = goal;
-    this.openModal('goal-detail-modal');
+    this.openModal('goal-detail-modal-' + this.goalType);
   }
 
   handleGoalDetailDeleteClicked(): void {
-    this.closeModal('goal-detail-modal');
+    this.closeModal('goal-detail-modal-' + this.goalType);
     this.openModal('goal-deletion-confirm-modal');
   }
 
   handleGoalDetailEditClicked(): void {
-    this.closeModal('goal-detail-modal');
-    this.openModal('goal-form-modal');
+    this.closeModal('goal-detail-modal-' + this.goalType);
+    this.openModal('goal-form-modal-' + this.goalType);
   }
 
   handleGoalFormSubmitted(form: FormGroup): void {
@@ -76,7 +76,7 @@ export class GoalsTypeContainerComponent implements OnInit {
     } else {
       this.goalsFacade.addGoal(form.value);
     }
-    this.closeModal('goal-form-modal');
+    this.closeModal('goal-form-modal-' + this.goalType);
   }
 
   onCancelDeleteGoal(): void {
