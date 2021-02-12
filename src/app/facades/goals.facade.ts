@@ -4,7 +4,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { GoalModel } from '../core/models/goal.model';
 import { GoalService } from '../core/services/goal.service';
 import { GoalAchievementModel } from '../core/models/goal-achievement.model';
-import { map, startWith } from 'rxjs/operators';
+import { filter, map, startWith } from 'rxjs/operators';
 import { SnackbarService } from '../core/services/snackbar.service';
 import { GoalType } from '../core/models/goal.type';
 
@@ -99,6 +99,7 @@ export class GoalsFacade {
       ),
     ]).pipe(
       map(([goals, achievements]) => {
+        achievements = achievements.filter((achievement) => !!goals.find((goal) => goal.id === achievement.goalId));
         return achievements.slice(0, count).map((achievement) => {
           return {
             achievedAt: achievement.achievedAt,
